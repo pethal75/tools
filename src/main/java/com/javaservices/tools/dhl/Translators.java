@@ -13,6 +13,7 @@ public class Translators {
 
         model.getApplications().add(
                 Application.builder()
+                        .id(21)
                         .name("Translator KYC")
                         .group(model.findGroup("Translators"))
                         .protocol(Server.Protocol.HTTP)
@@ -23,6 +24,7 @@ public class Translators {
 
         model.getApplications().add(
                 Application.builder()
+                        .id(22)
                         .name("Translator KYC Amazon")
                         .group(model.findGroup("Translators"))
                         .protocol(Server.Protocol.HTTP)
@@ -33,6 +35,7 @@ public class Translators {
 
         model.getApplications().add(
                 Application.builder()
+                        .id(23)
                         .name("Translator PMF")
                         .group(model.findGroup("Translators"))
                         .protocol(Server.Protocol.HTTP)

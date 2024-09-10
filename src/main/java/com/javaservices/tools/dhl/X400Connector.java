@@ -13,6 +13,7 @@ public class X400Connector {
 
         model.getApplications().add(
                 Application.builder()
+                        .id(40)
                         .name("X400 Connector")
                         .group(model.findGroup("X400"))
                         .protocol(Server.Protocol.HTTP)

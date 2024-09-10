@@ -13,6 +13,9 @@ import lombok.ToString;
 public class Application {
 
     @ToString.Include
+    protected long id;
+
+    @ToString.Include
     protected String name;
 
     @ToString.Include

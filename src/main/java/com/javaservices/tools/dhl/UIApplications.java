@@ -13,6 +13,7 @@ public class UIApplications {
 
         model.getApplications().add(
                 Application.builder()
+                        .id(1)
                         .name("Main UI")
                         .group(model.findGroup("UI"))
                         .protocol(Server.Protocol.HTTP)
@@ -24,6 +25,7 @@ public class UIApplications {
 
         model.getApplications().add(
                 Application.builder()
+                        .id(2)
                         .name("Dashboard UI")
                         .group(model.findGroup("UI"))
                         .protocol(Server.Protocol.HTTP)

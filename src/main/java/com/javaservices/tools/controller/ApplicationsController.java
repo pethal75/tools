@@ -88,4 +88,10 @@ public class ApplicationsController {
                 .filter(application -> application.getName().equals(name))
                 .findFirst().orElse(null);
     }
+
+    public Application findApplicationById(long id) {
+        return dhlConfiguration.getApplications().stream()
+                .filter(application -> application.getId() == id)
+                .findFirst().orElse(null);
+    }
 }

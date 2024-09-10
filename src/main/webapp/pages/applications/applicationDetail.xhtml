@@ -1,30 +1,32 @@
 <ui:composition template="/pages/include/layout.xhtml"
                 xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
     <ui:define name="content">
 
-        <h1>Application #{applicationsDetailBean.name}</h1>
+        <h1>Application #{applicationsDetailBean.application.name}</h1>
 
         <div class="card">
-            <p:tabView>
-
-                <!--f:facet name="actions">Global actions</f:facet-->
+            <p:tabView style="min-width: 1400px">
 
                 <p:tab>
                     <f:facet name="title">Info</f:facet>
-                    <!--f:facet name="actions">Info</f:facet-->
                     <ui:include src="applicationDetailInfo.xhtml"/>
                 </p:tab>
+
                 <p:tab>
-                    <!--f:facet name="actions">Instances</f:facet-->
+                    <f:facet name="title">Properties</f:facet>
+
+                    <ui:include src="applicationDetailProperties.xhtml"/>
+                </p:tab>
+
+                <p:tab>
                     <f:facet name="title">Instances</f:facet>
 
                     TODO
                 </p:tab>
+
                 <p:tab>
                     <f:facet name="title">Tests</f:facet>
 

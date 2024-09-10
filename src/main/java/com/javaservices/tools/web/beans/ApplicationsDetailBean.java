@@ -3,11 +3,16 @@ package com.javaservices.tools.web.beans;
 import com.javaservices.tools.controller.ApplicationsController;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
+import com.sun.javafx.binding.StringFormatter;
 import jakarta.annotation.PostConstruct;
+import jakarta.el.MethodExpression;
 import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.annotation.View;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
+import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.List;
 import lombok.Data;
 import lombok.Getter;
@@ -25,9 +30,9 @@ public class ApplicationsDetailBean {
 
     protected ApplicationsController applicationsController;
 
-    @Value("#{request.getParameter('name')}")
-    @ManagedProperty("name")
-    protected String name;
+    @Value("#{request.getParameter('id')}")
+    @ManagedProperty("id")
+    protected Long id;
 
     protected Application application;
 
@@ -38,9 +43,15 @@ public class ApplicationsDetailBean {
 
     @PostConstruct
     public void init() {
-        log.debug("initialize application " + name);
+        log.debug("initialize application id : {}", id);
 
-        this.application = applicationsController.findApplicationByName(name);
+        this.application = applicationsController.findApplicationById(id);
+
+        // TODO error handling when not found application
+        if (this.application == null)
+            throw new IllegalArgumentException(MessageFormat.format("Application with id {} not found!", this.id));
+
+        log.debug("Found application named : {}", application.getName());
     }
 
     public List<Application> getApplications() {
@@ -49,5 +60,12 @@ public class ApplicationsDetailBean {
 
     public List<ApplicationInstance> getApplicationInstances() {
         return applicationsController.getApplicationInstances();
+    }
+
+    public void save() throws IOException {
+        log.debug("Saving application details " + this.application.getId());
+
+        /*String url = "applicationDetail.xhtml?name=" + this.application.getName();
+        FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
     }
 }

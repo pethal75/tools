@@ -13,6 +13,7 @@ public class OfflineRating {
 
         model.getApplications().add(
                 Application.builder()
+                        .id(10)
                         .name("OfflineRating")
                         .group(model.findGroup("OFR"))
                         .protocol(Server.Protocol.HTTP)

@@ -13,6 +13,7 @@ public class AmfMonitoring {
 
         model.getApplications().add(
                 Application.builder()
+                        .id(5)
                         .name("AMF Monitoring")
                         .group(model.findGroup("AMF"))
                         .protocol(Server.Protocol.HTTP)
