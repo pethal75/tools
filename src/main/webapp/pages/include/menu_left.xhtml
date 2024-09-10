@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+    <!--p:tabMenu activeIndex="#{param.i}" style="width:15rem;" orientation="left">
+        <p:menuitem value="Home" outcome="/index" icon="pi pi-fw pi-home">
+            <f:param name="i" value="0"/>
+        </p:menuitem>
+        <p:submenu label="Servers">
+            <f:param name="i" value="1"/>
+            <p:menuitem value="List Servers" outcome="/pages/serversList" action="" icon="pi pi-refresh"/>
+            <p:menuitem value="Mocks" icon="pi pi-refresh"/>
+            <p:menuitem value="Delete" icon="pi pi-times"/>
+        </p:submenu>
+        <p:menuitem value="Applications" outcome="/pages/applicationsList" icon="pi pi-fw pi-home">
+            <f:param name="i" value="2"/>
+        </p:menuitem>
+        <p:menuitem value="Tasks" outcome="/pages/tasksList" icon="pi pi-fw pi-calendar">
+            <f:param name="i" value="3"/>
+        </p:menuitem>
+        <p:menuitem value="Settings" outcome="/pages/settings" icon="pi pi-fw pi-cog">
+            <f:param name="i" value="4"/>
+        </p:menuitem>
+    </p:tabMenu-->
+
+    <p:panelMenu style="width:300px" statefulGlobal="true">
+        <p:menuitem value="Home" url="/index.xhtml" icon="pi pi-home"/>
+        <p:submenu label="Servers" expanded="true">
+            <p:menuitem value="All" outcome="/pages/servers/serversList" icon="pi pi-desktop"/>
+        </p:submenu>
+        <p:submenu label="Applications" expanded="true">
+            <p:menuitem value="Applications" outcome="/pages/applications/applicationsList" icon="pi pi-microsoft"/>
+            <p:menuitem value="Instances" outcome="/pages/applications/applicationsInstancesList" icon="pi pi-desktop"/>
+            <p:menuitem value="Mock Responses" outcome="/pages/applications/mockResponsesList" icon="pi pi-sort-alt"/>
+            <p:menuitem value="Tests" outcome="/pages/applications/testsList" icon="pi pi-bolt"/>
+        </p:submenu>
+        <p:submenu label="Setup" expanded="true">
+            <p:menuitem value="Tomcat" outcome="/pages/utils/tomcatSetup" icon="pi pi-database"/>
+            <p:menuitem value="Maven" outcome="/pages/utils/mavenSetup" icon="pi pi-file"/>
+            <p:menuitem value="GitBash" outcome="/pages/utils/gitbashSetup" icon="pi pi-folder-open"/>
+        </p:submenu>
+    </p:panelMenu>
+</html>

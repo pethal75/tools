@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+
+    <div class="container-fluid">
+        <h:form id="applicationInfoForm">
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <p:inputText id="name" required="true" label="name" value="#{applicationsDetailBean.application.name}" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <p:inputTextarea id="description" label="description" value="#{applicationsDetailBean.application.description}" rows="4" cols="40" class="form-control"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <p:separator/>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <p:outputLabel for="notes">Notes</p:outputLabel>
+                            <p:inputTextarea id="notes" label="description" value="#{applicationsDetailBean.application.notes}" rows="15" cols="80" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+            <br/>
+
+            <div class="buttonsBlock">
+                <p:commandButton id="saveButton" value="Save" update="messages" />
+
+                <!-- p:blockUI block="applicationInfoForm" trigger="saveButton"/ -->
+            </div>
+        </h:form>
+    </div>
+</ui:composition>

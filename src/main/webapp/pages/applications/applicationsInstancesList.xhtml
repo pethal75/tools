@@ -1,0 +1,62 @@
+<ui:composition template="/pages/include/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+
+        <h1>Applications Instances list</h1>
+
+        <h:form>
+            <div class="card">
+
+                <p:dataTable id="applicationsTable" var="applicationInstance" value="#{applicationsListBean.applicationInstances}">
+                    <p:headerRow field="application.name"
+                                 expandable="true"
+                                 expanded="true">
+
+                        <p:column colspan="6">
+                            <h:outputLink styleClass="ml-2" value="applicationDetail.xhtml" target="_blank">
+                                <f:param name="name" value="#{applicationInstance.application.name}"/>
+                                <h:outputText value="#{applicationInstance.application.name}"/>
+                            </h:outputLink>
+                        </p:column>
+                    </p:headerRow>
+
+                    <p:column headerText="Name" width="20%">
+                        <h:outputText value="#{applicationInstance.application.name}" />
+                    </p:column>
+
+                    <p:column headerText="Environment">
+                        <h:outputText value="#{applicationInstance.environment.name}" />
+                    </p:column>
+
+                    <p:column headerText="Group">
+                        <h:outputText value="#{applicationInstance.application.group.name}" />
+                    </p:column>
+
+                    <p:column headerText="Protocol" width="10%" style="text-align: center">
+                        <h:outputText value="#{applicationInstance.application.protocol.name()}" />
+                    </p:column>
+
+                    <p:column headerText="Healthcheck" width="25%">
+                        <h:outputLink value="#{applicationInstance.applicationUrl}" target="_blank">#{applicationInstance.applicationUrl}</h:outputLink>
+                    </p:column>
+
+                    <p:column headerText="Status" width="10%" style="text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Status" title="Status"/>
+                            <p:commandLink action="#{applicationsController.refreshApplications}">
+                                <p:graphicImage value="/images/icon-refresh-blue.png" style="width: 24px; height: 24px; margin-left: 5px"/>
+                            </p:commandLink>
+                        </f:facet>
+                        <p:graphicImage value="/images/#{applicationInstance.statusImage}" style="width: 16px; height: 16px"/>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+    </ui:define>>
+
+</ui:composition>

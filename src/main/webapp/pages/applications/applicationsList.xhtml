@@ -1,0 +1,41 @@
+<ui:composition template="/pages/include/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:jsf="http://xmlns.jcp.org/jsf"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui">
+    <ui:define name="content">
+
+    <h1>Applications list</h1>
+
+        <div class="card">
+
+            <p:dataTable id="applicationsTable" var="applicationValue" value="#{applicationsListBean.applications}" sortMode="single" >
+
+                <p:column headerText="Name" width="30%" sortBy="#{applicationValue.name}" sortOrder="ASC">
+                    <h:outputLink styleClass="ml-2" value="applicationDetail.xhtml" target="_blank" >
+                        <f:param name="name" value="#{applicationValue.name}"/>
+                        <h:outputText value="#{applicationValue.name}"/>
+                    </h:outputLink>
+                </p:column>
+
+                <p:column headerText="Group" sortBy="#{applicationValue.group.name}">
+                    <h:outputText value="#{applicationValue.group.name}" />
+                </p:column>
+
+                <p:column headerText="Protocol" width="10%" style="text-align: center">
+                    <h:outputText value="#{applicationValue.protocol.name()}" />
+                </p:column>
+
+                <p:column headerText="Action" width="20%">
+                    <p:button href="applicationDetail.xhtml" value="Detail">
+                        <f:param name="name" value="#{applicationValue.name}"/>
+                    </p:button>
+                </p:column>
+            </p:dataTable>
+        </div>
+
+    </ui:define>
+
+</ui:composition>
