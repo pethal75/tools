@@ -2,7 +2,9 @@ package com.javaservices.tools.model.applications;
 
 import com.javaservices.tools.model.environments.Group;
 import com.javaservices.tools.model.servers.Server;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Builder;
 import lombok.Data;
 import lombok.ToString;
@@ -13,27 +15,36 @@ import lombok.ToString;
 public class Application {
 
     @ToString.Include
-    protected long id;
+    protected Long id;
 
     @ToString.Include
     protected String name;
 
-    @ToString.Include
     protected String description;
 
-    @ToString.Include
     protected String notes;
+
+    protected List<PropertyGroup> propertiesGroups;
 
     protected Server.Protocol protocol;
 
-    @ToString.Include
     protected Group group;
 
     protected List<ApplicationInstance> instances;
 
     public void initialize() {
-        instances.forEach(applicationInstanceConfiguration -> applicationInstanceConfiguration.setApplication(this));
+
+        if (instances != null)
+            instances.forEach(applicationInstance -> applicationInstance.initialize(this));
+
+        if (propertiesGroups != null)
+            propertiesGroups.forEach(PropertyGroup::initialize);
     }
 
 
+    public List<Property> getProperties() {
+        return this.getPropertiesGroups().stream()
+            .flatMap(propertyGroup -> propertyGroup.getProperties().stream())
+            .collect(Collectors.toList());
+    }
 }

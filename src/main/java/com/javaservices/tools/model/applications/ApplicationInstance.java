@@ -19,6 +19,10 @@ public class ApplicationInstance {
 
     protected ArrayList<Property> properties;
 
+    public void initialize(Application application) {
+        this.application = application;
+    }
+
     public enum Status {
         UP, DOWN
     }

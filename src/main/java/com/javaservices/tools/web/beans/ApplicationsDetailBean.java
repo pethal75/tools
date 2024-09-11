@@ -45,6 +45,9 @@ public class ApplicationsDetailBean {
     public void init() {
         log.debug("initialize application id : {}", id);
 
+        if (this.id == null)
+            return;
+
         this.application = applicationsController.findApplicationById(id);
 
         // TODO error handling when not found application

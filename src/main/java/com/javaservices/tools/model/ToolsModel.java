@@ -2,6 +2,8 @@ package com.javaservices.tools.model;
 
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
+import com.javaservices.tools.model.applications.Property;
+import com.javaservices.tools.model.applications.PropertyGroup;
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.model.environments.Group;
 import com.javaservices.tools.model.mocks.HttpMockResponse;
@@ -93,7 +95,12 @@ public class ToolsModel {
         xstream.alias("MockRequest", HttpMockResponse.class);
 
         xstream.addImplicitArray(Application.class, "instances", ApplicationInstance.class);
+        xstream.addImplicitArray(Application.class, "propertiesGroups", PropertyGroup.class);
+        xstream.addImplicitArray(PropertyGroup.class, "properties", Property.class);
+
         xstream.omitField(ApplicationInstance.class, "application");
+        xstream.omitField(Property.class, "group");
+
         return xstream;
     }
 }
