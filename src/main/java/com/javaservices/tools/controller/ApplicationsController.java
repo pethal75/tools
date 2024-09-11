@@ -1,11 +1,13 @@
 package com.javaservices.tools.controller;
 
 import com.javaservices.network.clients.HttpClientUtil;
+import com.javaservices.tools.model.ToolsModel;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
 import com.javaservices.tools.dhl.DhlModel;
 import jakarta.annotation.PostConstruct;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +21,7 @@ import reactor.core.publisher.Mono;
 public class ApplicationsController {
 
     // TODO read from session storage
-    protected DhlModel dhlConfiguration = new DhlModel();
+    protected ToolsModel toolsModel = new DhlModel();
 
     protected HttpClientUtil httpClientUtil = new HttpClientUtil();
 
@@ -32,7 +34,7 @@ public class ApplicationsController {
      * Reloads actual statuses for all applications, subscribes for responses and refresh main configuration array
      */
     public void refreshApplications() {
-        List<Mono<ResponseEntity<String>>> responses = dhlConfiguration.getApplications().stream()
+        List<Mono<ResponseEntity<String>>> responses = toolsModel.getApplications().stream()
                 .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
                 .map(this::refreshApplicationStatus)
                 .toList();
@@ -74,23 +76,33 @@ public class ApplicationsController {
     }
 
     public List<Application> getApplications() {
-        return dhlConfiguration.getApplications();
+        return toolsModel.getApplications();
     }
 
     public List<ApplicationInstance> getApplicationInstances() {
-        return dhlConfiguration.getApplications().stream()
+
+        if (this.getApplications() == null)
+            return Collections.emptyList();
+
+        return this.getApplications().stream()
                 .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
                 .collect(Collectors.toList());
     }
 
     public Application findApplicationByName(String name) {
-        return dhlConfiguration.getApplications().stream()
+        if (this.getApplications() == null)
+            return null;
+
+        return this.getApplications().stream()
                 .filter(application -> application.getName().equals(name))
                 .findFirst().orElse(null);
     }
 
     public Application findApplicationById(long id) {
-        return dhlConfiguration.getApplications().stream()
+        if (this.getApplications() == null)
+            return null;
+
+        return this.getApplications().stream()
                 .filter(application -> application.getId() == id)
                 .findFirst().orElse(null);
     }

@@ -3,6 +3,7 @@ package com.javaservices.tools.model.applications;
 import com.javaservices.tools.model.environments.Group;
 import com.javaservices.tools.model.servers.Server;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;
@@ -43,6 +44,9 @@ public class Application {
 
 
     public List<Property> getProperties() {
+        if (this.getPropertiesGroups() == null)
+            return Collections.emptyList();
+
         return this.getPropertiesGroups().stream()
             .flatMap(propertyGroup -> propertyGroup.getProperties().stream())
             .collect(Collectors.toList());
