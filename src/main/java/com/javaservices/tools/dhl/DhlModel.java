@@ -24,6 +24,7 @@ public class DhlModel extends ToolsModel {
         this.environments.add(Environment.builder().name("LOCAL").build());
         this.environments.add(Environment.builder().name("DEV").build());
         this.environments.add(Environment.builder().name("UAT").build());
+        this.environments.add(Environment.builder().name("QA").build());
         this.environments.add(Environment.builder().name("PROD").build());
 
         OfflineRating.setup(this);

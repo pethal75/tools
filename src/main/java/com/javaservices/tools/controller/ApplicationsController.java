@@ -56,11 +56,11 @@ public class ApplicationsController {
         return httpClientUtil.httpCall(instance.getApplicationUrl(), "GET")
             .exchangeToMono(response -> {
                 if (response.statusCode().is2xxSuccessful()) {
-                    log.debug("Check application status OK {} {}", instance.getApplication().getName(), instance.getApplicationUrl());
+                    log.debug("Check application status OK {} {} {}", instance.getApplication().getName(), instance.getName(), instance.getApplicationUrl());
 
                     instance.setStatus(ApplicationInstance.Status.UP);
                 } else {
-                    log.debug("Check application status NOT OK {} {}", instance.getApplication().getName(), instance.getApplicationUrl());
+                    log.debug("Check application status NOT OK {} {} {}", instance.getApplication().getName(), instance.getName(), instance.getApplicationUrl());
 
                     instance.setStatus(ApplicationInstance.Status.DOWN);
                 }
@@ -68,7 +68,7 @@ public class ApplicationsController {
                 return response.toEntity(String.class);
             })
             .doOnError(throwable -> {
-                log.debug("Check application status ERROR {} {}", instance.getApplication().getName(), instance.getApplicationUrl());
+                log.debug("Check application status ERROR {} {} {}", instance.getApplication().getName(), instance.getName(), instance.getApplicationUrl(), throwable.getMessage());
 
                 instance.setStatus(ApplicationInstance.Status.DOWN);
             })

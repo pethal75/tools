@@ -20,8 +20,13 @@ public class UIApplications {
                         .group(model.findGroup("UI"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().environment(model.findEnvironment("DEV")).applicationUrl("https://exp-cfit-dev-fwui.test-int.apps.czchooct002.dhl.com").build(),
-                                ApplicationInstance.builder().environment(model.findEnvironment("LOCAL")).applicationUrl("http://localhost:2020/pages/public/login.xhtml").build()
+                                ApplicationInstance.builder().name("DEV CFIT").environment(model.findEnvironment("DEV")).applicationUrl("https://exp-cfit-dev-fwui.test-int.apps.czchooct002.dhl.com").build(),
+                                ApplicationInstance.builder().name("DEV NZD").environment(model.findEnvironment("DEV")).applicationUrl("https://exp-nzd2-dev-fwui.test-int.apps.czchooct002.dhl.com").build(),
+                                ApplicationInstance.builder().name("UAT CFIT").environment(model.findEnvironment("UAT")).applicationUrl("https://exp-cfit-uat-fwui.apps.czchoocp007.dhl.com").build(),
+                                ApplicationInstance.builder().name("UAT NZD").environment(model.findEnvironment("UAT")).applicationUrl("https://exp-nzd2-uat-fwui.apps.czchoocp007.dhl.com").build(),
+                                ApplicationInstance.builder().name("UAT Old").environment(model.findEnvironment("UAT")).applicationUrl("https://nzd2-crs-uat-fwui.dhl.com/dcc/pages/public/login.xhtml").build(),
+                                ApplicationInstance.builder().name("QA CFIT").environment(model.findEnvironment("QA")).applicationUrl("https://exp-cfit-qa-fwui.prod-int.apps.czchoocp007.dhl.com/pages/public/login.xhtml").build(),
+                                ApplicationInstance.builder().name("Local").environment(model.findEnvironment("LOCAL")).applicationUrl("https://localhost:2020/pages/public/login.xhtml").build()
                         ))
                         .propertiesGroups(Arrays.asList(
                                 PropertyGroup.builder().id(1L).name("Database").properties(Arrays.asList(
@@ -29,8 +34,8 @@ public class UIApplications {
                                         Property.builder().name("UAT DB").value("mysql uat").build()
                                 )).build(),
                                 PropertyGroup.builder().id(2L).name("URLs").properties(Arrays.asList(
-                                        Property.builder().name("DEV URL").value("http://dev").build(),
-                                        Property.builder().name("UAT URL").value("http://uat").build()
+                                        Property.builder().name("Jenkins Root").value("https://jenkins-core-prg.dhl.com/cfit/job/root-folder/").build(),
+                                        Property.builder().name("JIRA").value("https://jira.dhl.com/issues/?filter=55006").build()
                                 )).build()
                         ))
                         .build());
@@ -42,8 +47,9 @@ public class UIApplications {
                         .group(model.findGroup("UI"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().environment(model.findEnvironment("DEV")).applicationUrl("https://exp-cfit-dev-fwds.test-int.apps.czchooct002.dhl.com/dccDashboard").build(),
-                                ApplicationInstance.builder().environment(model.findEnvironment("LOCAL")).applicationUrl("http://localhost:2020/dccDashboard/pages/public/login.xhtml").build()
+                                ApplicationInstance.builder().name("DEV").environment(model.findEnvironment("DEV")).applicationUrl("https://exp-cfit-dev-fwds.test-int.apps.czchooct002.dhl.com").build(),
+                                ApplicationInstance.builder().name("Local").environment(model.findEnvironment("LOCAL")).applicationUrl("https://localhost:2020/pages/public/login.xhtml").build(),
+                                ApplicationInstance.builder().name("QA").environment(model.findEnvironment("QA")).applicationUrl("https://exp-cfit-qa-fwds.prod-int.apps.czchoocp007.dhl.com/pages/public/login.xhtml").build()
                         ))
                         .build());
 

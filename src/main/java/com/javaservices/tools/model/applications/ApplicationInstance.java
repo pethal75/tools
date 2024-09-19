@@ -12,6 +12,8 @@ import lombok.ToString;
 public class ApplicationInstance {
 
     @ToString.Include
+    protected String name;
+
     protected Application application;
 
     @ToString.Include

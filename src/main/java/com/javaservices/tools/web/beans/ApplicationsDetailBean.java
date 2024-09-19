@@ -61,13 +61,10 @@ public class ApplicationsDetailBean {
         return applicationsController.getApplications();
     }
 
-    public List<ApplicationInstance> getApplicationInstances() {
-        return applicationsController.getApplicationInstances();
-    }
-
     public void save() throws IOException {
         log.debug("Saving application details " + this.application.getId());
 
+        // TODO Save configuration to database or disk in the future when loading/saving will be implemented
         /*String url = "applicationDetail.xhtml?name=" + this.application.getName();
         FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
     }
