@@ -1,6 +1,7 @@
 package com.javaservices.tools.model.applications;
 
 import com.javaservices.tools.model.environments.Environment;
+import com.javaservices.tools.model.servers.Server;
 import java.util.ArrayList;
 import lombok.Builder;
 import lombok.Data;
@@ -36,4 +37,6 @@ public class ApplicationInstance {
     }
 
     protected Environment environment;
+
+    protected Server server;
 }
