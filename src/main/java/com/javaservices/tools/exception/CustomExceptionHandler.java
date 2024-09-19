@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 
-    private ExceptionHandler exceptionHandler;
+    private final ExceptionHandler exceptionHandler;
 
     public CustomExceptionHandler(ExceptionHandler exceptionHandler) {
         this.exceptionHandler = exceptionHandler;

@@ -6,9 +6,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class JavaFXBrowser extends Application {
-	private Scene scene;
 
-	@Override
+    @Override
 	public void start(Stage stage) {
 
 		String title = getParameters().getUnnamed().get(0);
@@ -16,7 +15,7 @@ public class JavaFXBrowser extends Application {
 
 		// create the scene
 		stage.setTitle(title);
-		scene = new Scene(new Browser(url), 1600, 800, Color.web("#666970"));
+        Scene scene = new Scene(new Browser(url), 1600, 800, Color.web("#666970"));
 		stage.setScene(scene);
 		//scene.getStylesheets().add("webviewsample/BrowserToolbar.css");
 		stage.show();

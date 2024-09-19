@@ -25,7 +25,7 @@ public class RequestProcessor {
             return false;
 
         String url = request.getRequestURL() + "?" + request.getQueryString();
-        if (httpMockResponse.getUrlPattern() != null && url != null && !url.contains(httpMockResponse.getUrlPattern()))
+        if (httpMockResponse.getUrlPattern() != null && !url.contains(httpMockResponse.getUrlPattern()))
             return false;
 
         if (httpMockResponse.getBodyPattern() != null && body != null && !body.contains(httpMockResponse.getBodyPattern()))
