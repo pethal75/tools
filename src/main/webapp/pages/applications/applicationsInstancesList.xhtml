@@ -12,11 +12,11 @@
             <div class="card">
 
                 <p:dataTable id="applicationsTable" var="applicationInstance" value="#{applicationsListBean.applicationInstances}">
-                    <p:headerRow field="application.name" expandable="true" d="true">
+                    <p:headerRow field="application.name" expandable="true" expanded="true">
                         <p:column colspan="6">
                             <h:outputLink styleClass="ml-2" value="applicationDetail.xhtml" target="_blank">
                                 <f:param name="name" value="#{applicationInstance.application.name}"/>
-                                <h:outputText value="#{applicationInstance.application.name}"/>
+                                <h:outputText value="#{applicationInstance.application.name}"/> Application
                             </h:outputLink>
                         </p:column>
                     </p:headerRow>

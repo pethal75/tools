@@ -68,7 +68,7 @@ public class ApplicationsController {
                 return response.toEntity(String.class);
             })
             .doOnError(throwable -> {
-                log.debug("Check application status ERROR {} {} {}", instance.getApplication().getName(), instance.getName(), instance.getApplicationUrl(), throwable.getMessage());
+                log.debug("Check application status ERROR {} {} {} {}", instance.getApplication().getName(), instance.getName(), instance.getApplicationUrl(), throwable.getMessage());
 
                 instance.setStatus(ApplicationInstance.Status.DOWN);
             })

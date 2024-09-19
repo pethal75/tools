@@ -8,19 +8,22 @@
         <h1>Application #{applicationsDetailBean.application.name}</h1>
 
         <div class="card">
-            <p:tabView style="width: 1400px">
+            <p:tabView style="width: 1400px" activeIndex="#{applicationsDetailBean.tabId}">
 
-                <p:tab>
+                <p:ajax event="tabChange" listener="#{applicationsDetailBean.onTabChange}"/>
+
+
+                <p:tab id="applicationDetailInfoTab">
                     <f:facet name="title">Info</f:facet>
                     <ui:include src="applicationDetailInfo.xhtml"/>
                 </p:tab>
 
-                <p:tab>
+                <p:tab id="applicationDetailPropertiesTab">
                     <f:facet name="title">Properties</f:facet>
                     <ui:include src="applicationDetailProperties.xhtml"/>
                 </p:tab>
 
-                <p:tab>
+                <p:tab id="applicationDetailInstancesTab">
                     <f:facet name="title">Instances</f:facet>
 
                     <ui:include src="applicationDetailInstances.xhtml"/>

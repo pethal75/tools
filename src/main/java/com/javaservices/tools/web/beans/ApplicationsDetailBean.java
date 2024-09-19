@@ -2,31 +2,26 @@ package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.controller.ApplicationsController;
 import com.javaservices.tools.model.applications.Application;
-import com.javaservices.tools.model.applications.ApplicationInstance;
-import com.sun.javafx.binding.StringFormatter;
 import jakarta.annotation.PostConstruct;
-import jakarta.el.MethodExpression;
 import jakarta.faces.annotation.ManagedProperty;
-import jakarta.faces.annotation.View;
-import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
-import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 
+@EqualsAndHashCode(callSuper = true)
 @Component
 @ViewScoped
 @Data
 @Slf4j
-public class ApplicationsDetailBean {
+public class ApplicationsDetailBean extends GenericPrimefacesBean {
+
+    protected static final String pageUrl = "applicationDetail.xhtml";
 
     protected ApplicationsController applicationsController;
 
@@ -52,7 +47,7 @@ public class ApplicationsDetailBean {
 
         // TODO error handling when not found application
         if (this.application == null)
-            throw new IllegalArgumentException(MessageFormat.format("Application with id {} not found!", this.id));
+            throw new IllegalArgumentException(MessageFormat.format("Application with id {0} not found!", this.id));
 
         log.debug("Found application named : {}", application.getName());
     }
@@ -61,11 +56,20 @@ public class ApplicationsDetailBean {
         return applicationsController.getApplications();
     }
 
-    public void save() throws IOException {
+    public void save() {
         log.debug("Saving application details " + this.application.getId());
 
         // TODO Save configuration to database or disk in the future when loading/saving will be implemented
         /*String url = "applicationDetail.xhtml?name=" + this.application.getName();
         FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
+    }
+
+    @Override
+    protected String prepareUrl() {
+
+        if (tabId == null)
+            return MessageFormat.format("{0}?id={1}", pageUrl, this.id);
+        else
+            return MessageFormat.format("{0}?id={1}&tabId={2}", pageUrl, this.id, this.tabId);
     }
 }
