@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationsListBean {
 
-    protected ApplicationsController applicationsController;
+    protected final ApplicationsController applicationsController;
 
     public ApplicationsListBean(ApplicationsController applicationsController) {
         this.applicationsController = applicationsController;

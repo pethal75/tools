@@ -29,7 +29,7 @@ public class SSHClient {
                 Thread.sleep(100);
             }
 
-            String responseString = new String(responseStream.toByteArray());
+            String responseString = responseStream.toString();
             System.out.println(responseString);
         } finally {
             if (session != null) {

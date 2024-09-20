@@ -8,7 +8,7 @@ import org.springframework.http.HttpMethod;
 
 public class RequestProcessor {
 
-    public Collection<HttpMockResponse> requests;
+    public final Collection<HttpMockResponse> requests;
 
     public RequestProcessor(Collection<HttpMockResponse> mockResponses) {
         this.requests = mockResponses;

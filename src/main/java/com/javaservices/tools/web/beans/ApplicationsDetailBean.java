@@ -57,11 +57,9 @@ public class ApplicationsDetailBean extends GenericPrimefacesBean {
     }
 
     public void save() {
-        log.debug("Saving application details " + this.application.getId());
+        log.debug("Saving application details {}", this.application.getId());
 
         // TODO Save configuration to database or disk in the future when loading/saving will be implemented
-        /*String url = "applicationDetail.xhtml?name=" + this.application.getName();
-        FacesContext.getCurrentInstance().getExternalContext().redirect(url);*/
     }
 
     @Override

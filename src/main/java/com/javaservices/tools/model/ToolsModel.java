@@ -73,7 +73,7 @@ public class ToolsModel {
         XStream xstream = prepareXStream();
 
         File saveFile = new File(fileName);
-        FileWriter saveWriter = null;
+        FileWriter saveWriter;
         try {
             saveWriter = new FileWriter(saveFile);
 

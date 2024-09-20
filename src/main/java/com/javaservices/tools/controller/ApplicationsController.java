@@ -23,7 +23,7 @@ public class ApplicationsController {
     // TODO read from session storage
     protected ToolsModel toolsModel = new DhlModel();
 
-    protected HttpClientUtil httpClientUtil = new HttpClientUtil();
+    protected final HttpClientUtil httpClientUtil = new HttpClientUtil();
 
     @PostConstruct
     public void init() {

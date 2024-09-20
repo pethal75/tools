@@ -22,7 +22,7 @@ public class ProxyController {
 
     protected ToolsModel configuration;
 
-    protected RequestProcessor requestProcessor;
+    protected final RequestProcessor requestProcessor;
 
     public ProxyController(ToolsModel configuration) {
         this.configuration = configuration;
