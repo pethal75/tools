@@ -14,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import lombok.Data;
 
 @Data
@@ -22,27 +23,27 @@ public class ToolsModel {
     /**
      * Array of servers
      */
-    protected ArrayList<Server> servers = new ArrayList<>();
+    protected List<Server> servers = new ArrayList<>();
 
     /**
      * Array of applications
      */
-    protected ArrayList<Application> applications = new ArrayList<>();
+    protected List<Application> applications = new ArrayList<>();
 
     /**
      * Array of environments
      */
-    protected ArrayList<Environment> environments = new ArrayList<>();
+    protected List<Environment> environments = new ArrayList<>();
 
     /**
      * Array of groups
      */
-    protected ArrayList<Group> groups = new ArrayList<>();
+    protected List<Group> groups = new ArrayList<>();
 
     /**
      * Mocks of http requests/responses
      */
-    protected ArrayList<HttpMockResponse> mockResponses = new ArrayList<>();
+    protected List<HttpMockResponse> mockResponses = new ArrayList<>();
 
     public Environment findEnvironment(String name) {
         return this.environments.stream()

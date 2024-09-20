@@ -24,16 +24,17 @@
         </p:menuitem>
     </p:tabMenu-->
 
+    <h2>Main Menu</h2>
     <p:panelMenu style="width:300px" statefulGlobal="true">
         <p:menuitem value="Home" url="/index.xhtml" icon="pi pi-home"/>
-        <p:submenu label="Servers" expanded="true">
-            <p:menuitem value="All" outcome="/pages/servers/serversList" icon="pi pi-desktop"/>
-        </p:submenu>
         <p:submenu label="Applications" expanded="true">
             <p:menuitem value="Applications" outcome="/pages/applications/applicationsList" icon="pi pi-microsoft"/>
-            <p:menuitem value="Instances" outcome="/pages/applications/applicationsInstancesList" icon="pi pi-desktop"/>
-            <p:menuitem value="Mock Responses" outcome="/pages/applications/mockResponsesList" icon="pi pi-sort-alt"/>
-            <p:menuitem value="Tests" outcome="/pages/applications/testsList" icon="pi pi-bolt"/>
+            <p:menuitem value="Instances" outcome="/pages/applications/instancesList" icon="pi pi-desktop"/>
+            <p:menuitem value="Environments" outcome="/pages/applications/environmentsList" icon="pi pi-database"/>
+            <p:menuitem value="Groups" outcome="/pages/applications/groupsList" icon="pi pi-clone"/>
+        </p:submenu>
+        <p:submenu label="Servers" expanded="true">
+            <p:menuitem value="All" outcome="/pages/servers/serversList" icon="pi pi-desktop"/>
         </p:submenu>
         <p:submenu label="Setup" expanded="true">
             <p:menuitem value="Tomcat" outcome="/pages/utils/tomcatSetup" icon="pi pi-database"/>

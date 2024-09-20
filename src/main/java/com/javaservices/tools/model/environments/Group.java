@@ -6,5 +6,9 @@ import lombok.Data;
 @Data
 @Builder
 public class Group {
+    protected Long id;
+
     protected String name;
+
+    protected String description;
 }

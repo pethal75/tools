@@ -1,12 +1,17 @@
 package com.javaservices.tools.model.applications;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
+import lombok.experimental.SuperBuilder;
 
 @Data
-@Builder
+@SuperBuilder
 @ToString(onlyExplicitlyIncluded = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Property {
 
     @ToString.Include
@@ -16,7 +21,7 @@ public class Property {
     protected String value;
 
     public enum PropertyType {
-        NUMBER, TEXT, URL
+        NUMBER, TEXT, URL, DATABASE
     }
 
     @ToString.Include

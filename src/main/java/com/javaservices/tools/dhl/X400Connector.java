@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class X400Connector {
 
     public static void setup(DhlModel model) {
-        model.getGroups().add(Group.builder().name("X400").build());
+        model.getGroups().add(Group.builder().id(5L).name("X400").description("X400 Connector").build());
 
         model.getApplications().add(
                 Application.builder()

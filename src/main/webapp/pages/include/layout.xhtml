@@ -14,8 +14,11 @@
         <link href="#{request.contextPath}/css/style.css?ln=css" rel="stylesheet" type="text/css" />
     </h:head>
     <h:body>
-        <p:panel header="Infrastructure Application">
-            <div class="row flex-nowrap">
+        <p:panel styleClass="mainTitleBar">
+            <f:facet name="header">
+                <h1>Infrastructure and Tools</h1>
+            </f:facet>
+            <div class="row flex-nowrap" style="padding: 10px">
                 <div class="col-xs-3" style="padding-right: 10px; padding-bottom: 10px;">
                     <ui:insert name="menu">
                         <ui:include src="menu_left.xhtml"/>

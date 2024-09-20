@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class Translators {
 
     public static void setup(DhlModel model) {
-        model.getGroups().add(Group.builder().name("Translators").build());
+        model.getGroups().add(Group.builder().id(4L).name("Translators").description("Translators applications").build());
 
         model.getApplications().add(
                 Application.builder()

@@ -1,3 +1,21 @@
 body .ui-tabmenu .ui-tabmenu-nav {
     overflow-x: hidden;
 }
+
+h1 {
+    font-size: 25px;
+    color: #48d;
+}
+
+h2 {
+    font-size: 21px;
+    color: #6af;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+.mainTitleBar > .ui-panel-titlebar {
+    background: #e0f0ff !important;
+}

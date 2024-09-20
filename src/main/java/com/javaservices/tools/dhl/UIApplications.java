@@ -11,7 +11,7 @@ import java.util.Arrays;
 public class UIApplications {
 
     public static void setup(DhlModel model) {
-        model.getGroups().add(Group.builder().name("UI").build());
+        model.getGroups().add(Group.builder().id(1L).name("UI").description("Main UI and Dashboards UI").build());
 
         model.getApplications().add(
                 Application.builder()

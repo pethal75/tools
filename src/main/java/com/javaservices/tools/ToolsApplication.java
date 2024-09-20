@@ -2,6 +2,8 @@ package com.javaservices.tools;
 
 import com.javaservices.tools.web.webview.JavaFXBrowser;
 import jakarta.annotation.PostConstruct;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

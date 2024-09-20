@@ -21,11 +21,11 @@ public class DhlModel extends ToolsModel {
 
         WebMethods.setup(this);
 
-        this.environments.add(Environment.builder().name("LOCAL").build());
-        this.environments.add(Environment.builder().name("DEV").build());
-        this.environments.add(Environment.builder().name("UAT").build());
-        this.environments.add(Environment.builder().name("QA").build());
-        this.environments.add(Environment.builder().name("PROD").build());
+        this.environments.add(Environment.builder().id(1L).name("LOCAL").build());
+        this.environments.add(Environment.builder().id(2L).name("DEV").description("Development purpose environment").build());
+        this.environments.add(Environment.builder().id(3L).name("UAT").description("Uaser acceptance testing environment").build());
+        this.environments.add(Environment.builder().id(4L).name("QA").description("Quality assurance environment").build());
+        this.environments.add(Environment.builder().id(5L).name("PROD").description("Production environment").build());
 
         OfflineRating.setup(this);
 

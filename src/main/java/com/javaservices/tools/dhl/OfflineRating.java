@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class OfflineRating {
 
     public static void setup(DhlModel model) {
-        model.getGroups().add(Group.builder().name("OFR").build());
+        model.getGroups().add(Group.builder().id(3L).name("OFR").description("Offline Rating").build());
 
         model.getApplications().add(
                 Application.builder()

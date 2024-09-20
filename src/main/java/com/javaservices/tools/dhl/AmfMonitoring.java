@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class AmfMonitoring {
 
     public static void setup(DhlModel model) {
-        model.getGroups().add(Group.builder().name("AMF").build());
+        model.getGroups().add(Group.builder().id(2L).name("AMF").description("Application monitoring").build());
 
         model.getApplications().add(
                 Application.builder()

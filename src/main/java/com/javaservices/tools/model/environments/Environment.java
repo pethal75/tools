@@ -7,5 +7,9 @@ import lombok.Data;
 @Builder
 public class Environment {
 
+    protected Long id;
+
     protected String name;
+
+    protected String description;
 }
