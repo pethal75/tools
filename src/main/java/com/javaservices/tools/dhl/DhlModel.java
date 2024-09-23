@@ -11,10 +11,13 @@ public class DhlModel extends ToolsModel {
 
     public DhlModel() {
 
-        // TODO setup related to applications, add name
-        this.servers.add(Server.builder().host("aaaprg.prg-dc.dhl.com").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());
-        this.servers.add(Server.builder().host("exp-cfit-dev-fwds.test-int.apps.czchooct002.dhl.com/").protocol(Server.Protocol.HTTPS).serverType(Server.ServerType.WEB).build());
-        this.servers.add(Server.builder().host("exp-cfit-dev-fwui.test-int.apps.czchooct002.dhl.com/").protocol(Server.Protocol.HTTPS).serverType(Server.ServerType.WEB).build());
+        // TODO setup relations to applications/instances, add name
+        this.servers.add(Server.builder().id(1L).name("AAA Gateway").host("aaaprg.prg-dc.dhl.com").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());
+        this.servers.add(Server.builder().id(2L).name("czcholsint3246").host("czcholsint3246").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());
+        this.servers.add(Server.builder().id(3L).name("czcholsint3242").host("czcholsint3242").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());
+        this.servers.add(Server.builder().id(4L).name("czcholsint3245").host("czcholsint3245").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());
+        this.servers.add(Server.builder().id(5L).name("czcholsint4357").host("czcholsint4357").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());
+        this.servers.add(Server.builder().id(6L).name("czcholsint2428").host("czcholsint2428").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());
 
         // Login request mock
         Umex.setup(this);

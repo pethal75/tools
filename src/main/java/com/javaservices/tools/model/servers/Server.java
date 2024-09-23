@@ -7,7 +7,9 @@ import lombok.Data;
 @Builder
 public class Server {
 
+    protected Long id;
     protected String name;
+    protected String description;
     protected String host;
     protected Integer port;
     protected Protocol protocol;
