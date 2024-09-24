@@ -64,13 +64,12 @@ public class ServerDetailBean extends PrimefacesBean {
     public void save() throws IOException {
         log.debug("Saving server details {}", this.server.getId());
 
-        if (this.server.getId() == null) {
-            this.serversController.updateServer(this.server);
-        }
-
-        // TODO Save configuration to database or disk in the future when loading/saving will be implemented
+        this.serversController.updateServer(this.server);
 
         this.redirect(ServersListBean.pageUrl);
     }
 
+    public void cancel() throws IOException {
+        this.redirect(ServersListBean.pageUrl);
+    }
 }

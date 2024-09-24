@@ -25,29 +25,28 @@
 
                 <p:dataTable id="serversTable" var="serverValue" value="#{serversListBean.servers}">
 
-                    <p:column headerText="Name" sortBy="#{serverValue.name}" sortOrder="ASC">
+                    <p:column headerText="Name" sortBy="#{serverValue.name}" sortOrder="ASC" width="25%">
                         <h:outputLink styleClass="ml-2" value="serverDetail.xhtml">
                             <f:param name="id" value="#{serverValue.id}"/>
                             <h:outputText value="#{serverValue.name}"/>
                         </h:outputLink>
-                    </p:column>
-
-                    <p:column headerText="Description" sortBy="#{serverValue.description}">
+                        <br/>
                         <h:outputText value="#{serverValue.description}"/>
                     </p:column>
-                    <p:column headerText="Host" sortBy="#{serverValue.host}">
+
+                    <p:column headerText="Host" sortBy="#{serverValue.host}" width="20%">
                         <h:outputText value="#{serverValue.host}"/> <h:outputText rendered="#{serverValue.port != null}" value=" : #{serverValue.port}"/>
                     </p:column>
 
-                    <p:column headerText="Protocol" sortBy="#{serverValue.protocol}">
+                    <p:column headerText="Protocol" sortBy="#{serverValue.protocol}" style="text-align: center">
                         <h:outputText value="#{serverValue.protocol}"/>
                     </p:column>
 
-                    <p:column headerText="Type" sortBy="#{serverValue.serverType}">
+                    <p:column headerText="Type" sortBy="#{serverValue.serverType}" style="text-align: center">
                         <h:outputText value="#{serverValue.serverType}"/>
                     </p:column>
 
-                    <p:column headerText="Action" width="20%" style="text-align: center">
+                    <p:column headerText="Action" style="text-align: center">
                         <p:button href="serverDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{serverValue.id}"/>
                         </p:button>

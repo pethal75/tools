@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 @ViewScoped
 public class EnvironmentsListBean {
 
+    public static final String pageUrl = "environmentsList.xhtml";
+
     protected final EnvironmentsController environmentsController;
 
     @Inject

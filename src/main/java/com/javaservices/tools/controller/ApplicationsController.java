@@ -1,10 +1,8 @@
 package com.javaservices.tools.controller;
 
 import com.javaservices.network.clients.HttpClientUtil;
-import com.javaservices.tools.model.ToolsModel;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
-import com.javaservices.tools.dhl.DhlModel;
 import jakarta.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,10 +18,13 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class ApplicationsController {
 
-    // TODO read from session storage
-    protected ToolsModel toolsModel = new DhlModel();
+    private final ModelController modelController;
 
     protected final HttpClientUtil httpClientUtil = new HttpClientUtil();
+
+    public ApplicationsController(ModelController modelController) {
+        this.modelController = modelController;
+    }
 
     @PostConstruct
     public void init() {
@@ -34,7 +35,7 @@ public class ApplicationsController {
      * Reloads actual statuses for all applications, subscribes for responses and refresh main configuration array
      */
     public void refreshApplications() {
-        List<Mono<ResponseEntity<String>>> responses = toolsModel.getApplications().stream()
+        List<Mono<ResponseEntity<String>>> responses = modelController.getModel().getApplications().stream()
                 .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
                 .map(this::refreshApplicationStatus)
                 .toList();
@@ -76,7 +77,7 @@ public class ApplicationsController {
     }
 
     public List<Application> getApplications() {
-        return toolsModel.getApplications();
+        return modelController.getModel().getApplications();
     }
 
     public List<ApplicationInstance> getApplicationInstances() {

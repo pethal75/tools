@@ -8,9 +8,21 @@
 
     <h2>Applications</h2>
 
-        <div class="card">
+        <h:form>
+            <div class="row">
+                <div class="col-md-10">
+                    <br/>
+                </div>
 
-            <h:form>
+                <div class="col-md-2 text-right">
+                    <p:button styleClass="ui-button-success" href="applicationDetail.xhtml" value="Add Application"/>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="card">
+
                 <p:dataTable id="applicationsTable" var="applicationValue" value="#{applicationsListBean.applications}" sortMode="single" >
 
                     <p:column headerText="Name" width="30%" sortBy="#{applicationValue.name}" sortOrder="ASC">
@@ -28,14 +40,14 @@
                         <h:outputText value="#{applicationValue.protocol.name()}" />
                     </p:column>
 
-                    <p:column headerText="Action" width="20%" style="text-align: center">
+                    <p:column headerText="Action" style="text-align: center">
                         <p:button href="applicationDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{applicationValue.id}"/>
                         </p:button>
                     </p:column>
                 </p:dataTable>
-            </h:form>
-        </div>
+            </div>
+        </h:form>
 
     </ui:define>
 

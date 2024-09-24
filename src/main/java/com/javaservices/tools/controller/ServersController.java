@@ -13,11 +13,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ServersController {
 
-    // TODO read from session storage
-    protected ToolsModel toolsModel = new DhlModel();
+    private final ModelController modelController;
+
+    public ServersController(ModelController modelController) {
+        this.modelController = modelController;
+    }
 
     public List<Server> getServers() {
-        return toolsModel.getServers();
+        return modelController.getModel().getServers();
     }
 
     public Server findServerById(Long id) {
@@ -28,10 +31,15 @@ public class ServersController {
         // TODO save server according saving method - file / database
 
         if (server.getId() == null) {
-            Long maxId = this.toolsModel.getServers().stream().max(Comparator.comparingLong(Server::getId)).map(Server::getId).orElse(0L);
+            Long maxId = this.modelController.getModel().getServers().stream()
+                    .max(Comparator.comparingLong(Server::getId))
+                    .map(Server::getId)
+                    .orElse(0L);
             server.setId(maxId + 1);
-        }
 
-        this.toolsModel.getServers().add(server);
+            this.modelController.getModel().getServers().add(server);
+        } else {
+            // TODO update ?
+        }
     }
 }

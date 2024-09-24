@@ -6,10 +6,22 @@
                 xmlns:p="http://primefaces.org/ui">
     <ui:define name="content">
         <h2>Groups</h2>
-        
-        <div class="card">
 
-            <h:form>
+        <h:form>
+            <div class="row">
+                <div class="col-md-10">
+                    <br/>
+                </div>
+
+                <div class="col-md-2 text-right">
+                    <p:button styleClass="ui-button-success" href="groupDetail.xhtml" value="Add Group"/>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="card">
+
                 <p:dataTable id="groupsTable" var="groupValue" value="#{groupsListBean.groups}">
 
                     <p:column headerText="Name" sortBy="#{groupValue.name}" sortOrder="ASC">
@@ -23,14 +35,14 @@
                         <h:outputText value="#{groupValue.description}"/>
                     </p:column>
 
-                    <p:column headerText="Action" width="20%">
+                    <p:column headerText="Action" style="text-align: center">
                         <p:button href="groupDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{groupValue.id}"/>
                         </p:button>
                     </p:column>
                 </p:dataTable>
-            </h:form>
-        </div>
+            </div>
+        </h:form>
 
     </ui:define>
 

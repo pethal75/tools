@@ -25,15 +25,15 @@
                         <h:outputText value="#{applicationInstance.name}" />
                     </p:column>
 
-                    <p:column headerText="Environment">
+                    <p:column headerText="Environment" width="100px" style="text-align: center">
                         <h:outputText value="#{applicationInstance.environment.name}" />
                     </p:column>
 
-                    <p:column headerText="Group">
+                    <p:column headerText="Group" width="60px" style="text-align: center">
                         <h:outputText value="#{applicationInstance.application.group.name}" />
                     </p:column>
 
-                    <p:column headerText="Protocol" width="10%" style="text-align: center">
+                    <p:column headerText="Protocol" width="80px" style="text-align: center">
                         <h:outputText value="#{applicationInstance.application.protocol.name()}" />
                     </p:column>
 
