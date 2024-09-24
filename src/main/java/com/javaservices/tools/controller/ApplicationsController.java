@@ -3,10 +3,13 @@ package com.javaservices.tools.controller;
 import com.javaservices.network.clients.HttpClientUtil;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
+import com.javaservices.tools.model.environments.Group;
 import jakarta.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -99,12 +102,28 @@ public class ApplicationsController {
                 .findFirst().orElse(null);
     }
 
-    public Application findApplicationById(long id) {
+    public Application findApplicationById(Long id) {
         if (this.getApplications() == null)
             return null;
 
         return this.getApplications().stream()
-                .filter(application -> application.getId() == id)
+                .filter(application -> Objects.equals(application.getId(), id))
                 .findFirst().orElse(null);
+    }
+
+    public void updateApplication(Application application) {
+        // TODO save group according saving method - file / database
+
+        if (application.getId() == null) {
+            Long maxId = this.modelController.getModel().getApplications().stream()
+                    .max(Comparator.comparingLong(Application::getId))
+                    .map(Application::getId)
+                    .orElse(0L);
+            application.setId(maxId + 1);
+
+            this.modelController.getModel().getApplications().add(application);
+        } else {
+
+        }
     }
 }

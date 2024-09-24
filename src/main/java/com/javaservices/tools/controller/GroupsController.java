@@ -25,7 +25,13 @@ public class GroupsController {
     }
 
     public Group findGroupById(Long id) {
-        return this.getGroups().stream().filter(group -> Objects.equals(group.getId(), id)).findFirst().orElse(null);
+        if (this.getGroups() == null)
+            return null;
+
+        return this.getGroups().stream()
+                .filter(group -> Objects.equals(group.getId(), id))
+                .findFirst()
+                .orElse(null);
     }
 
     public void updateGroup(Group group) {

@@ -33,7 +33,7 @@
                 <br/>
 
                 <div class="buttonsBlock">
-                    <p:commandButton id="saveButton" value="Save" action="#{environmentDetailBean.save()}" styleClass="ui-button-success mr-2"/>
+                    <p:commandButton id="saveButton" value="Save" action="#{environmentDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
                     <p:commandButton id="cancelButton" value="Cancel" action="#{environmentDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
                 </div>
 

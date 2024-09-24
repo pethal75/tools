@@ -7,6 +7,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
+import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
 import lombok.Data;
@@ -53,12 +54,6 @@ public class ApplicationsDetailBean extends PrimefacesTabBean {
         return applicationsController.getApplications();
     }
 
-    public void save() {
-        log.debug("Saving application details {}", this.application.getId());
-
-        // TODO Save configuration to database or disk in the future when loading/saving will be implemented
-    }
-
     @Override
     protected String prepareUrl() {
 
@@ -67,4 +62,17 @@ public class ApplicationsDetailBean extends PrimefacesTabBean {
         else
             return MessageFormat.format("{0}?id={1}&tabId={2}", pageUrl, this.id, this.tabId);
     }
+
+    public void save() throws IOException {
+        log.debug("Saving application details {}", this.application.getId());
+
+        this.applicationsController.updateApplication(this.application);
+
+        this.redirect(ApplicationsListBean.pageUrl);
+    }
+
+    public void cancel() throws IOException {
+        this.redirect(ApplicationsListBean.pageUrl);
+    }
+
 }

@@ -36,7 +36,13 @@ public class EnvironmentsController {
     }
 
     public Environment findEnvironmentById(Long id) {
-        return this.getEnvironments().stream().filter(environment -> Objects.equals(environment.getId(), id)).findFirst().orElse(null);
+        if (this.getEnvironments() == null)
+            return null;
+
+        return this.getEnvironments().stream()
+                .filter(environment -> Objects.equals(environment.getId(), id))
+                .findFirst()
+                .orElse(null);
     }
 
     public void updateEnvironment(Environment environment) {

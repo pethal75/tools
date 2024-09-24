@@ -9,6 +9,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class ApplicationsListBean {
 
+    public static final String pageUrl = "applicationsList.xhtml";
+
     protected final ApplicationsController applicationsController;
 
     public ApplicationsListBean(ApplicationsController applicationsController) {
