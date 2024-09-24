@@ -2,11 +2,47 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
-                xmlns:jsf="http://xmlns.jcp.org/jsf"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
     <ui:define name="content">
-        Servers list
-    </ui:define>>
+        <h2>Servers</h2>
+        
+        <div class="card">
+
+            <h:form>
+                <p:dataTable id="serversTable" var="serverValue" value="#{serversListBean.servers}">
+
+                    <p:column headerText="Name" sortBy="#{serverValue.name}" sortOrder="ASC">
+                        <h:outputLink styleClass="ml-2" value="serverDetail.xhtml">
+                            <f:param name="id" value="#{serverValue.id}"/>
+                            <h:outputText value="#{serverValue.name}"/>
+                        </h:outputLink>
+                    </p:column>
+
+                    <p:column headerText="Description" sortBy="#{serverValue.description}">
+                        <h:outputText value="#{serverValue.description}"/>
+                    </p:column>
+                    <p:column headerText="Host" sortBy="#{serverValue.host}">
+                        <h:outputText value="#{serverValue.host}"/> <h:outputText rendered="#{serverValue.port != null}" value=" : #{serverValue.port}"/>
+                    </p:column>
+
+                    <p:column headerText="Protocol" sortBy="#{serverValue.protocol}">
+                        <h:outputText value="#{serverValue.protocol}"/>
+                    </p:column>
+
+                    <p:column headerText="Type" sortBy="#{serverValue.serverType}">
+                        <h:outputText value="#{serverValue.serverType}"/>
+                    </p:column>
+
+                    <p:column headerText="Action" width="20%">
+                        <p:button href="serverDetail.xhtml" value="Detail">
+                            <f:param name="id" value="#{serverValue.id}"/>
+                        </p:button>
+                    </p:column>
+                </p:dataTable>
+            </h:form>
+        </div>
+
+    </ui:define>
 
 </ui:composition>
