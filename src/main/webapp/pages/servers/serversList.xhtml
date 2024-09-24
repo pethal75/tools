@@ -6,10 +6,23 @@
                 xmlns:p="http://primefaces.org/ui">
     <ui:define name="content">
         <h2>Servers</h2>
-        
-        <div class="card">
 
-            <h:form>
+        <h:form>
+
+            <div class="row">
+                <div class="col-md-10">
+                    <br/>
+                </div>
+
+                <div class="col-md-2 text-right">
+                    <p:button styleClass="ui-button-success" href="serverDetail.xhtml" value="Add Server"/>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="card">
+
                 <p:dataTable id="serversTable" var="serverValue" value="#{serversListBean.servers}">
 
                     <p:column headerText="Name" sortBy="#{serverValue.name}" sortOrder="ASC">
@@ -34,15 +47,15 @@
                         <h:outputText value="#{serverValue.serverType}"/>
                     </p:column>
 
-                    <p:column headerText="Action" width="20%">
+                    <p:column headerText="Action" width="20%" style="text-align: center">
                         <p:button href="serverDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{serverValue.id}"/>
                         </p:button>
                     </p:column>
                 </p:dataTable>
-            </h:form>
-        </div>
+            </div>
 
+        </h:form>
     </ui:define>
 
 </ui:composition>

@@ -41,9 +41,6 @@ public class ApplicationsDetailBean extends PrimefacesTabBean {
     public void init() {
         log.debug("initialize application id : {}", id);
 
-        if (this.id == null)
-            return;
-
         this.application = applicationsController.findApplicationById(id);
 
         if (this.application != null)

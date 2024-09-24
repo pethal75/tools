@@ -11,14 +11,15 @@
     <div class="card">
 
         <div class="container-fluid" style="width: 1400px">
-            <h:form id="applicationInfoForm">
+            <h:form id="serverDetailForm">
                 <br/>
 
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <p:inputText id="name" required="true" label="name" value="#{serverDetailBean.server.name}" class="form-control"/>
+                            <p:inputText id="name" required="true" label="name" value="#{serverDetailBean.server.name}" class="form-control" requiredMessage="Missing name"/>
+                            <p:message for="name" styleClass="validationMessage"/>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -33,7 +34,8 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="host">Host</label>
-                            <p:inputText id="host" required="true" label="name" value="#{serverDetailBean.server.host}" class="form-control"/>
+                            <p:inputText id="host" required="true" label="host" value="#{serverDetailBean.server.host}" class="form-control" requiredMessage="Missing host"/>
+                            <p:message for="host" styleClass="validationMessage"/>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -46,6 +48,7 @@
                         <div class="form-group">
                             <label for="protocol">Protocol</label>
                             <p:selectOneMenu id="protocol" label="protocol" value="#{serverDetailBean.server.protocol}" class="form-control">
+                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
                                 <f:selectItems value="#{serverDetailBean.protocols}"/>
                             </p:selectOneMenu>
                         </div>
@@ -57,6 +60,7 @@
                         <div class="form-group">
                             <label for="type">Type</label>
                             <p:selectOneMenu id="type" label="type" value="#{serverDetailBean.server.serverType}" class="form-control">
+                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
                                 <f:selectItems value="#{serverDetailBean.types}"/>
                             </p:selectOneMenu>
                         </div>
@@ -66,7 +70,7 @@
                 <br/>
 
                 <div class="buttonsBlock">
-                    <p:commandButton id="saveButton" value="Save" action="#{serverDetailBean.save()}"/>
+                    <p:commandButton id="saveButton" value="Save" action="#{serverDetailBean.save()}" update=":serverDetailForm"/>
                 </div>
 
                 <br/>

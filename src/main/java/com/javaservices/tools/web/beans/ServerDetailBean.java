@@ -41,10 +41,7 @@ public class ServerDetailBean extends PrimefacesBean {
 
     @PostConstruct
     public void init() {
-        log.debug("initialize application id : {}", id);
-
-        if (this.id == null)
-            return;
+        log.debug("initialize server id : {}", id);
 
         this.server = serversController.findServerById(id);
 
@@ -66,6 +63,10 @@ public class ServerDetailBean extends PrimefacesBean {
 
     public void save() throws IOException {
         log.debug("Saving server details {}", this.server.getId());
+
+        if (this.server.getId() == null) {
+            this.serversController.updateServer(this.server);
+        }
 
         // TODO Save configuration to database or disk in the future when loading/saving will be implemented
 
