@@ -12,6 +12,8 @@ import org.springframework.stereotype.Component;
 @ViewScoped
 public class ServersListBean {
 
+    public static final String pageUrl = "serversList.xhtml";
+
     protected final ServersController serversController;
 
     @Inject

@@ -1,4 +1,4 @@
-package com.javaservices.tools.web.beans;
+package com.javaservices.tools.web.beans.primefaces;
 
 import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.context.FacesContext;
@@ -10,15 +10,11 @@ import org.springframework.beans.factory.annotation.Value;
 
 @Data
 @Slf4j
-public class GenericPrimefacesBean {
+public class PrimefacesTabBean extends PrimefacesBean{
 
     @Value("#{request.getParameter('tabId')}")
     @ManagedProperty("tabId")
     protected Long tabId;
-
-    protected void redirect(String url) throws IOException {
-        FacesContext.getCurrentInstance().getExternalContext().redirect(url);
-    }
 
     public void onTabChange(TabChangeEvent<?> tabChangeEvent) throws IOException {
         log.info("Tab change");

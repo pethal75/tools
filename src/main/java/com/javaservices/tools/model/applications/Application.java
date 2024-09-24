@@ -5,10 +5,14 @@ import com.javaservices.tools.model.servers.Server;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 @Builder
 @ToString(onlyExplicitlyIncluded = true)

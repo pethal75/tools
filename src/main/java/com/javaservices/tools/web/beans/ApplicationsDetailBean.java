@@ -2,6 +2,7 @@ package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.controller.ApplicationsController;
 import com.javaservices.tools.model.applications.Application;
+import com.javaservices.tools.web.beans.primefaces.PrimefacesTabBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.view.ViewScoped;
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Component;
 @ViewScoped
 @Data
 @Slf4j
-public class ApplicationsDetailBean extends GenericPrimefacesBean {
+public class ApplicationsDetailBean extends PrimefacesTabBean {
 
     protected static final String pageUrl = "applicationDetail.xhtml";
 
@@ -45,11 +46,10 @@ public class ApplicationsDetailBean extends GenericPrimefacesBean {
 
         this.application = applicationsController.findApplicationById(id);
 
-        // TODO error handling when not found application
-        if (this.application == null)
-            throw new IllegalArgumentException(MessageFormat.format("Application with id {0} not found!", this.id));
-
-        log.debug("Found application named : {}", application.getName());
+        if (this.application != null)
+            log.debug("Found application named : {}", application.getName());
+        else
+            this.application = new Application();
     }
 
     public List<Application> getApplications() {
