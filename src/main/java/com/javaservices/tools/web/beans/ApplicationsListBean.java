@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class ApplicationsListBean {
 
     public static final String pageUrl = "applicationsList.xhtml";
-    public static final String pageUrlInstance = "instanceList.xhtml";
+    public static final String pageUrlInstance = "instancesList.xhtml";
 
     protected final ApplicationsService applicationsService;
 
