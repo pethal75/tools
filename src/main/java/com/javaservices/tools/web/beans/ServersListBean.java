@@ -1,8 +1,8 @@
 package com.javaservices.tools.web.beans;
 
-import com.javaservices.tools.controller.ServersController;
-import com.javaservices.tools.model.environments.Group;
+import com.javaservices.tools.service.ServersService;
 import com.javaservices.tools.model.servers.Server;
+import jakarta.el.MethodExpression;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.util.List;
@@ -14,15 +14,18 @@ public class ServersListBean {
 
     public static final String pageUrl = "serversList.xhtml";
 
-    protected final ServersController serversController;
+    protected final ServersService serversService;
 
     @Inject
-    public ServersListBean(ServersController serversController) {
-        this.serversController = serversController;
+    public ServersListBean(ServersService serversService) {
+        this.serversService = serversService;
     }
 
     public List<Server> getServers() {
-        return serversController.getServers();
+        return serversService.getServers();
     }
 
+    public void deleteServer(Long id) {
+        this.serversService.delete(id);
+    }
 }

@@ -4,6 +4,7 @@ import com.javaservices.tools.model.ToolsModel;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.model.servers.Server;
+import java.util.concurrent.atomic.AtomicLong;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -40,9 +41,19 @@ public class DhlModel extends ToolsModel {
 
         X400Connector.setup(this);
 
-        this.applications.forEach(Application::initialize);
+        this.initialize();
 
         this.saveConfiguration("config.json");
+    }
+
+    private void initialize() {
+        this.applications.forEach(Application::initialize);
+
+        AtomicLong index = new AtomicLong(1);
+
+        this.getApplications().stream()
+                .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
+                .forEach(applicationInstance -> applicationInstance.setId(index.getAndIncrement()));
     }
 
 }

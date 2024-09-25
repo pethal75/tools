@@ -5,12 +5,12 @@
                 xmlns:p="http://primefaces.org/ui">
     <ui:define name="content">
 
-        <h2>Application #{applicationsDetailBean.application.name}</h2>
+        <h2>Application #{applicationDetailBean.application.name}</h2>
 
         <div class="card">
-            <p:tabView style="width: 100%" activeIndex="#{applicationsDetailBean.tabId}">
+            <p:tabView style="width: 100%" activeIndex="#{applicationDetailBean.tabId}">
 
-                <p:ajax event="tabChange" listener="#{applicationsDetailBean.onTabChange}"/>
+                <p:ajax event="tabChange" listener="#{applicationDetailBean.onTabChange}"/>
 
 
                 <p:tab id="applicationDetailInfoTab">

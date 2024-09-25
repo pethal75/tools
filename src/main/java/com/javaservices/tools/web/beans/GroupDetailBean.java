@@ -1,17 +1,13 @@
 package com.javaservices.tools.web.beans;
 
-import com.javaservices.tools.controller.GroupsController;
+import com.javaservices.tools.service.GroupsService;
 import com.javaservices.tools.model.environments.Group;
-import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +23,7 @@ public class GroupDetailBean extends PrimefacesBean {
 
     public static final String pageUrl = "groupDetail.xhtml";
 
-    protected GroupsController groupsController;
+    protected GroupsService groupsService;
 
     @Value("#{request.getParameter('id')}")
     @ManagedProperty("id")
@@ -36,15 +32,15 @@ public class GroupDetailBean extends PrimefacesBean {
     protected Group group;
 
     @Inject
-    public GroupDetailBean(GroupsController groupsController) {
-        this.groupsController = groupsController;
+    public GroupDetailBean(GroupsService groupsService) {
+        this.groupsService = groupsService;
     }
 
     @PostConstruct
     public void init() {
         log.debug("initialize group id : {}", id);
 
-        this.group = groupsController.findGroupById(id);
+        this.group = groupsService.findGroupById(id);
 
         if (this.group != null)
             log.debug("Found group named : {}", group.getName());
@@ -55,7 +51,7 @@ public class GroupDetailBean extends PrimefacesBean {
     public void save() throws IOException {
         log.debug("Saving group details {}", this.group.getId());
 
-        this.groupsController.updateGroup(this.group);
+        this.groupsService.updateGroup(this.group);
 
         this.redirect(GroupsListBean.pageUrl);
     }

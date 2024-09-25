@@ -1,9 +1,7 @@
-package com.javaservices.tools.controller;
+package com.javaservices.tools.service;
 
-import com.javaservices.tools.dhl.DhlModel;
-import com.javaservices.tools.model.ToolsModel;
+import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.model.environments.Group;
-import com.javaservices.tools.model.servers.Server;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
@@ -12,16 +10,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class GroupsController {
+public class GroupsService {
 
-    private final ModelController modelController;
+    private final ModelService modelService;
 
-    public GroupsController(ModelController modelController) {
-        this.modelController = modelController;
+    public GroupsService(ModelService modelService) {
+        this.modelService = modelService;
     }
 
     public List<Group> getGroups() {
-        return modelController.getModel().getGroups();
+        return modelService.getModel().getGroups();
     }
 
     public Group findGroupById(Long id) {
@@ -38,15 +36,23 @@ public class GroupsController {
         // TODO save group according saving method - file / database
 
         if (group.getId() == null) {
-            Long maxId = this.modelController.getModel().getGroups().stream()
+            Long maxId = this.modelService.getModel().getGroups().stream()
                     .max(Comparator.comparingLong(Group::getId))
                     .map(Group::getId)
                     .orElse(0L);
             group.setId(maxId + 1);
 
-            this.modelController.getModel().getGroups().add(group);
+            this.modelService.getModel().getGroups().add(group);
         } else {
 
+        }
+    }
+
+    public void delete(Long id) {
+        Group group = findGroupById(id);
+
+        if (group != null) {
+            this.modelService.getModel().getGroups().remove(group);
         }
     }
 }

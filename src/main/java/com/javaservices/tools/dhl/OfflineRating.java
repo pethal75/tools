@@ -18,7 +18,7 @@ public class OfflineRating {
                         .group(model.findGroup("OFR"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().environment(model.findEnvironment("LOCAL")).applicationUrl("http://localhost:1601/kyc-enc/actuator/health").build()
+                                ApplicationInstance.builder().id(1L).environment(model.findEnvironment("LOCAL")).applicationUrl("http://localhost:1601/kyc-enc/actuator/health").build()
                         ))
                         .build());
 

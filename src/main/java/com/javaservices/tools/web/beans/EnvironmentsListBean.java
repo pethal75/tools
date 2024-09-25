@@ -1,6 +1,6 @@
 package com.javaservices.tools.web.beans;
 
-import com.javaservices.tools.controller.EnvironmentsController;
+import com.javaservices.tools.service.EnvironmentsService;
 import com.javaservices.tools.model.environments.Environment;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
@@ -13,15 +13,18 @@ public class EnvironmentsListBean {
 
     public static final String pageUrl = "environmentsList.xhtml";
 
-    protected final EnvironmentsController environmentsController;
+    protected final EnvironmentsService environmentsService;
 
     @Inject
-    public EnvironmentsListBean(EnvironmentsController environmentsController) {
-        this.environmentsController = environmentsController;
+    public EnvironmentsListBean(EnvironmentsService environmentsService) {
+        this.environmentsService = environmentsService;
     }
 
     public List<Environment> getEnvironments() {
-        return environmentsController.getEnvironments();
+        return environmentsService.getEnvironments();
     }
 
+    public void deleteEnvironment(Long id) {
+        this.environmentsService.delete(id);
+    }
 }

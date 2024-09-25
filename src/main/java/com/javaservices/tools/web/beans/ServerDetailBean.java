@@ -1,6 +1,6 @@
 package com.javaservices.tools.web.beans;
 
-import com.javaservices.tools.controller.ServersController;
+import com.javaservices.tools.service.ServersService;
 import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesBean;
 import jakarta.annotation.PostConstruct;
@@ -26,7 +26,7 @@ public class ServerDetailBean extends PrimefacesBean {
 
     public static final String pageUrl = "serverDetail.xhtml";
 
-    protected ServersController serversController;
+    protected ServersService serversService;
 
     @Value("#{request.getParameter('id')}")
     @ManagedProperty("id")
@@ -35,15 +35,15 @@ public class ServerDetailBean extends PrimefacesBean {
     protected Server server;
 
     @Inject
-    public ServerDetailBean(ServersController serversController) {
-        this.serversController = serversController;
+    public ServerDetailBean(ServersService serversService) {
+        this.serversService = serversService;
     }
 
     @PostConstruct
     public void init() {
         log.debug("initialize server id : {}", id);
 
-        this.server = serversController.findServerById(id);
+        this.server = serversService.findServerById(id);
 
         if (this.server != null)
             log.debug("Found server named : {}", server.getName());
@@ -64,7 +64,7 @@ public class ServerDetailBean extends PrimefacesBean {
     public void save() throws IOException {
         log.debug("Saving server details {}", this.server.getId());
 
-        this.serversController.updateServer(this.server);
+        this.serversService.updateServer(this.server);
 
         this.redirect(ServersListBean.pageUrl);
     }

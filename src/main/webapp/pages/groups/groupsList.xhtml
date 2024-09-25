@@ -39,6 +39,7 @@
                         <p:button href="groupDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{groupValue.id}"/>
                         </p:button>
+                        <p:commandButton value="Delete" action="#{groupsListBean.deleteGroup(groupValue.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
                     </p:column>
                 </p:dataTable>
             </div>

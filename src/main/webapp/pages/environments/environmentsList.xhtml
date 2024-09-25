@@ -40,6 +40,7 @@
                         <p:button href="environmentDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{environmentValue.id}"/>
                         </p:button>
+                        <p:commandButton value="Delete" action="#{environmentsListBean.deleteEnvironment(environmentValue.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
                     </p:column>
                 </p:dataTable>
             </div>

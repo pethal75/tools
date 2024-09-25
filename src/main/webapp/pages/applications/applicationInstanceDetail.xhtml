@@ -1,0 +1,43 @@
+<ui:composition template="/pages/include/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+<ui:define name="content">
+
+    <h2>Application Instance #{applicationInstanceDetailBean.applicationInstance.name}</h2>
+
+    <div class="card">
+
+        <div class="container-fluid" style="width: 100%">
+            <h:form id="environmentDetailForm">
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <p:inputText id="name" required="true" label="name" value="#{applicationInstanceDetailBean.applicationInstance.name}" class="form-control" requiredMessage="Missing name"/>
+                            <p:message for="name" styleClass="validationMessage"/>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="buttonsBlock">
+                    <p:commandButton id="saveButton" value="Save" action="#{applicationInstanceDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
+                    <p:commandButton id="cancelButton" value="Cancel" action="#{applicationInstanceDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
+                </div>
+
+                <br/>
+            </h:form>
+        </div>
+    </div>
+</ui:define>
+</ui:composition>

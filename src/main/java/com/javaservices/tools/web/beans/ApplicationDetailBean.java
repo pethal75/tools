@@ -1,6 +1,6 @@
 package com.javaservices.tools.web.beans;
 
-import com.javaservices.tools.controller.ApplicationsController;
+import com.javaservices.tools.service.ApplicationsService;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesTabBean;
 import jakarta.annotation.PostConstruct;
@@ -21,11 +21,11 @@ import org.springframework.stereotype.Component;
 @ViewScoped
 @Data
 @Slf4j
-public class ApplicationsDetailBean extends PrimefacesTabBean {
+public class ApplicationDetailBean extends PrimefacesTabBean {
 
     protected static final String pageUrl = "applicationDetail.xhtml";
 
-    protected ApplicationsController applicationsController;
+    protected ApplicationsService applicationsService;
 
     @Value("#{request.getParameter('id')}")
     @ManagedProperty("id")
@@ -34,15 +34,15 @@ public class ApplicationsDetailBean extends PrimefacesTabBean {
     protected Application application;
 
     @Inject
-    public ApplicationsDetailBean(ApplicationsController applicationsController) {
-        this.applicationsController = applicationsController;
+    public ApplicationDetailBean(ApplicationsService applicationsService) {
+        this.applicationsService = applicationsService;
     }
 
     @PostConstruct
     public void init() {
         log.debug("initialize application id : {}", id);
 
-        this.application = applicationsController.findApplicationById(id);
+        this.application = applicationsService.findApplicationById(id);
 
         if (this.application != null)
             log.debug("Found application named : {}", application.getName());
@@ -51,7 +51,7 @@ public class ApplicationsDetailBean extends PrimefacesTabBean {
     }
 
     public List<Application> getApplications() {
-        return applicationsController.getApplications();
+        return applicationsService.getApplications();
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ApplicationsDetailBean extends PrimefacesTabBean {
     public void save() throws IOException {
         log.debug("Saving application details {}", this.application.getId());
 
-        this.applicationsController.updateApplication(this.application);
+        this.applicationsService.updateApplication(this.application);
 
         this.redirect(ApplicationsListBean.pageUrl);
     }

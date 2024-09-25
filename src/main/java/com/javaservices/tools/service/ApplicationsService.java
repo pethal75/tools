@@ -1,9 +1,8 @@
-package com.javaservices.tools.controller;
+package com.javaservices.tools.service;
 
 import com.javaservices.network.clients.HttpClientUtil;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
-import com.javaservices.tools.model.environments.Group;
 import jakarta.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Collections;
@@ -19,14 +18,14 @@ import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-public class ApplicationsController {
+public class ApplicationsService {
 
-    private final ModelController modelController;
+    private final ModelService modelService;
 
     protected final HttpClientUtil httpClientUtil = new HttpClientUtil();
 
-    public ApplicationsController(ModelController modelController) {
-        this.modelController = modelController;
+    public ApplicationsService(ModelService modelService) {
+        this.modelService = modelService;
     }
 
     @PostConstruct
@@ -38,7 +37,7 @@ public class ApplicationsController {
      * Reloads actual statuses for all applications, subscribes for responses and refresh main configuration array
      */
     public void refreshApplications() {
-        List<Mono<ResponseEntity<String>>> responses = modelController.getModel().getApplications().stream()
+        List<Mono<ResponseEntity<String>>> responses = modelService.getModel().getApplications().stream()
                 .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
                 .map(this::refreshApplicationStatus)
                 .toList();
@@ -80,7 +79,7 @@ public class ApplicationsController {
     }
 
     public List<Application> getApplications() {
-        return modelController.getModel().getApplications();
+        return modelService.getModel().getApplications();
     }
 
     public List<ApplicationInstance> getApplicationInstances() {
@@ -111,19 +110,41 @@ public class ApplicationsController {
                 .findFirst().orElse(null);
     }
 
+
+    public ApplicationInstance findApplicationInstanceById(Long id) {
+        if (this.getApplicationInstances() == null)
+            return null;
+
+        return this.getApplicationInstances().stream()
+                .filter(application -> Objects.equals(application.getId(), id))
+                .findFirst().orElse(null);
+    }
+
     public void updateApplication(Application application) {
         // TODO save group according saving method - file / database
 
         if (application.getId() == null) {
-            Long maxId = this.modelController.getModel().getApplications().stream()
+            Long maxId = this.modelService.getModel().getApplications().stream()
                     .max(Comparator.comparingLong(Application::getId))
                     .map(Application::getId)
                     .orElse(0L);
             application.setId(maxId + 1);
 
-            this.modelController.getModel().getApplications().add(application);
+            this.modelService.getModel().getApplications().add(application);
         } else {
 
         }
+    }
+
+    public void delete(Long id) {
+        Application application = findApplicationById(id);
+
+        if (application != null) {
+            this.modelService.getModel().getApplications().remove(application);
+        }
+    }
+
+    public void updateApplicationInstance(ApplicationInstance applicationInstance) {
+        // TODO
     }
 }

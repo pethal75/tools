@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationsDetailBean.application.instances}">
+                <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationDetailBean.application.instances}">
                     <p:headerRow field="environment.name" expandable="true" expanded="true">
                         <p:column colspan="4">
                             <f:param name="name" value="#{applicationInstance.environment.name}"/>
@@ -32,7 +32,7 @@
                     <p:column headerText="Status" width="10%" style="text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Status" title="Status"/>
-                            <p:commandLink action="#{applicationsController.refreshApplications}">
+                            <p:commandLink action="#{applicationsService.refreshApplications}">
                                 <p:graphicImage value="/images/icon-refresh-blue.png" style="width: 24px; height: 24px; margin-left: 5px"/>
                             </p:commandLink>
                         </f:facet>

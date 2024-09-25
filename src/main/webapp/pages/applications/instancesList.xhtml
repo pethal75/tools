@@ -13,7 +13,7 @@
 
                 <p:dataTable id="applicationsTable" var="applicationInstance" value="#{applicationsListBean.applicationInstances}">
                     <p:headerRow field="application.name" expandable="true" expanded="true">
-                        <p:column colspan="6">
+                        <p:column colspan="7">
                             <h:outputLink styleClass="ml-2" value="applicationDetail.xhtml" target="_blank">
                                 <f:param name="name" value="#{applicationInstance.application.name}"/>
                                 <h:outputText value="#{applicationInstance.application.name}"/> Application
@@ -37,18 +37,25 @@
                         <h:outputText value="#{applicationInstance.application.protocol.name()}" />
                     </p:column>
 
-                    <p:column headerText="Healthcheck" width="40%">
+                    <p:column headerText="Healthcheck" width="30%">
                         <h:outputLink value="#{applicationInstance.applicationUrl}" target="_blank">#{applicationInstance.applicationUrl}</h:outputLink>
                     </p:column>
 
                     <p:column headerText="Status" width="10%" style="text-align: center">
                         <f:facet name="header">
                             <h:outputText value="Status" title="Status"/>
-                            <p:commandLink action="#{applicationsController.refreshApplications}">
+                            <p:commandLink action="#{applicationsService.refreshApplications}">
                                 <p:graphicImage value="/images/icon-refresh-blue.png" style="width: 24px; height: 24px; margin-left: 5px"/>
                             </p:commandLink>
                         </f:facet>
                         <p:graphicImage value="/images/#{applicationInstance.statusImage}" style="width: 16px; height: 16px"/>
+                    </p:column>
+
+                    <p:column headerText="Action" style="text-align: center" width="200px">
+                        <p:button href="applicationInstanceDetail.xhtml" value="Detail">
+                            <f:param name="id" value="#{applicationInstance.id}"/>
+                        </p:button>
+                        <p:commandButton value="Delete" action="#{applicationsListBean.deleteApplicationInstance(applicationInstance.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
                     </p:column>
                 </p:dataTable>
             </div>

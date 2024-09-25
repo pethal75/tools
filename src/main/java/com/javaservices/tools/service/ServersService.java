@@ -1,7 +1,5 @@
-package com.javaservices.tools.controller;
+package com.javaservices.tools.service;
 
-import com.javaservices.tools.dhl.DhlModel;
-import com.javaservices.tools.model.ToolsModel;
 import com.javaservices.tools.model.servers.Server;
 import java.util.Comparator;
 import java.util.List;
@@ -11,16 +9,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class ServersController {
+public class ServersService {
 
-    private final ModelController modelController;
+    private final ModelService modelService;
 
-    public ServersController(ModelController modelController) {
-        this.modelController = modelController;
+    public ServersService(ModelService modelService) {
+        this.modelService = modelService;
     }
 
     public List<Server> getServers() {
-        return modelController.getModel().getServers();
+        return modelService.getModel().getServers();
     }
 
     public Server findServerById(Long id) {
@@ -31,15 +29,23 @@ public class ServersController {
         // TODO save server according saving method - file / database
 
         if (server.getId() == null) {
-            Long maxId = this.modelController.getModel().getServers().stream()
+            Long maxId = this.modelService.getModel().getServers().stream()
                     .max(Comparator.comparingLong(Server::getId))
                     .map(Server::getId)
                     .orElse(0L);
             server.setId(maxId + 1);
 
-            this.modelController.getModel().getServers().add(server);
+            this.modelService.getModel().getServers().add(server);
         } else {
             // TODO update ?
+        }
+    }
+
+    public void delete(Long id) {
+        Server server = findServerById(id);
+
+        if (server != null) {
+            this.modelService.getModel().getServers().remove(server);
         }
     }
 }

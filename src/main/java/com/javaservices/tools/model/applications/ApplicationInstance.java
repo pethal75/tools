@@ -3,14 +3,20 @@ package com.javaservices.tools.model.applications;
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.model.servers.Server;
 import java.util.ArrayList;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @Builder
 @ToString(onlyExplicitlyIncluded = true)
 public class ApplicationInstance {
+
+    protected Long id;
 
     @ToString.Include
     protected String name;

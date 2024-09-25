@@ -1,4 +1,4 @@
-package com.javaservices.tools.controller;
+package com.javaservices.tools.service;
 
 import com.javaservices.tools.dhl.DhlModel;
 import com.javaservices.tools.model.ToolsModel;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class ModelController {
+public class ModelService {
     ToolsModel model = new DhlModel();
 
     public void loadModel() {

@@ -10,14 +10,14 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <p:inputText id="name" required="true" label="name" value="#{applicationsDetailBean.application.name}" class="form-control" requiredMessage="Missing name"/>
+                        <p:inputText id="name" required="true" label="name" value="#{applicationDetailBean.application.name}" class="form-control" requiredMessage="Missing name"/>
                         <p:message for="name" styleClass="validationMessage"/>
                     </div>
                 </div>
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <p:inputTextarea id="description" label="description" value="#{applicationsDetailBean.application.description}" rows="4" cols="40" class="form-control"/>
+                        <p:inputTextarea id="description" label="description" value="#{applicationDetailBean.application.description}" rows="4" cols="40" class="form-control"/>
                     </div>
                 </div>
 
@@ -28,7 +28,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <p:outputLabel for="notes">Notes</p:outputLabel>
-                        <p:inputTextarea id="notes" label="description" value="#{applicationsDetailBean.application.notes}" rows="10" cols="80" class="form-control"/>
+                        <p:inputTextarea id="notes" label="description" value="#{applicationDetailBean.application.notes}" rows="10" cols="80" class="form-control"/>
                     </div>
                 </div>
             </div>
@@ -36,8 +36,8 @@
             <br/>
 
             <div class="buttonsBlock">
-                <p:commandButton id="saveButton" value="Save" action="#{applicationsDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
-                <p:commandButton id="cancelButton" value="Cancel" action="#{applicationsDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
+                <p:commandButton id="saveButton" value="Save" action="#{applicationDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
+                <p:commandButton id="cancelButton" value="Cancel" action="#{applicationDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
                 <!-- p:blockUI block="applicationInfoForm" trigger="saveButton"/ -->
             </div>
         </h:form>

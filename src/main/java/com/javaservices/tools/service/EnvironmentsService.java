@@ -1,38 +1,25 @@
-package com.javaservices.tools.controller;
+package com.javaservices.tools.service;
 
-import com.javaservices.network.clients.HttpClientUtil;
-import com.javaservices.tools.dhl.DhlModel;
-import com.javaservices.tools.model.ToolsModel;
-import com.javaservices.tools.model.applications.Application;
-import com.javaservices.tools.model.applications.ApplicationInstance;
 import com.javaservices.tools.model.environments.Environment;
-import com.javaservices.tools.model.environments.Group;
 import com.javaservices.tools.model.servers.Server;
-import jakarta.annotation.PostConstruct;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 @Component
 @Slf4j
-public class EnvironmentsController {
+public class EnvironmentsService {
 
-    private final ModelController modelController;
+    private final ModelService modelService;
 
-    public EnvironmentsController(ModelController modelController) {
-        this.modelController = modelController;
+    public EnvironmentsService(ModelService modelService) {
+        this.modelService = modelService;
     }
 
     public List<Environment> getEnvironments() {
-        return modelController.getModel().getEnvironments();
+        return modelService.getModel().getEnvironments();
     }
 
     public Environment findEnvironmentById(Long id) {
@@ -49,16 +36,23 @@ public class EnvironmentsController {
         // TODO save environment according saving method - file / database
 
         if (environment.getId() == null) {
-            Long maxId = this.modelController.getModel().getServers().stream()
+            Long maxId = this.modelService.getModel().getServers().stream()
                     .max(Comparator.comparingLong(Server::getId))
                     .map(Server::getId)
                     .orElse(0L);
             environment.setId(maxId + 1);
 
-            this.modelController.getModel().getEnvironments().add(environment);
+            this.modelService.getModel().getEnvironments().add(environment);
         } else {
 
         }
     }
 
+    public void delete(Long id) {
+        Environment environment = findEnvironmentById(id);
+
+        if (environment != null) {
+            this.modelService.getModel().getEnvironments().remove(environment);
+        }
+    }
 }

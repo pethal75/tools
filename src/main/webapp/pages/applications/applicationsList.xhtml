@@ -44,6 +44,7 @@
                         <p:button href="applicationDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{applicationValue.id}"/>
                         </p:button>
+                        <p:commandButton value="Delete" action="#{applicationsListBean.deleteApplication(applicationValue.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
                     </p:column>
                 </p:dataTable>
             </div>

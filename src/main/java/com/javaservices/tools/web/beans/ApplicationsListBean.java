@@ -1,8 +1,9 @@
 package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.model.applications.ApplicationInstance;
-import com.javaservices.tools.controller.ApplicationsController;
+import com.javaservices.tools.service.ApplicationsService;
 import com.javaservices.tools.model.applications.Application;
+import jakarta.el.MethodExpression;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
@@ -10,18 +11,23 @@ import org.springframework.stereotype.Component;
 public class ApplicationsListBean {
 
     public static final String pageUrl = "applicationsList.xhtml";
+    public static final String pageUrlInstance = "instanceList.xhtml";
 
-    protected final ApplicationsController applicationsController;
+    protected final ApplicationsService applicationsService;
 
-    public ApplicationsListBean(ApplicationsController applicationsController) {
-        this.applicationsController = applicationsController;
+    public ApplicationsListBean(ApplicationsService applicationsService) {
+        this.applicationsService = applicationsService;
     }
 
     public List<Application> getApplications() {
-        return applicationsController.getApplications();
+        return applicationsService.getApplications();
     }
 
     public List<ApplicationInstance> getApplicationInstances() {
-        return applicationsController.getApplicationInstances();
+        return applicationsService.getApplicationInstances();
+    }
+
+    public void deleteApplication(Long id) {
+        this.applicationsService.delete(id);
     }
 }
