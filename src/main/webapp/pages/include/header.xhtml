@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <div class="row">
+        <div class="col-md-3">
+            <h1>DevTools Application</h1>
+        </div>
+        <div class="col-md-4 text-center">
+            <span class="ui-input-icon-left">
+                <i class="pi pi-search" />
+                <p:inputText id="search" required="true" placeholder="search" style="width: 200px"/>
+            </span>
+            <p:commandButton id="searchButton" value="Search" styleClass="ml-2"/>
+        </div>
+        <div class="col-md-3">
+            <label for="project">Project</label>
+            <p:selectOneMenu id="project" label="project" class="ml-2" style="width: 200px">
+                <f:selectItem itemLabel="Select0" itemValue="#{null}"/>
+                <f:selectItem itemLabel="Select1" itemValue="project1"/>
+                <f:selectItem itemLabel="Select2" itemValue="project2"/>
+                <f:selectItem itemLabel="Select3" itemValue="project3"/>
+            </p:selectOneMenu>
+        </div>
+        <div class="col-md-2 my-auto text-right">
+            <p:commandButton id="dynaButton" value="Main Menu " type="button" icon="pi pi-bars"/>
+            <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                <p:submenu label="Project">
+                    <p:menuitem value="Detail" action="#{menuView.update}" update="messages" icon="pi pi-file"/>
+                    <p:menuitem value="Import" action="#{menuView.save}" update="messages" ajax="false" icon="pi pi-cloud-upload"/>
+                    <p:menuitem value="Export" action="#{menuView.save}" update="messages" ajax="false" icon="pi pi-cloud-download"/>
+                </p:submenu>
+                <p:submenu label="Profile">
+                    <p:menuitem value="User" action="#{menuView.update}" update="messages" icon="pi pi-user"/>
+                    <p:menuitem value="Settings" update="messages" ajax="false" icon="pi pi-cog"/>
+                    <p:menuitem value="Logout" update="messages" ajax="false" icon="pi pi-power-off"/>
+                </p:submenu>
+            </p:menu>
+        </div>
+    </div>
+
+</html>

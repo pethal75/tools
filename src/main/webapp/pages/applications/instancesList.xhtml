@@ -6,9 +6,13 @@
                 xmlns:p="http://primefaces.org/ui">
     <ui:define name="content">
 
-        <h2>Applications Instances</h2>
-
         <h:form>
+            <div class="row">
+                <div class="col-md-10 my-auto">
+                    <h2>Applications Instances</h2>
+                </div>
+            </div>
+
             <div class="card">
 
                 <p:dataTable id="applicationsTable" var="applicationInstance" value="#{applicationsListBean.applicationInstances}">

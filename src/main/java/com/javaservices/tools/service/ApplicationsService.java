@@ -20,12 +20,12 @@ import reactor.core.publisher.Mono;
 @Slf4j
 public class ApplicationsService {
 
-    private final ModelService modelService;
+    private final ToolsModelService toolsModelService;
 
     protected final HttpClientUtil httpClientUtil = new HttpClientUtil();
 
-    public ApplicationsService(ModelService modelService) {
-        this.modelService = modelService;
+    public ApplicationsService(ToolsModelService toolsModelService) {
+        this.toolsModelService = toolsModelService;
     }
 
     @PostConstruct
@@ -37,7 +37,7 @@ public class ApplicationsService {
      * Reloads actual statuses for all applications, subscribes for responses and refresh main configuration array
      */
     public void refreshApplications() {
-        List<Mono<ResponseEntity<String>>> responses = modelService.getModel().getApplications().stream()
+        List<Mono<ResponseEntity<String>>> responses = toolsModelService.getModel().getApplications().stream()
                 .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
                 .map(this::refreshApplicationStatus)
                 .toList();
@@ -79,7 +79,7 @@ public class ApplicationsService {
     }
 
     public List<Application> getApplications() {
-        return modelService.getModel().getApplications();
+        return toolsModelService.getModel().getApplications();
     }
 
     public List<ApplicationInstance> getApplicationInstances() {
@@ -124,13 +124,13 @@ public class ApplicationsService {
         // TODO save group according saving method - file / database
 
         if (application.getId() == null) {
-            Long maxId = this.modelService.getModel().getApplications().stream()
+            Long maxId = this.toolsModelService.getModel().getApplications().stream()
                     .max(Comparator.comparingLong(Application::getId))
                     .map(Application::getId)
                     .orElse(0L);
             application.setId(maxId + 1);
 
-            this.modelService.getModel().getApplications().add(application);
+            this.toolsModelService.getModel().getApplications().add(application);
         } else {
 
         }
@@ -140,7 +140,7 @@ public class ApplicationsService {
         Application application = findApplicationById(id);
 
         if (application != null) {
-            this.modelService.getModel().getApplications().remove(application);
+            this.toolsModelService.getModel().getApplications().remove(application);
         }
     }
 

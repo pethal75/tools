@@ -11,14 +11,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ServersService {
 
-    private final ModelService modelService;
+    private final ToolsModelService toolsModelService;
 
-    public ServersService(ModelService modelService) {
-        this.modelService = modelService;
+    public ServersService(ToolsModelService toolsModelService) {
+        this.toolsModelService = toolsModelService;
     }
 
     public List<Server> getServers() {
-        return modelService.getModel().getServers();
+        return toolsModelService.getModel().getServers();
     }
 
     public Server findServerById(Long id) {
@@ -29,13 +29,13 @@ public class ServersService {
         // TODO save server according saving method - file / database
 
         if (server.getId() == null) {
-            Long maxId = this.modelService.getModel().getServers().stream()
+            Long maxId = this.toolsModelService.getModel().getServers().stream()
                     .max(Comparator.comparingLong(Server::getId))
                     .map(Server::getId)
                     .orElse(0L);
             server.setId(maxId + 1);
 
-            this.modelService.getModel().getServers().add(server);
+            this.toolsModelService.getModel().getServers().add(server);
         } else {
             // TODO update ?
         }
@@ -45,7 +45,7 @@ public class ServersService {
         Server server = findServerById(id);
 
         if (server != null) {
-            this.modelService.getModel().getServers().remove(server);
+            this.toolsModelService.getModel().getServers().remove(server);
         }
     }
 }

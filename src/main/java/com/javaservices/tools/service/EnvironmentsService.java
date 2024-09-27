@@ -12,14 +12,14 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class EnvironmentsService {
 
-    private final ModelService modelService;
+    private final ToolsModelService toolsModelService;
 
-    public EnvironmentsService(ModelService modelService) {
-        this.modelService = modelService;
+    public EnvironmentsService(ToolsModelService toolsModelService) {
+        this.toolsModelService = toolsModelService;
     }
 
     public List<Environment> getEnvironments() {
-        return modelService.getModel().getEnvironments();
+        return toolsModelService.getModel().getEnvironments();
     }
 
     public Environment findEnvironmentById(Long id) {
@@ -36,13 +36,13 @@ public class EnvironmentsService {
         // TODO save environment according saving method - file / database
 
         if (environment.getId() == null) {
-            Long maxId = this.modelService.getModel().getServers().stream()
+            Long maxId = this.toolsModelService.getModel().getServers().stream()
                     .max(Comparator.comparingLong(Server::getId))
                     .map(Server::getId)
                     .orElse(0L);
             environment.setId(maxId + 1);
 
-            this.modelService.getModel().getEnvironments().add(environment);
+            this.toolsModelService.getModel().getEnvironments().add(environment);
         } else {
 
         }
@@ -52,7 +52,7 @@ public class EnvironmentsService {
         Environment environment = findEnvironmentById(id);
 
         if (environment != null) {
-            this.modelService.getModel().getEnvironments().remove(environment);
+            this.toolsModelService.getModel().getEnvironments().remove(environment);
         }
     }
 }

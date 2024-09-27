@@ -75,4 +75,7 @@ public class ApplicationDetailBean extends PrimefacesTabBean {
         this.redirect(ApplicationsListBean.pageUrl);
     }
 
+    public void saveModel() {
+        // TODO
+    }
 }

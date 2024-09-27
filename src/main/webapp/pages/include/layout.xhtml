@@ -16,7 +16,9 @@
     <h:body>
         <p:panel styleClass="mainTitleBar">
             <f:facet name="header">
-                <h1>Infrastructure and Tools</h1>
+                <ui:insert name="menu">
+                    <ui:include src="header.xhtml"/>
+                </ui:insert>
             </f:facet>
             <div class="row flex-nowrap" style="padding: 10px">
                 <div class="col-xs-3" style="padding-right: 10px; padding-bottom: 10px;">
