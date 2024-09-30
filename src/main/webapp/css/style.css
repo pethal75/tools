@@ -29,3 +29,7 @@ h2 {
 .btn-width-icon {
     width: 45px !important;
 }
+
+.btn-width-icon-small {
+    width: 36px !important;
+}

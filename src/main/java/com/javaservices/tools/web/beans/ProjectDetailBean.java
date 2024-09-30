@@ -1,16 +1,22 @@
 package com.javaservices.tools.web.beans;
 
+import com.javaservices.tools.model.ToolsModel;
 import com.javaservices.tools.model.environments.Group;
 import com.javaservices.tools.service.GroupsService;
+import com.javaservices.tools.service.ToolsModelService;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
+import jakarta.faces.application.FacesMessage;
+import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.IOException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.file.UploadedFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -21,43 +27,46 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ProjectDetailBean extends PrimefacesBean {
 
-    public static final String pageUrl = "groupDetail.xhtml";
+    public static final String pageUrl = "projectDetail.xhtml";
 
-    protected GroupsService groupsService;
+    protected ToolsModelService toolsModelService;
 
-    @Value("#{request.getParameter('id')}")
-    @ManagedProperty("id")
-    protected Long id;
+    protected ToolsModel projectModel;
 
-    protected Group group;
+    private UploadedFile file;
 
     @Inject
-    public ProjectDetailBean(GroupsService groupsService) {
-        this.groupsService = groupsService;
+    public ProjectDetailBean(ToolsModelService toolsModelService) {
+        this.toolsModelService = toolsModelService;
     }
 
     @PostConstruct
     public void init() {
-        log.debug("initialize group id : {}", id);
+        log.debug("initialize project : {}", toolsModelService.getModel().getName());
 
-        this.group = groupsService.findGroupById(id);
-
-        if (this.group != null)
-            log.debug("Found group named : {}", group.getName());
-        else
-            this.group = new Group();
+        this.projectModel = toolsModelService.getModel();
     }
 
-    public void save() throws IOException {
-        log.debug("Saving group details {}", this.group.getId());
-
-        this.groupsService.updateGroup(this.group);
-
-        this.redirect(GroupsListBean.pageUrl);
+    public void setFile(UploadedFile file) {
+        this.file = file;
     }
 
-    public void cancel() throws IOException {
-        this.redirect(GroupsListBean.pageUrl);
+    /*public void handleFileUpload(FileUploadEvent event) {
+        FacesMessage message = new FacesMessage("Successful", event.getFile().getFileName() + " is uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, message);
+    }
+
+    public void upload() {
+        if (file != null) {
+            FacesMessage message = new FacesMessage("Successful", file.getFileName() + " is uploaded.");
+            FacesContext.getCurrentInstance().addMessage(null, message);
+        }
+    }*/
+
+    public void importModel(String name) {
+    }
+
+    public void exportModel() {
     }
 
 }

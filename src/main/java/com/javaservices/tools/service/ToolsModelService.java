@@ -15,6 +15,15 @@ public class ToolsModelService {
 
     private String actualPath;
 
+    public ToolsModel getModel() {
+        if (this.model == null) {
+            // TODO reload model from storage
+            model = new DhlModel();
+        }
+
+        return this.model;
+    }
+
     public void loadModel(String path) {
 
     }

@@ -11,29 +11,28 @@
         <div class="col-md-4 text-center">
             <span class="ui-input-icon-left">
                 <i class="pi pi-search" />
-                <p:inputText id="search" required="true" placeholder="search" style="width: 200px"/>
+                <p:inputText id="search" required="true" placeholder="search" style="width: 400px"/>
             </span>
             <p:commandButton id="searchButton" value="Search" styleClass="ml-2"/>
         </div>
         <div class="col-md-3">
             <label for="project">Project</label>
-            <p:selectOneMenu id="project" label="project" class="ml-2" style="width: 200px">
+            <p:selectOneMenu id="project" label="project" class="ml-2 mb-1" style="width: 200px; background: #e0f0ff">
                 <f:selectItem itemLabel="Select0" itemValue="#{null}"/>
                 <f:selectItem itemLabel="Select1" itemValue="project1"/>
                 <f:selectItem itemLabel="Select2" itemValue="project2"/>
                 <f:selectItem itemLabel="Select3" itemValue="project3"/>
             </p:selectOneMenu>
+            <p:button href="#{request.contextPath}/pages/project/projectDetail.xhtml" value="&nbsp;" type="button" icon="pi pi-arrow-circle-right" styleClass="ml-2 btn-width-icon-small"/>
         </div>
         <div class="col-md-2 my-auto text-right">
             <p:commandButton id="dynaButton" value="Main Menu " type="button" icon="pi pi-bars"/>
             <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                 <p:submenu label="Project">
-                    <p:menuitem value="Detail" action="#{menuView.update}" update="messages" icon="pi pi-file"/>
-                    <p:menuitem value="Import" action="#{menuView.save}" update="messages" ajax="false" icon="pi pi-cloud-upload"/>
-                    <p:menuitem value="Export" action="#{menuView.save}" update="messages" ajax="false" icon="pi pi-cloud-download"/>
+                    <p:menuitem value="Detail" outcome="/pages/project/projectDetail" update="messages" icon="pi pi-file"/>
                 </p:submenu>
                 <p:submenu label="Profile">
-                    <p:menuitem value="User" action="#{menuView.update}" update="messages" icon="pi pi-user"/>
+                    <p:menuitem value="User" action="#/pages/user/userDetail.xhtml" update="messages" icon="pi pi-user"/>
                     <p:menuitem value="Settings" update="messages" ajax="false" icon="pi pi-cog"/>
                     <p:menuitem value="Logout" update="messages" ajax="false" icon="pi pi-power-off"/>
                 </p:submenu>

@@ -12,6 +12,9 @@ public class DhlModel extends ToolsModel {
 
     public DhlModel() {
 
+        this.name = "DHL applications project";
+        this.description = "DHL applications project";
+
         // TODO setup relations to applications/instances, add name
         this.servers.add(Server.builder().id(1L).name("AAA Gateway").host("aaaprg.prg-dc.dhl.com").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());
         this.servers.add(Server.builder().id(2L).name("czcholsint3246").host("czcholsint3246").protocol(Server.Protocol.SSH).serverType(Server.ServerType.LINUX).build());

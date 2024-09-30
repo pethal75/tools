@@ -6,26 +6,26 @@
                 xmlns:p="http://primefaces.org/ui">
 <ui:define name="content">
 
-    <h2>Project</h2>
+    <h2>Project Detail</h2>
 
     <div class="card">
 
         <div class="container-fluid" style="width: 100%">
-            <h:form id="environmentDetailForm">
+            <h:form id="projectDetailForm" enctype="multipart/form-data">
                 <br/>
 
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <p:inputText id="name" required="true" label="name" value="#{groupDetailBean.group.name}" class="form-control" requiredMessage="Missing name"/>
+                            <p:inputText id="name" required="true" label="name" value="#{projectDetailBean.projectModel.name}" class="form-control" requiredMessage="Missing name"/>
                             <p:message for="name" styleClass="validationMessage"/>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <p:inputTextarea id="description" label="description" value="#{groupDetailBean.group.description}" rows="4" cols="40" class="form-control"/>
+                            <p:inputTextarea id="description" label="description" value="#{projectDetailBean.projectModel.description}" rows="4" cols="40" class="form-control"/>
                         </div>
                     </div>
                 </div>
@@ -33,8 +33,8 @@
                 <br/>
 
                 <div class="buttonsBlock">
-                    <p:commandButton id="saveButton" value="Save" action="#{groupDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
-                    <p:commandButton id="cancelButton" value="Cancel" action="#{groupDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
+                    <p:fileUpload value="#{projectDetailBean.file}" mode="simple" skinSimple="true" chooseIcon="pi pi-cloud-upload" label="Import" auto="true"/>
+                    <p:commandButton id="exportButton" value="Export" action="#{projectDetailBean.exportModel}" styleClass="" icon="pi pi-cloud-download"/>
                 </div>
 
                 <br/>
