@@ -28,15 +28,17 @@
         <p:menuitem value="Home" url="/index.xhtml" icon="pi pi-home"/>
         <p:submenu label="Applications" expanded="true">
             <p:menuitem value="Applications" outcome="/pages/applications/applicationsList" icon="pi pi-microsoft"/>
-            <p:menuitem value="Instances" outcome="/pages/applications/instancesList" icon="pi pi-desktop"/>
-            <p:menuitem value="Environments" outcome="/pages/environments/environmentsList" icon="pi pi-database"/>
-            <p:menuitem value="Groups" outcome="/pages/groups/groupsList" icon="pi pi-clone"/>
+            <p:menuitem value="Instances" outcome="/pages/applications/instancesList" icon="pi pi-sitemap"/>
+            <p:menuitem value="Environments" outcome="/pages/environments/environmentsList" icon="pi pi-clone"/>
+            <p:menuitem value="Groups" outcome="/pages/groups/groupsList" icon="pi pi-tags"/>
         </p:submenu>
-        <p:submenu label="Servers" expanded="true">
+        <p:submenu label="Infrastructure" expanded="true">
             <p:menuitem value="Servers" outcome="/pages/servers/serversList" icon="pi pi-desktop"/>
+            <p:menuitem value="Databases" outcome="/pages/servers/serversList" icon="pi pi-database"/>
+            <p:menuitem value="Active MQ" outcome="/pages/servers/serversList" icon="pi pi-envelope"/>
         </p:submenu>
         <p:submenu label="Setup" expanded="true">
-            <p:menuitem value="Tomcat" outcome="/pages/utils/tomcatSetup" icon="pi pi-database"/>
+            <p:menuitem value="Tomcat" outcome="/pages/utils/tomcatSetup" icon="pi pi-server"/>
             <p:menuitem value="Maven" outcome="/pages/utils/mavenSetup" icon="pi pi-file"/>
             <p:menuitem value="GitBash" outcome="/pages/utils/gitbashSetup" icon="pi pi-folder-open"/>
         </p:submenu>
