@@ -1,0 +1,89 @@
+<ui:composition template="/pages/include/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+<ui:define name="content">
+
+    <h2>Active MQ</h2>
+
+    <div class="card">
+
+        <div class="container-fluid" style="width: 100%">
+            <h:form id="activemqDetailForm">
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-3" style="padding-right: 0px">
+                        Active MQ testing server status:
+                    </div>
+                    <div class="col-md-1">
+                        <p:toggleSwitch  value="#{activeMQDetailBean.activeMQ.enabled}"/>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="name">Broker name</label>
+                            <p:inputText id="name" required="true" label="name" value="#{activeMQDetailBean.activeMQ.brokerName}" class="form-control" requiredMessage="Missing name"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="host">Host</label>
+                            <p:inputText id="host" label="host" value="#{activeMQDetailBean.activeMQ.host}" disabled="true" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="port">Port</label>
+                            <p:inputText id="port" label="port" value="#{activeMQDetailBean.activeMQ.port}" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="user">Username</label>
+                            <p:inputText id="user" label="user" value="#{activeMQDetailBean.activeMQ.user}" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <p:inputText id="password" label="password" value="#{activeMQDetailBean.activeMQ.password}" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="buttonsBlock">
+                    <p:commandButton id="saveButton" value="Save" action="#{activeMQDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
+                    <p:commandButton id="cancelButton" value="Cancel" action="#{activeMQDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
+                </div>
+
+                <br/>
+
+                <div class="col-md-12">
+                    <p:separator/>
+                </div>
+
+                <p>
+                    Broker is available on URL <a href="http://localhost:61616">http://localhost:61616</a>.
+                    Discovery API (Jolokia) is available on URL <a href="http://localhost:7000/tools/actuator/jolokia">http://localhost:7000/tools/actuator/jolokia</a>
+                </p>
+
+
+            </h:form>
+        </div>
+    </div>
+</ui:define>
+</ui:composition>

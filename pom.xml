@@ -29,13 +29,13 @@
                 <scope>import</scope>
             </dependency>
 
-            <!--dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>3.3.4</version>
+            <dependency>
+                <groupId>io.hawt</groupId>
+                <artifactId>hawtio-bom</artifactId>
+                <version>4.2.0</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency-->
+            </dependency>
 
         </dependencies>
     </dependencyManagement>
@@ -91,6 +91,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-console</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-log4j2</artifactId>
         </dependency>
@@ -99,6 +104,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>io.hawt</groupId>
+            <artifactId>hawtio-springboot</artifactId>
+            <version>4.2.0</version>
+        </dependency>
+
 
         <!-- Joinfaces, primefaces -->
         <dependency>

@@ -6,6 +6,7 @@ import com.javaservices.tools.model.applications.Property;
 import com.javaservices.tools.model.applications.PropertyGroup;
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.model.environments.Group;
+import com.javaservices.tools.model.messaging.ActiveMQ;
 import com.javaservices.tools.model.mocks.HttpMockResponse;
 import com.javaservices.tools.model.servers.Server;
 import com.thoughtworks.xstream.XStream;
@@ -20,7 +21,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class ToolsModel {
 
@@ -48,10 +48,20 @@ public class ToolsModel {
      */
     protected List<Group> groups = new ArrayList<>();
 
+    protected ActiveMQ embeddedActiveMQ = ActiveMQ.setupEmbeddedActiveMQ();
+
     /**
      * Mocks of http requests/responses
      */
     protected List<HttpMockResponse> mockResponses = new ArrayList<>();
+
+    public ToolsModel() {
+
+    }
+
+    protected void initialize() {
+
+    }
 
     public Environment findEnvironment(String name) {
         return this.environments.stream()

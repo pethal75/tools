@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 public class DhlModel extends ToolsModel {
 
     public DhlModel() {
+        super();
 
         this.name = "DHL applications project";
         this.description = "DHL applications project";
@@ -49,7 +50,9 @@ public class DhlModel extends ToolsModel {
         this.saveConfiguration("config.json");
     }
 
-    private void initialize() {
+    protected void initialize() {
+        super.initialize();
+
         this.applications.forEach(Application::initialize);
 
         AtomicLong index = new AtomicLong(1);
