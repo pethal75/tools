@@ -1,0 +1,82 @@
+<ui:composition template="/pages/include/layout.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:p="http://primefaces.org/ui">
+<ui:define name="content">
+
+    <h2>Server #{serverDetailBean.server.name}</h2>
+
+    <div class="card">
+
+        <div class="container-fluid" style="width: 100%">
+            <h:form id="serverDetailForm">
+                <br/>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <p:inputText id="name" required="true" label="name" value="#{serverDetailBean.server.name}" class="form-control" requiredMessage="Missing name"/>
+                            <p:message for="name" styleClass="validationMessage"/>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <p:inputTextarea id="description" label="description" value="#{serverDetailBean.server.description}" rows="4" cols="40" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="host">Host</label>
+                            <p:inputText id="host" required="true" label="host" value="#{serverDetailBean.server.host}" class="form-control" requiredMessage="Missing host"/>
+                            <p:message for="host" styleClass="validationMessage"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="port">Port</label>
+                            <p:inputText id="port" label="port" value="#{serverDetailBean.server.port}" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="protocol">Protocol</label>
+                            <p:selectOneMenu id="protocol" label="protocol" value="#{serverDetailBean.server.protocol}" class="form-control">
+                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+                                <f:selectItems value="#{serverDetailBean.protocols}"/>
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="type">Type</label>
+                            <p:selectOneMenu id="type" label="type" value="#{serverDetailBean.server.serverType}" class="form-control">
+                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+                                <f:selectItems value="#{serverDetailBean.types}"/>
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
+                </div>
+
+                <br/>
+
+                <div class="buttonsBlock">
+                    <p:commandButton id="saveButton" value="Save" action="#{serverDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
+                    <p:commandButton id="cancelButton" value="Cancel" action="#{serverDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
+                </div>
+
+                <br/>
+            </h:form>
+        </div>
+    </div>
+</ui:define>
+</ui:composition>
