@@ -47,19 +47,7 @@ public class DhlModel extends ToolsModel {
 
         this.initialize();
 
-        this.saveConfiguration("config.json");
-    }
-
-    protected void initialize() {
-        super.initialize();
-
-        this.applications.forEach(Application::initialize);
-
-        AtomicLong index = new AtomicLong(1);
-
-        this.getApplications().stream()
-                .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
-                .forEach(applicationInstance -> applicationInstance.setId(index.getAndIncrement()));
+        //this.saveModel("dhl.json");
     }
 
 }

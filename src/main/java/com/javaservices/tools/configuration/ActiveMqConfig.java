@@ -31,8 +31,7 @@ import org.springframework.jms.core.JmsTemplate;
  *  Hawtio console
  *   http://localhost:7000/tools/actuator/hawtio
  */
-@Configuration
-@EnableJms
+// @Configuration
 public class ActiveMqConfig {
 
     @Value("${spring.activemq.broker-url}")
