@@ -27,4 +27,12 @@ public class ActiveMQService {
 
         this.toolsModelService.saveModel();
     }
+
+    public void startBroker() {
+
+    }
+
+    public void stopBroker() {
+
+    }
 }

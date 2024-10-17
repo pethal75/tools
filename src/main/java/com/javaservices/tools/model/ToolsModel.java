@@ -12,10 +12,13 @@ import com.javaservices.tools.model.servers.Server;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
+import javax.tools.Tool;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -61,6 +64,14 @@ public class ToolsModel {
 
     protected void initialize() {
 
+        this.applications.forEach(Application::initialize);
+
+        AtomicLong index = new AtomicLong(1);
+
+        this.getApplications().stream()
+                .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
+                .forEach(applicationInstance -> applicationInstance.setId(index.getAndIncrement()));
+
     }
 
     public Environment findEnvironment(String name) {
@@ -77,28 +88,33 @@ public class ToolsModel {
                 .orElse(null);
     }
 
-    public void loadConfiguration(String fileName) {
+    public static ToolsModel loadModel(String filePath) {
         XStream xstream = prepareXStream();
-    /*
-        XStream xstream = new XStream(new JettisonMappedXmlDriver());
-        xstream.alias("product", Product.class);
-        Product product = (Product) xstream.fromXML(json);
-        System.out.println(product.getName());
-     */
 
+        File loadFile = new File(filePath);
+
+        try (FileReader reader = new FileReader(loadFile)){
+
+            ToolsModel model = (ToolsModel) xstream.fromXML(reader);
+
+            model.initialize();
+
+            return model;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public void saveConfiguration(String fileName) {
+    public void saveModel(String filePath) {
         XStream xstream = prepareXStream();
 
-        File saveFile = new File(fileName);
-        FileWriter saveWriter;
-        try {
-            saveWriter = new FileWriter(saveFile);
+        File saveFile = new File(filePath);
 
-            xstream.toXML(this, saveWriter);
+        try (FileWriter writer = new FileWriter(saveFile);){
 
-            saveWriter.close();
+            xstream.toXML(this, writer);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -107,11 +123,15 @@ public class ToolsModel {
     private static XStream prepareXStream() {
         XStream xstream = new XStream(new JettisonMappedXmlDriver());
         xstream.setMode(XStream.NO_REFERENCES);
-        xstream.alias("ToolsConfiguration", ToolsModel.class);
+        xstream.alias("Project", ToolsModel.class);
         xstream.alias("Application", Application.class);
         xstream.alias("ApplicationInstance", ApplicationInstance.class);
         xstream.alias("Server", Server.class);
         xstream.alias("MockRequest", HttpMockResponse.class);
+        xstream.alias("PropertyGroup", PropertyGroup.class);
+        xstream.alias("Property", Property.class);
+        xstream.alias("Environment", Environment.class);
+        xstream.alias("Group", Group.class);
 
         xstream.addImplicitArray(Application.class, "instances", ApplicationInstance.class);
         xstream.addImplicitArray(Application.class, "propertiesGroups", PropertyGroup.class);
@@ -119,6 +139,8 @@ public class ToolsModel {
 
         xstream.omitField(ApplicationInstance.class, "application");
         xstream.omitField(Property.class, "group");
+
+        xstream.allowTypesByWildcard(new String[] {"com.javaservices.**"});
 
         return xstream;
     }

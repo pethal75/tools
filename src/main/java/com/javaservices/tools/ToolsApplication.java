@@ -11,6 +11,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.jms.annotation.EnableJms;
 import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
@@ -20,6 +21,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @ServletComponentScan
 @ComponentScan(basePackages = {"com.javaservices"})
 @EnableAsync
+@EnableJms
 public class ToolsApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
