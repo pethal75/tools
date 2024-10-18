@@ -1,15 +1,18 @@
 package com.javaservices.tools.model.messaging;
 
+import com.javaservices.tools.web.beans.primefaces.EditableEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
-public class ActiveMQ {
+@Builder(toBuilder = true)
+@EqualsAndHashCode
+public class ActiveMQ implements EditableEntity {
 
     protected Long id;
     protected boolean enabled = false;
@@ -27,5 +30,10 @@ public class ActiveMQ {
                 .host("localhost")
                 .port(61616)
                 .build();
+    }
+
+    @Override
+    public ActiveMQ clone() {
+        return this.toBuilder().build();
     }
 }

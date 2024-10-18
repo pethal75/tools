@@ -1,23 +1,22 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+>
 
     <div class="row">
         <div class="col-md-3">
-            <h1>DevTools Application</h1>
+            <h1 style="padding-top: 5px">DevTools Application</h1>
         </div>
         <div class="col-md-4 text-center">
             <span class="ui-input-icon-left">
                 <i class="pi pi-search" />
-                <p:inputText id="search" required="true" placeholder="search" style="width: 400px"/>
+                <p:inputText id="search" required="true" placeholder="search" style="width: 300px; background: #e0f0ff"/>
             </span>
             <p:commandButton id="searchButton" value="Search" styleClass="ml-2"/>
         </div>
         <div class="col-md-3">
             <label for="project">Project</label>
-            <p:selectOneMenu id="project" label="project" class="ml-2 mb-1" style="width: 200px; background: #e0f0ff">
+            <p:selectOneMenu id="project" label="project" class="ml-2 mb-1" style="width: 180px; background: #e0f0ff">
                 <f:selectItem itemLabel="Select0" itemValue="#{null}"/>
                 <f:selectItem itemLabel="Select1" itemValue="project1"/>
                 <f:selectItem itemLabel="Select2" itemValue="project2"/>
