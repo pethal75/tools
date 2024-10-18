@@ -1,7 +1,7 @@
 package com.javaservices.tools.web.beans;
 
-import com.javaservices.tools.service.ApplicationsService;
 import com.javaservices.tools.model.applications.Application;
+import com.javaservices.tools.service.ApplicationsService;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesTabBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class ApplicationDetailBean extends PrimefacesTabBean {
 
-    protected static final String pageUrl = "applicationDetail.xhtml";
+    protected static final String pageUrl = "/pages/applications/applicationDetail.xhtml";
 
     protected ApplicationsService applicationsService;
 
@@ -68,11 +68,11 @@ public class ApplicationDetailBean extends PrimefacesTabBean {
 
         this.applicationsService.updateApplication(this.application);
 
-        this.redirect(ApplicationsListBean.pageUrl);
+        this.redirect(ApplicationsListBean.pageUrlApplications);
     }
 
     public void cancel() throws IOException {
-        this.redirect(ApplicationsListBean.pageUrl);
+        this.redirect(ApplicationsListBean.pageUrlApplications);
     }
 
     public void saveModel() {

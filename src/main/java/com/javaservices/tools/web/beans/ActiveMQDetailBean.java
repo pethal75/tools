@@ -1,13 +1,13 @@
+
 package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.model.messaging.ActiveMQ;
 import com.javaservices.tools.service.ActiveMQService;
-import com.javaservices.tools.web.beans.primefaces.PrimefacesBean;
+import com.javaservices.tools.web.beans.primefaces.PrimefacesFormBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
-import java.io.IOException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -19,17 +19,15 @@ import org.springframework.stereotype.Component;
 @ViewScoped
 @Data
 @Slf4j
-public class ActiveMQDetailBean extends PrimefacesBean {
+public class ActiveMQDetailBean extends PrimefacesFormBean<ActiveMQ> {
 
     public static final String pageUrl = "activemqDetail.xhtml";
-
-    protected ActiveMQService activeMQService;
 
     @Value("#{request.getParameter('id')}")
     @ManagedProperty("id")
     protected Long id;
 
-    protected ActiveMQ activeMQ;
+    protected ActiveMQService activeMQService;
 
     @Inject
     public ActiveMQDetailBean(ActiveMQService activeMQService) {
@@ -38,25 +36,30 @@ public class ActiveMQDetailBean extends PrimefacesBean {
 
     @PostConstruct
     public void init() {
-        log.debug("initialize activemq id : {}", id);
+        if (id != null)
+            log.debug("initialize activemq id : {}", id);
 
-        this.activeMQ = activeMQService.getEmbeddedActiveMQ();
+        super.initialize(activeMQService.getEmbeddedActiveMQ());
 
-        if (this.activeMQ != null)
-            log.debug("Found activemq named : {}", activeMQ.getBrokerName());
+        if (this.entity != null)
+            log.debug("Found activemq named : {}", entity.getBrokerName());
         else
-            this.activeMQ = new ActiveMQ();
+            entity = new ActiveMQ();
     }
 
     public void save() throws Exception {
-        log.debug("Saving activemq details {}", this.activeMQ.getId());
+        log.debug("Saving activemq details {}", entity.getId());
 
-        this.activeMQService.updateEmbeddeedActiveMQ(this.activeMQ);
+        activeMQService.updateEmbeddeedActiveMQ(entity);
 
         this.redirect(pageUrl);
     }
 
-    public void cancel() throws IOException {
-        this.redirect(pageUrl);
+    public String getUrl() {
+        return pageUrl;
+    }
+
+    public String getBackUrl() {
+        return "/index.xhtml";
     }
 }

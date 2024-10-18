@@ -59,11 +59,11 @@ public class ApplicationInstanceDetailBean extends PrimefacesTabBean {
 
         this.applicationsService.updateApplicationInstance(this.applicationInstance);
 
-        this.redirect(ApplicationsListBean.pageUrlInstance);
+        this.redirect(ApplicationsListBean.pageUrlInstances);
     }
 
     public void cancel() throws IOException {
-        this.redirect(ApplicationsListBean.pageUrlInstance);
+        this.redirect(ApplicationsListBean.pageUrlInstances);
     }
 
 }

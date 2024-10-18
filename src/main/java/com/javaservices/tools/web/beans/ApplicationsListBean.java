@@ -1,17 +1,16 @@
 package com.javaservices.tools.web.beans;
 
+import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
 import com.javaservices.tools.service.ApplicationsService;
-import com.javaservices.tools.model.applications.Application;
-import jakarta.el.MethodExpression;
 import java.util.List;
 import org.springframework.stereotype.Component;
 
 @Component
 public class ApplicationsListBean {
 
-    public static final String pageUrl = "applicationsList.xhtml";
-    public static final String pageUrlInstance = "instancesList.xhtml";
+    public static final String pageUrlApplications = "/pages/applications/applicationsList.xhtml";
+    public static final String pageUrlInstances = "/pages/applications/instancesList.xhtml";
 
     protected final ApplicationsService applicationsService;
 
