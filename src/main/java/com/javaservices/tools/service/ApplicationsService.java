@@ -30,7 +30,7 @@ public class ApplicationsService {
 
     @PostConstruct
     public void init() {
-        this.refreshApplications();
+        // Not for now this.refreshApplications();
     }
 
     /**

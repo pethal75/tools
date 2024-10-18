@@ -1,28 +1,21 @@
 package com.javaservices.tools.service;
 
-import com.javaservices.tools.dhl.DhlModel;
 import com.javaservices.tools.model.ToolsCustomProperties;
 import com.javaservices.tools.model.ToolsModel;
 import jakarta.annotation.PostConstruct;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.Properties;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.DefaultPropertiesPersister;
-import org.springframework.web.context.annotation.ApplicationScope;
 
-@Component
+@Component("toolsModelService")
 @Data
-@ApplicationScope
+@Scope("singleton")
 @Slf4j
 public class ToolsModelService {
 
@@ -32,7 +25,7 @@ public class ToolsModelService {
 
     public ToolsModel getModel() {
         if (this.model == null) {
-            this.loadModel(customProperties.lastProject);
+            this.initialize();
         }
 
         return this.model;
@@ -47,6 +40,9 @@ public class ToolsModelService {
         } else {
             this.createModel("New tools project");
         }
+
+        // TODO initialize all related services
+
     }
 
     public void createModel(String name) {
@@ -55,6 +51,9 @@ public class ToolsModelService {
     }
 
     public void loadModel(String name) {
+        if (customProperties == null)
+            loadCustomProperties();
+
         this.model = ToolsModel.loadModel(customProperties.storageDirectory + File.separator + name + ".json");
     }
 
