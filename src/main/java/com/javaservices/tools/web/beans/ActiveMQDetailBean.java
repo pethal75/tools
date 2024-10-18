@@ -1,25 +1,20 @@
 package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.model.messaging.ActiveMQ;
-import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.service.ActiveMQService;
-import com.javaservices.tools.service.ServersService;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.stream.Collectors;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @Component
 @ViewScoped
 @Data
@@ -53,7 +48,7 @@ public class ActiveMQDetailBean extends PrimefacesBean {
             this.activeMQ = new ActiveMQ();
     }
 
-    public void save() throws IOException {
+    public void save() throws Exception {
         log.debug("Saving activemq details {}", this.activeMQ.getId());
 
         this.activeMQService.updateEmbeddeedActiveMQ(this.activeMQ);
