@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <p:dataTable id="applicationsTable" var="property" value="#{applicationDetailBean.application.properties}">
+                <p:dataTable id="applicationsTable" var="property" value="#{applicationDetailBean.application.properties}" sortMode="single">
                     <p:headerRow field="group.name"
                                  expandable="true">
 
@@ -24,12 +24,23 @@
                     </p:column>
 
                     <p:column headerText="Value" width="40%">
-                        <h:outputText value="#{property.value}" />
+                        <h:outputLink value="#{property.value}" rendered="#{property.type == 'URL'}">
+                            <h:outputText value="#{property.value}" />
+                        </h:outputLink>
+                        <h:outputText value="#{property.value}" rendered="#{property.type != 'URL'}" />
                     </p:column>
 
                     <p:column headerText="Type" width="20%">
                         <h:outputText value="#{property.type}" />
                     </p:column>
+
+                    <p:column headerText="Action" width="20%">
+                        <p:button value="Detail" outcome="applicationPropertyDetail.xhtml">
+                            <f:param name="id" value="#{property.name}"/>
+                        </p:button>
+                        <p:commandButton value="Delete" action="#{applicationDetailBean.deletePropertyByName(property.name)}" update="@form" styleClass="ui-button-danger ml-2"/>
+                    </p:column>
+
                 </p:dataTable>
             </div>
         </div>

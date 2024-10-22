@@ -2,7 +2,7 @@ package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.service.ApplicationsService;
-import com.javaservices.tools.web.beans.primefaces.PrimefacesTabBean;
+import com.javaservices.tools.web.beans.primefaces.PrimefacesFormBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.view.ViewScoped;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 @ViewScoped
 @Data
 @Slf4j
-public class ApplicationDetailBean extends PrimefacesTabBean {
+public class ApplicationDetailBean extends PrimefacesFormBean<Application> {
 
     protected static final String pageUrl = "/pages/applications/applicationDetail.xhtml";
 
@@ -31,7 +31,7 @@ public class ApplicationDetailBean extends PrimefacesTabBean {
     @ManagedProperty("id")
     protected Long id;
 
-    protected Application application;
+    Application application;
 
     @Inject
     public ApplicationDetailBean(ApplicationsService applicationsService) {
@@ -42,12 +42,15 @@ public class ApplicationDetailBean extends PrimefacesTabBean {
     public void init() {
         log.debug("initialize application id : {}", id);
 
-        this.application = applicationsService.findApplicationById(id);
+        application = applicationsService.findApplicationById(id);
 
-        if (this.application != null)
+        if (application != null) {
             log.debug("Found application named : {}", application.getName());
-        else
-            this.application = new Application();
+
+            super.initialize(application);
+        } else {
+            super.initialize(new Application());
+        }
     }
 
     public List<Application> getApplications() {
@@ -63,19 +66,26 @@ public class ApplicationDetailBean extends PrimefacesTabBean {
             return MessageFormat.format("{0}?id={1}&tabId={2}", pageUrl, this.id, this.tabId);
     }
 
+    @Override
+    public String getUrl() {
+        return pageUrl;
+    }
+
+    @Override
+    public String getBackUrl() {
+        return ApplicationsListBean.pageUrlApplications;
+    }
+
     public void save() throws IOException {
-        log.debug("Saving application details {}", this.application.getId());
+        log.debug("Saving application details {}", entity.getId());
 
-        this.applicationsService.updateApplication(this.application);
+        this.applicationsService.updateApplication(entity);
 
         this.redirect(ApplicationsListBean.pageUrlApplications);
     }
 
-    public void cancel() throws IOException {
-        this.redirect(ApplicationsListBean.pageUrlApplications);
+    public void deletePropertyByName(String name) {
+        this.applicationsService.deletePropertyByName(entity, name);
     }
 
-    public void saveModel() {
-        // TODO
-    }
 }

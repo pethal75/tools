@@ -121,7 +121,6 @@ public class ApplicationsService {
     }
 
     public void updateApplication(Application application) {
-        // TODO save group according saving method - file / database
 
         if (application.getId() == null) {
             Long maxId = this.toolsModelService.getModel().getApplications().stream()
@@ -132,8 +131,14 @@ public class ApplicationsService {
 
             this.toolsModelService.getModel().getApplications().add(application);
         } else {
+            Application existingApplication = findApplicationById(application.getId());
 
+            existingApplication.setName(application.getName());
+            existingApplication.setDescription(application.getDescription());
+            existingApplication.setNotes(application.getNotes());
         }
+
+        this.toolsModelService.saveModel();
     }
 
     public void delete(Long id) {
@@ -146,5 +151,11 @@ public class ApplicationsService {
 
     public void updateApplicationInstance(ApplicationInstance applicationInstance) {
         // TODO
+    }
+
+    public void deletePropertyByName(Application application, String name) {
+        application.deletePropertyByName(name);
+
+        updateApplication(application);
     }
 }
