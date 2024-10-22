@@ -16,4 +16,8 @@ public class PropertyGroup {
     public void initialize() {
         properties.forEach(property -> property.setGroup(this));
     }
+
+    public void deletePropertyByName(String name) {
+        getProperties().removeIf(property -> property.getName().equals(name));
+    }
 }

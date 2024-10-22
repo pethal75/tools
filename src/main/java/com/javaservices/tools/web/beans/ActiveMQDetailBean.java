@@ -39,12 +39,14 @@ public class ActiveMQDetailBean extends PrimefacesFormBean<ActiveMQ> {
         if (id != null)
             log.debug("initialize activemq id : {}", id);
 
-        super.initialize(activeMQService.getEmbeddedActiveMQ());
 
-        if (this.entity != null)
+        if (activeMQService.getEmbeddedActiveMQ() != null) {
             log.debug("Found activemq named : {}", entity.getBrokerName());
-        else
-            entity = new ActiveMQ();
+
+            super.initialize(activeMQService.getEmbeddedActiveMQ());
+        } else {
+            super.initialize(new ActiveMQ());
+        }
     }
 
     public void save() throws Exception {

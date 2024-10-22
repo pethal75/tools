@@ -112,6 +112,12 @@
         </dependency>
 
 
+        <!-- embedded kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
         <!-- Joinfaces, primefaces -->
         <dependency>
             <groupId>org.joinfaces</groupId>

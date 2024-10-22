@@ -1,3 +1,105 @@
 TODO:
 
--
+	- Application object
+		- Application detail
+			- add property type
+				- URL - display URLs as links
+				- DB connection - url/user/password
+				- config file - path
+			- add/edit/delete property
+			- add icon to application
+			- edit
+				- assign group
+			- add list of tasks for application
+				- run local command (intellij project, build, run, maven)
+			- deploy to Tomcat command ?
+		- Instances table
+			- add instance-server relation
+		- Instance Detail
+			- add new instance, delete instance, go to instance detail
+			- edit instance
+				- assign group/environment/server/application
+		- Mocks - http responses
+			- show detail
+			- processing with ProxyController
+			- add group/environment properties
+			- related to specific application / environment
+		- Test cases list
+			- move TestCase to Application class
+			- list of test cases for application
+			- test case detail page
+			- run http request and check response
+			- run automated testing
+			- test case related to specific application instance / environment
+		- Tasks list
+			- build application
+			- install local applications - java, maven, tomcat
+			- deploy application to tomcat, linux server
+			- read logs from local / remote machine
+			- run build / deployment ?
+
+	- Instances list
+		- edit instance detail
+
+	- Servers - add login data - username/password for telnet/ssh
+	- Add server relation to application instance
+	- SSHServerTerminal comunication with server
+		- login
+		- enter password
+		- execute command
+		- relogin to other server
+		- execute multiple commands from script
+		- read file
+	- Jenkins pipeline
+		- HTML scanner to run/read status
+		- add pipeline URLs to application properties
+	- Custom jScript
+	- Saving/Loading configuration from/to Json file
+		- on project page
+		- after each change
+
+	- Current work tasks
+		- remote commands, checking logs, upload files, restart tomcat / run remote scripts
+		- Run Jenkins pipelines - wait for progress - scan html page
+
+	-> Ideas
+		-> open IntelliJ for application
+		-> run Spring application
+			- show log file
+		-> databases simulations through H2
+		-> MQ simulations
+			- MQ tests - send/receive message
+		-> LDAP simulation
+		-> ssh/telnet perform commands, read log files
+		-> custom scripting language jScript
+		-> PGP keys
+		-> Active MQ
+
+
+	- Servers list
+		- KPI monitoring - disk, healthchecks, applications, others
+		- connect terminal to server
+			- connect through other server
+
+	- Databases list
+		- show databases
+		- db connection check
+		- db mocking
+
+	- Build
+		- Maven build
+		- Deployment to Tomcat
+		- Start Tomcat
+
+	- Install
+		- Tomcat
+		- Docker ?
+
+	- KYC client tasks
+		- generate messages
+
+	- Run scripts
+		- custom scripting language, commands:
+			- cp, cd, mv, ls, du, df, ps, install, verify, checkfile, check URL, etc...
+		- script task
+

@@ -2,6 +2,7 @@ package com.javaservices.tools.model.applications;
 
 import com.javaservices.tools.model.environments.Group;
 import com.javaservices.tools.model.servers.Server;
+import com.javaservices.tools.web.beans.primefaces.EditableEntity;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,9 +15,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
+@Builder(toBuilder = true)
 @ToString(onlyExplicitlyIncluded = true)
-public class Application {
+public class Application implements EditableEntity {
 
     @ToString.Include
     protected Long id;
@@ -47,11 +48,23 @@ public class Application {
 
 
     public List<Property> getProperties() {
-        if (this.getPropertiesGroups() == null)
+        if (this.propertiesGroups == null)
             return Collections.emptyList();
 
-        return this.getPropertiesGroups().stream()
+        return this.propertiesGroups.stream()
             .flatMap(propertyGroup -> propertyGroup.getProperties().stream())
             .collect(Collectors.toList());
+    }
+
+    public void deletePropertyByName(String name) {
+        if (this.propertiesGroups != null) {
+            this.propertiesGroups.forEach(propertyGroup -> propertyGroup.deletePropertyByName(name));
+        }
+
+    }
+
+    @Override
+    public EditableEntity clone() {
+        return this.toBuilder().build();
     }
 }
