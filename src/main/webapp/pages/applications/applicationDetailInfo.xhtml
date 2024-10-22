@@ -45,7 +45,6 @@
                 <p:commandButton id="saveButton" value="Save" action="#{applicationDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2" disabled="#{!applicationDetailBean.isChanged()}"/>
                 <p:commandButton id="cancelButton" value="Cancel" action="#{applicationDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger mr-2" disabled="#{!applicationDetailBean.isChanged()}"/>
                 <p:commandButton id="backButton" value="Back" action="#{applicationDetailBean.back()}" immediate="true" styleClass="ui-button-secondary"/>
-                <!-- p:blockUI block="applicationInfoForm" trigger="saveButton"/ -->
             </div>
         </h:form>
     </div>

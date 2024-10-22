@@ -5,13 +5,11 @@ import com.javaservices.tools.model.messaging.ActiveMQ;
 import com.javaservices.tools.service.ActiveMQService;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesFormBean;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @EqualsAndHashCode(callSuper = false)
@@ -22,10 +20,6 @@ import org.springframework.stereotype.Component;
 public class ActiveMQDetailBean extends PrimefacesFormBean<ActiveMQ> {
 
     public static final String pageUrl = "activemqDetail.xhtml";
-
-    @Value("#{request.getParameter('id')}")
-    @ManagedProperty("id")
-    protected Long id;
 
     protected ActiveMQService activeMQService;
 

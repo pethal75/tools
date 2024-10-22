@@ -6,43 +6,59 @@
 
     <div class="container-fluid">
 
-        <div class="row">
-            <div class="col-md-12">
+        <h:form>
+            <div class="row">
+                <div class="col-md-9 my-auto">
+                </div>
 
-                <p:dataTable id="applicationsTable" var="property" value="#{applicationDetailBean.application.properties}" sortMode="single">
-                    <p:headerRow field="group.name"
-                                 expandable="true">
-
-                        <p:column colspan="3">
-                            <f:param name="name" value="#{property.group.name}"/>
-                            <h:outputText value="#{property.group.name}"/>
-                        </p:column>
-                    </p:headerRow>
-
-                    <p:column headerText="Name" width="20%">
-                        <h:outputText value="#{property.name}" />
-                    </p:column>
-
-                    <p:column headerText="Value" width="40%">
-                        <h:outputLink value="#{property.value}" rendered="#{property.type == 'URL'}">
-                            <h:outputText value="#{property.value}" />
-                        </h:outputLink>
-                        <h:outputText value="#{property.value}" rendered="#{property.type != 'URL'}" />
-                    </p:column>
-
-                    <p:column headerText="Type" width="20%">
-                        <h:outputText value="#{property.type}" />
-                    </p:column>
-
-                    <p:column headerText="Action" width="20%">
-                        <p:button value="Detail" outcome="applicationPropertyDetail.xhtml">
-                            <f:param name="id" value="#{property.name}"/>
-                        </p:button>
-                        <p:commandButton value="Delete" action="#{applicationDetailBean.deletePropertyByName(property.name)}" update="@form" styleClass="ui-button-danger ml-2"/>
-                    </p:column>
-
-                </p:dataTable>
+                <div class="col-md-3 text-center">
+                    <p:button styleClass="ui-button-outlined rounded-button ui-button-success" href="propertyDetail.xhtml" value="Add Property" icon="pi pi-plus">
+                        <f:param name="applicationId" value="#{applicationDetailBean.entity.id}"/>
+                    </p:button>
+                </div>
             </div>
-        </div>
+
+            <br/>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <p:dataTable id="applicationsTable" var="property" value="#{applicationDetailBean.properties}" sortMode="single" rendered="#{applicationDetailBean.propertiesExists}">
+
+                        <p:headerRow field="group.name" expandable="true" >
+                            <p:column colspan="3">
+                                <f:param name="name" value="#{property.groupName}"/>
+                                <h:outputText value="#{property.groupName}"/>
+                            </p:column>
+                        </p:headerRow>
+
+                        <p:column headerText="Name" width="20%">
+                            <h:outputText value="#{property.name}" />
+                        </p:column>
+
+                        <p:column headerText="Value" width="40%">
+                            <h:outputLink value="#{property.value}" rendered="#{property.type == 'URL'}">
+                                <h:outputText value="#{property.value}" />
+                            </h:outputLink>
+                            <h:outputText value="#{property.value}" rendered="#{property.type != 'URL'}" />
+                        </p:column>
+
+                        <p:column headerText="Type" width="20%">
+                            <h:outputText value="#{property.type}" />
+                        </p:column>
+
+                        <p:column headerText="Action" style="text-align: center">
+                            <p:button value="Detail" href="propertyDetail.xhtml" styleClass="ui-button-outlined rounded-button">
+                                <f:param name="applicationId" value="#{property.applicationId}"/>
+                                <f:param name="groupId" value="#{property.groupId}"/>
+                                <f:param name="name" value="#{property.name}"/>
+                            </p:button>
+                            <p:commandButton value="Delete" action="#{applicationDetailBean.deletePropertyByName(property.name)}" update="@form" styleClass="ui-button-outlined rounded-button ui-button-danger ml-2"/>
+                        </p:column>
+
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
     </div>
 </ui:composition>

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationDetailBean.application.instances}">
+                <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationDetailBean.entity.instances}">
                     <p:headerRow field="environment.name" expandable="true" expanded="true">
                         <p:column colspan="4">
                             <f:param name="name" value="#{applicationInstance.environment.name}"/>

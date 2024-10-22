@@ -12,8 +12,8 @@
                     <h2>Applications</h2>
                 </div>
 
-                <div class="col-md-2 text-right">
-                    <p:button styleClass="ui-button-success" href="applicationDetail.xhtml" value="Add Application"/>
+                <div class="col-md-2 text-center">
+                    <p:button styleClass="ui-button-success ui-button-outlined rounded-button" href="applicationDetail.xhtml" value="Add Application"/>
                 </div>
             </div>
 
@@ -39,10 +39,10 @@
                     </p:column>
 
                     <p:column headerText="Action" style="text-align: center">
-                        <p:button href="applicationDetail.xhtml" value="Detail">
+                        <p:button href="applicationDetail.xhtml" value="Detail" styleClass="ui-button-outlined rounded-button">
                             <f:param name="id" value="#{applicationValue.id}"/>
                         </p:button>
-                        <p:commandButton value="Delete" action="#{applicationsListBean.deleteApplication(applicationValue.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
+                        <p:commandButton value="Delete" action="#{applicationsListBean.deleteApplication(applicationValue.id)}" update="@form" styleClass="ui-button-danger ui-button-outlined rounded-button ml-2"/>
                     </p:column>
                 </p:dataTable>
             </div>

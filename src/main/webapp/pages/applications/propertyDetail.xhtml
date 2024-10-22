@@ -17,14 +17,18 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <p:inputText id="name" required="true" label="name" value="#{environmentDetailBean.environment.name}" class="form-control" requiredMessage="Missing name"/>
+                            <p:inputText id="name" required="true" label="name" value="#{propertyDetailBean.entity.name}" class="form-control" requiredMessage="Missing name">
+                                <p:ajax event="change" update="@form"/>
+                            </p:inputText>
                             <p:message for="name" styleClass="validationMessage"/>
                         </div>
                     </div>
                     <div class="col-md-8">
                         <div class="form-group">
-                            <label for="description">Description</label>
-                            <p:inputTextarea id="description" label="description" value="#{environmentDetailBean.environment.description}" rows="4" cols="40" class="form-control"/>
+                            <label for="value">Value</label>
+                            <p:inputText id="value" label="value" value="#{propertyDetailBean.entity.value}" class="form-control">
+                                <p:ajax event="change" update="@form"/>
+                            </p:inputText>
                         </div>
                     </div>
                 </div>
@@ -32,8 +36,9 @@
                 <br/>
 
                 <div class="buttonsBlock">
-                    <p:commandButton id="saveButton" value="Save" action="#{environmentDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
-                    <p:commandButton id="cancelButton" value="Cancel" action="#{environmentDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
+                    <p:commandButton id="saveButton" value="Save" action="#{propertyDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2" disabled="#{!propertyDetailBean.isChanged()}"/>
+                    <p:commandButton id="cancelButton" value="Cancel" action="#{propertyDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger mr-2" disabled="#{!propertyDetailBean.isChanged()}"/>
+                    <p:commandButton id="backButton" value="Back" action="#{propertyDetailBean.back()}" immediate="true" styleClass="ui-button-secondary"/>
                 </div>
 
                 <br/>
