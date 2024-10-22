@@ -18,10 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
-import javax.tools.Tool;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
@@ -138,6 +136,7 @@ public class ToolsModel {
         xstream.addImplicitArray(PropertyGroup.class, "properties", Property.class);
 
         xstream.omitField(ApplicationInstance.class, "application");
+        xstream.omitField(PropertyGroup.class, "application");
         xstream.omitField(Property.class, "group");
 
         xstream.allowTypesByWildcard(new String[] {"com.javaservices.**"});

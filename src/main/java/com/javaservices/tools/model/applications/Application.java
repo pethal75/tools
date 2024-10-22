@@ -3,7 +3,7 @@ package com.javaservices.tools.model.applications;
 import com.javaservices.tools.model.environments.Group;
 import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.web.beans.primefaces.EditableEntity;
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -29,7 +29,7 @@ public class Application implements EditableEntity {
 
     protected String notes;
 
-    protected List<PropertyGroup> propertiesGroups;
+    protected List<PropertyGroup> propertiesGroups = new ArrayList<>();
 
     protected Server.Protocol protocol;
 
@@ -42,14 +42,18 @@ public class Application implements EditableEntity {
         if (instances != null)
             instances.forEach(applicationInstance -> applicationInstance.initialize(this));
 
-        if (propertiesGroups != null)
+        if (propertiesGroups != null) {
+            propertiesGroups.forEach(propertyGroup -> propertyGroup.setApplication(this));
             propertiesGroups.forEach(PropertyGroup::initialize);
+        }
     }
 
+    @Override
+    public EditableEntity clone() {
+        return this.toBuilder().build();
+    }
 
     public List<Property> getProperties() {
-        if (this.propertiesGroups == null)
-            return Collections.emptyList();
 
         return this.propertiesGroups.stream()
             .flatMap(propertyGroup -> propertyGroup.getProperties().stream())
@@ -57,14 +61,10 @@ public class Application implements EditableEntity {
     }
 
     public void deletePropertyByName(String name) {
-        if (this.propertiesGroups != null) {
-            this.propertiesGroups.forEach(propertyGroup -> propertyGroup.deletePropertyByName(name));
-        }
-
+        this.propertiesGroups.forEach(propertyGroup -> propertyGroup.deletePropertyByName(name));
     }
 
-    @Override
-    public EditableEntity clone() {
-        return this.toBuilder().build();
+    public PropertyGroup findPropertyGroupById(Long groupId) {
+        return this.propertiesGroups.stream().filter(propertyGroup -> propertyGroup.getId().equals(groupId)).findFirst().orElse(null);
     }
 }

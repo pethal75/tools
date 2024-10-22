@@ -1,10 +1,10 @@
 package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.model.applications.Application;
+import com.javaservices.tools.model.applications.Property;
 import com.javaservices.tools.service.ApplicationsService;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesFormBean;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.annotation.ManagedProperty;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.IOException;
@@ -13,7 +13,6 @@ import java.util.List;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @EqualsAndHashCode(callSuper = true)
@@ -24,14 +23,9 @@ import org.springframework.stereotype.Component;
 public class ApplicationDetailBean extends PrimefacesFormBean<Application> {
 
     protected static final String pageUrl = "/pages/applications/applicationDetail.xhtml";
+    protected static final Long tabPropertiesId = 1L;
 
     protected ApplicationsService applicationsService;
-
-    @Value("#{request.getParameter('id')}")
-    @ManagedProperty("id")
-    protected Long id;
-
-    Application application;
 
     @Inject
     public ApplicationDetailBean(ApplicationsService applicationsService) {
@@ -42,15 +36,13 @@ public class ApplicationDetailBean extends PrimefacesFormBean<Application> {
     public void init() {
         log.debug("initialize application id : {}", id);
 
-        application = applicationsService.findApplicationById(id);
+        Application application = applicationsService.findApplicationById(id);
 
-        if (application != null) {
-            log.debug("Found application named : {}", application.getName());
-
-            super.initialize(application);
-        } else {
-            super.initialize(new Application());
+        if (application == null) {
+            application = new Application();
         }
+
+        super.initialize(application);
     }
 
     public List<Application> getApplications() {
@@ -76,6 +68,10 @@ public class ApplicationDetailBean extends PrimefacesFormBean<Application> {
         return ApplicationsListBean.pageUrlApplications;
     }
 
+    public List<Property> getProperties() {
+        return this.entity.getProperties();
+    }
+
     public void save() throws IOException {
         log.debug("Saving application details {}", entity.getId());
 
@@ -88,4 +84,7 @@ public class ApplicationDetailBean extends PrimefacesFormBean<Application> {
         this.applicationsService.deletePropertyByName(entity, name);
     }
 
+    public Boolean getPropertiesExists() {
+        return this.entity.getPropertiesGroups() != null && !this.entity.getPropertiesGroups().isEmpty();
+    }
 }
