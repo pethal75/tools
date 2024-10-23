@@ -2,27 +2,58 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:p="http://primefaces.org/ui">
 <ui:define name="content">
 
-    <h2>Application Instance #{applicationInstanceDetailBean.applicationInstance.name}</h2>
+    <h2>Application Instance #{applicationInstanceDetailBean.entity.name}</h2>
 
     <div class="card">
 
         <div class="container-fluid" style="width: 100%">
-            <h:form id="environmentDetailForm">
+            <h:form id="instanceDetailForm">
                 <br/>
 
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">Name</label>
-                            <p:inputText id="name" required="true" label="name" value="#{applicationInstanceDetailBean.applicationInstance.name}" class="form-control" requiredMessage="Missing name"/>
+                            <p:inputText id="name" required="true" value="#{applicationInstanceDetailBean.entity.name}" class="form-control" requiredMessage="Missing name">
+                                <p:ajax event="change" update="@form"/>
+                            </p:inputText>
                             <p:message for="name" styleClass="validationMessage"/>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="application">Application</label>
+                            <p:selectOneMenu id="application" value="#{applicationInstanceDetailBean.entity.application}" class="form-control" disabled="#{applicationInstanceDetailBean.isExistingInstance()}" converter="#{applicationInstanceDetailBean}">
+                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+                                <f:selectItems value="#{applicationInstanceDetailBean.applications}" var="app" itemLabel="#{app.name}" itemValue="#{app}"/>
+                                <p:ajax event="change" update="@form"/>
+                            </p:selectOneMenu>
+                            <p:message for="application" styleClass="validationMessage"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="environment">Environment</label>
+                            <p:selectOneMenu id="environment" value="#{applicationInstanceDetailBean.entity.environment}" class="form-control" converter="#{environmentConverterBean}">
+                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+                                <f:selectItems value="#{applicationInstanceDetailBean.environments}" var="env" itemLabel="#{env.name}" itemValue="#{env}"/>
+                                <p:ajax event="change" update="@form"/>
+                            </p:selectOneMenu>
+                            <p:message for="environment" styleClass="validationMessage"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-md-8">
                         <div class="form-group">
+                            <label for="url">Url</label>
+                            <p:inputText id="url" value="#{applicationInstanceDetailBean.entity.applicationUrl}" class="form-control">
+                                <p:ajax event="change" update="@form"/>
+                            </p:inputText>
                         </div>
                     </div>
                 </div>
@@ -30,8 +61,10 @@
                 <br/>
 
                 <div class="buttonsBlock">
-                    <p:commandButton id="saveButton" value="Save" action="#{applicationInstanceDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
-                    <p:commandButton id="cancelButton" value="Cancel" action="#{applicationInstanceDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
+                    <p:commandButton id="saveButton" value="Save" action="#{applicationInstanceDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2" disabled="#{!applicationInstanceDetailBean.isChanged()}"/>
+                    <p:commandButton id="cancelButton" value="Cancel" action="#{applicationInstanceDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger mr-2" disabled="#{!applicationInstanceDetailBean.isChanged()}"/>
+                    <p:commandButton id="backButton" value="Back" action="#{applicationInstanceDetailBean.back()}" immediate="true" styleClass="ui-button-secondary"/>
+
                 </div>
 
                 <br/>

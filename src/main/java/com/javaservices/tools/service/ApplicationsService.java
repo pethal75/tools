@@ -151,7 +151,21 @@ public class ApplicationsService {
     }
 
     public void updateApplicationInstance(ApplicationInstance applicationInstance) {
-        // TODO
+        // Find whether it is existing instance
+        ApplicationInstance existingInstance = this.findApplicationInstanceById(applicationInstance.getId());
+
+        if (existingInstance != null) {
+            // Update property
+            existingInstance.setName(applicationInstance.getName());
+            existingInstance.setApplicationUrl(applicationInstance.getApplicationUrl());
+            existingInstance.setServer(applicationInstance.getServer());
+            existingInstance.setEnvironment(applicationInstance.getEnvironment());
+        } else {
+            // Create property
+            applicationInstance.getApplication().addInstance(applicationInstance);
+        }
+
+        this.toolsModelService.saveModel();
     }
 
     public void updateProperty(Application application, String groupName, Property property) {

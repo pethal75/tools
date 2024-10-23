@@ -24,6 +24,7 @@ public class ApplicationDetailBean extends PrimefacesFormBean<Application> {
 
     protected static final String pageUrl = "/pages/applications/applicationDetail.xhtml";
     protected static final Long tabPropertiesId = 1L;
+    protected static final Long tabInstancesId = 2L;
 
     protected ApplicationsService applicationsService;
 

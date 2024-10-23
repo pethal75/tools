@@ -2,6 +2,7 @@ package com.javaservices.tools.model.applications;
 
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.model.servers.Server;
+import com.javaservices.tools.web.beans.primefaces.EditableEntity;
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,9 +13,9 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
+@Builder(toBuilder = true)
 @ToString(onlyExplicitlyIncluded = true)
-public class ApplicationInstance {
+public class ApplicationInstance implements EditableEntity {
 
     protected Long id;
 
@@ -45,4 +46,10 @@ public class ApplicationInstance {
     protected Environment environment;
 
     protected Server server;
+
+    @Override
+    public EditableEntity clone() {
+        return this.toBuilder().build();
+    }
+
 }
