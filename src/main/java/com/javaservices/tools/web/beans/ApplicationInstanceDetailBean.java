@@ -9,9 +9,6 @@ import static com.javaservices.tools.web.beans.ApplicationDetailBean.tabInstance
 import com.javaservices.tools.web.beans.primefaces.PrimefacesFormBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
-import jakarta.faces.component.UIComponent;
-import jakarta.faces.context.FacesContext;
-import jakarta.faces.convert.Converter;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.IOException;
@@ -28,7 +25,7 @@ import org.springframework.stereotype.Component;
 @ViewScoped
 @Data
 @Slf4j
-public class ApplicationInstanceDetailBean extends PrimefacesFormBean<ApplicationInstance> implements Converter<Application> {
+public class ApplicationInstanceDetailBean extends PrimefacesFormBean<ApplicationInstance> {
 
     protected static final String pageUrl = "applicationInstanceDetail.xhtml";
 
@@ -84,19 +81,6 @@ public class ApplicationInstanceDetailBean extends PrimefacesFormBean<Applicatio
 
     public boolean isExistingInstance() {
         return this.entity.getApplication() != null;
-    }
-
-    @Override
-    public Application getAsObject(FacesContext facesContext, UIComponent uiComponent, String s) {
-        return applicationsService.findApplicationByName(s);
-    }
-
-    @Override
-    public String getAsString(FacesContext facesContext, UIComponent uiComponent, Application application) {
-        if (application != null)
-            return application.getName();
-
-        return "Select One";
     }
 
     public void save() throws IOException {

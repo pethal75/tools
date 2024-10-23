@@ -27,7 +27,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="application">Application</label>
-                            <p:selectOneMenu id="application" value="#{applicationInstanceDetailBean.entity.application}" class="form-control" disabled="#{applicationInstanceDetailBean.isExistingInstance()}" converter="#{applicationInstanceDetailBean}">
+                            <p:selectOneMenu id="application" value="#{applicationInstanceDetailBean.entity.application}" class="form-control" disabled="#{applicationInstanceDetailBean.isExistingInstance()}" converter="#{applicationConverterBean}">
                                 <f:selectItem itemLabel="Select" itemValue="#{null}"/>
                                 <f:selectItems value="#{applicationInstanceDetailBean.applications}" var="app" itemLabel="#{app.name}" itemValue="#{app}"/>
                                 <p:ajax event="change" update="@form"/>

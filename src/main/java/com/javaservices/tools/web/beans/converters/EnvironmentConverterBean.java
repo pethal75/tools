@@ -1,4 +1,4 @@
-package com.javaservices.tools.web.beans;
+package com.javaservices.tools.web.beans.converters;
 
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.service.ToolsModelService;

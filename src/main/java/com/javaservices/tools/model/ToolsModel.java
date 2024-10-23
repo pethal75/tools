@@ -72,6 +72,16 @@ public class ToolsModel {
 
     }
 
+    public Application findApplicationByName(String name) {
+        if (applications == null || name == null)
+            return null;
+
+        return this.applications.stream()
+                .filter(application -> application.getName().equals(name))
+                .findAny()
+                .orElse(null);
+    }
+
     public Environment findEnvironment(String name) {
 
         if (environments == null || name == null)
@@ -150,4 +160,5 @@ public class ToolsModel {
 
         return xstream;
     }
+
 }
