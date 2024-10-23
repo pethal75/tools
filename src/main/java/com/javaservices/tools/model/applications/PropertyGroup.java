@@ -45,6 +45,8 @@ public class PropertyGroup {
     }
 
     public void addProperty(Property property) {
+        property.setGroup(this);
+
         if (properties == null)
             properties = new ArrayList<>();
 
