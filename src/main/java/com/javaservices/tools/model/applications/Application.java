@@ -37,12 +37,14 @@ public class Application implements EditableEntity {
 
     protected Group group;
 
-    protected List<ApplicationInstance> instances;
+    protected List<ApplicationInstance> instances = new ArrayList<>();
 
     public void initialize() {
 
-        if (instances != null)
-            instances.forEach(applicationInstance -> applicationInstance.initialize(this));
+        if (instances == null)
+            instances = new ArrayList<>();
+
+        instances.forEach(applicationInstance -> applicationInstance.initialize(this));
 
         if (propertiesGroups != null) {
             propertiesGroups.forEach(propertyGroup -> propertyGroup.setApplication(this));
@@ -123,4 +125,19 @@ public class Application implements EditableEntity {
                 .findFirst().orElse(null);
     }
 
+    public void addInstance(ApplicationInstance applicationInstance) {
+        if (this.instances == null)
+            this.instances = new ArrayList<>();
+
+        Long maxId = this.instances.stream()
+                .map(ApplicationInstance::getId)
+                .max(Long::compareTo)
+                .orElse(1L);
+
+        // Create property group
+        applicationInstance.setId(maxId + 1);
+
+        this.instances.add(applicationInstance);
+        this.instances.sort(Comparator.comparing(ApplicationInstance::getName));
+    }
 }

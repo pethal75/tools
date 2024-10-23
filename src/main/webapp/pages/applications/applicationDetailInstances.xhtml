@@ -6,38 +6,61 @@
 
     <div class="container-fluid">
 
-        <div class="card">
-            <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationDetailBean.entity.instances}">
-                <p:headerRow field="environment.name" expandable="true" expanded="true">
-                    <p:column colspan="4">
-                        <f:param name="name" value="#{applicationInstance.environment.name}"/>
-                        <h:outputText value="#{applicationInstance.environment.name}"/> Environment
+        <h:form>
+            <div class="row">
+                <div class="col-md-10 my-auto">
+                </div>
+
+                <div class="col-md-2 text-center">
+                    <p:button styleClass="ui-button-outlined rounded-button ui-button-success" href="instanceDetail.xhtml" value="Add Instance" icon="pi pi-plus">
+                        <f:param name="applicationId" value="#{applicationDetailBean.entity.id}"/>
+                    </p:button>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="card">
+                <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationDetailBean.entity.instances}">
+                    <p:headerRow field="environment.name" expandable="true" expanded="true">
+                        <p:column colspan="5">
+                            <f:param name="name" value="#{applicationInstance.environment.name}"/>
+                            <h:outputText value="#{applicationInstance.environment.name}"/> Environment
+                        </p:column>
+                    </p:headerRow>
+
+                    <p:column headerText="Name" width="15%">
+                        <h:outputText value="#{applicationInstance.name}" />
                     </p:column>
-                </p:headerRow>
 
-                <p:column headerText="Name" width="15%">
-                    <h:outputText value="#{applicationInstance.name}" />
-                </p:column>
+                    <p:column headerText="Protocol" width="10%" style="text-align: center">
+                        <h:outputText value="#{applicationInstance.application.protocol.name()}" />
+                    </p:column>
 
-                <p:column headerText="Protocol" width="10%" style="text-align: center">
-                    <h:outputText value="#{applicationInstance.application.protocol.name()}" />
-                </p:column>
+                    <p:column headerText="URL" width="40%">
+                        <h:outputLink value="#{applicationInstance.applicationUrl}" target="_blank">#{applicationInstance.applicationUrl}</h:outputLink>
+                    </p:column>
 
-                <p:column headerText="URL" width="40%">
-                    <h:outputLink value="#{applicationInstance.applicationUrl}" target="_blank">#{applicationInstance.applicationUrl}</h:outputLink>
-                </p:column>
+                    <p:column headerText="Status" width="10%" style="text-align: center">
+                        <f:facet name="header">
+                            <h:outputText value="Status" title="Status"/>
+                            <p:commandLink action="#{applicationsService.refreshApplications}">
+                                <p:graphicImage value="/images/icon-refresh-blue.png" style="width: 24px; height: 24px; margin-left: 5px"/>
+                            </p:commandLink>
+                        </f:facet>
+                        <p:graphicImage value="/images/#{applicationInstance.statusImage}" style="width: 16px; height: 16px"/>
+                    </p:column>
 
-                <p:column headerText="Status" width="10%" style="text-align: center">
-                    <f:facet name="header">
-                        <h:outputText value="Status" title="Status"/>
-                        <p:commandLink action="#{applicationsService.refreshApplications}">
-                            <p:graphicImage value="/images/icon-refresh-blue.png" style="width: 24px; height: 24px; margin-left: 5px"/>
-                        </p:commandLink>
-                    </f:facet>
-                    <p:graphicImage value="/images/#{applicationInstance.statusImage}" style="width: 16px; height: 16px"/>
-                </p:column>
+                    <p:column headerText="Action" style="text-align: center">
+                        <p:button value="Detail" href="instanceDetail.xhtml" styleClass="ui-button-outlined rounded-button">
+                            <f:param name="applicationId" value="#{applicationInstance.application.id}"/>
+                            <f:param name="id" value="#{applicationInstance.id}"/>
+                        </p:button>
+                        <p:commandButton value="Delete" action="#{applicationDetailBean.deleteInstanceById(applicationInstance.id)}" update="@form" styleClass="ui-button-outlined rounded-button ui-button-danger ml-2"/>
+                    </p:column>
 
-            </p:dataTable>
-        </div>
+                </p:dataTable>
+            </div>
+        </h:form>
     </div>
 </ui:composition>

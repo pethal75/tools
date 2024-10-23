@@ -67,12 +67,16 @@ public class ToolsModel {
         AtomicLong index = new AtomicLong(1);
 
         this.getApplications().stream()
-                .flatMap(applicationConfiguration -> applicationConfiguration.getInstances().stream())
+                .flatMap(application -> application.getInstances().stream())
                 .forEach(applicationInstance -> applicationInstance.setId(index.getAndIncrement()));
 
     }
 
     public Environment findEnvironment(String name) {
+
+        if (environments == null || name == null)
+            return null;
+
         return this.environments.stream()
                 .filter(environment -> environment.getName().equals(name))
                 .findAny()
@@ -80,6 +84,9 @@ public class ToolsModel {
     }
 
     public Group findGroup(String name) {
+        if (groups == null || name == null)
+            return null;
+
         return this.groups.stream()
                 .filter(group -> group.getName().equals(name))
                 .findAny()
