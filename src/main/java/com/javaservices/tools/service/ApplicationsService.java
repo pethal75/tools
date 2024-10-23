@@ -3,6 +3,7 @@ package com.javaservices.tools.service;
 import com.javaservices.network.clients.HttpClientUtil;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
+import com.javaservices.tools.model.applications.Property;
 import jakarta.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Collections;
@@ -93,7 +94,7 @@ public class ApplicationsService {
     }
 
     public Application findApplicationByName(String name) {
-        if (this.getApplications() == null)
+        if (this.getApplications() == null || name == null)
             return null;
 
         return this.getApplications().stream()
@@ -153,9 +154,28 @@ public class ApplicationsService {
         // TODO
     }
 
+    public void updateProperty(Application application, String groupName, Property property) {
+        // Find whether it is existing property
+        Property existingProperty = application.findPropertyByName(property.getName());
+
+        if (existingProperty != null) {
+            // Update property
+            existingProperty.setName(property.getName());
+            existingProperty.setValue(property.getValue());
+            existingProperty.setType(property.getType());
+            existingProperty.setGroup(property.getGroup());
+        } else {
+            // Create property
+            application.addProperty(groupName, property);
+        }
+
+        this.toolsModelService.saveModel();
+    }
+
     public void deletePropertyByName(Application application, String name) {
         application.deletePropertyByName(name);
 
         updateApplication(application);
     }
+
 }

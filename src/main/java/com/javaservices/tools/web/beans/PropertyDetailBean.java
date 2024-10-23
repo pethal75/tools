@@ -3,7 +3,6 @@ package com.javaservices.tools.web.beans;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.Property;
 import com.javaservices.tools.model.applications.PropertyGroup;
-import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.service.ApplicationsService;
 import static com.javaservices.tools.web.beans.ApplicationDetailBean.tabPropertiesId;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesFormBean;
@@ -13,9 +12,12 @@ import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import static java.util.stream.Collectors.toCollection;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +31,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class PropertyDetailBean extends PrimefacesFormBean<Property> {
 
-    public static final String pageUrl = "applicationPropertyDetail.xhtml";
+    public static final String pageUrl = "propertyDetail.xhtml";
 
     protected ApplicationsService applicationsService;
 
@@ -37,17 +39,13 @@ public class PropertyDetailBean extends PrimefacesFormBean<Property> {
     @ManagedProperty("applicationId")
     protected Long applicationId;
 
-    @Value("#{request.getParameter('groupId')}")
-    @ManagedProperty("groupId")
-    protected Long groupId;
-
     @Value("#{request.getParameter('name')}")
     @ManagedProperty("name")
     protected String name;
 
-    protected Application application;
+    protected String groupName, origGroupName;
 
-    protected PropertyGroup propertyGroup;
+    protected Application application;
 
     @Inject
     public PropertyDetailBean(ApplicationsService applicationsService) {
@@ -60,42 +58,66 @@ public class PropertyDetailBean extends PrimefacesFormBean<Property> {
 
         application = applicationsService.findApplicationById(applicationId);
 
-        propertyGroup = application.findPropertyGroupById(groupId);
-
-        Property property = propertyGroup.findPropertyByName(name);
+        Property property = application.findPropertyByName(name);
 
         if (property == null) {
             property = new Property();
         }
 
+        this.groupName = property.getGroupName();
+        this.origGroupName = property.getGroupName();
+
         this.initialize(property);
     }
 
-    public Map<String, Server.Protocol> getProtocols() {
-        return Arrays.stream(Server.Protocol.values())
-                .collect(Collectors.toMap(protocol -> protocol.toString(), protocol -> protocol));
-    }
+    public List<String> completeGroup(String query) {
+        String queryLowerCase = query.toLowerCase();
 
-    public Map<String, Server.ServerType> getTypes() {
-        return Arrays.stream(Server.ServerType.values())
-                .collect(Collectors.toMap(serverType -> serverType.toString(), serverType -> serverType));
+        if (application.getPropertiesGroups() == null)
+            return List.of(query);
+
+        ArrayList<String> currentGroups = application.getPropertiesGroups().stream().map(PropertyGroup::getName).collect(toCollection(ArrayList::new));
+        currentGroups.add(query);
+
+        return currentGroups.stream()
+                .filter(groupName -> groupName.toLowerCase().startsWith(queryLowerCase))
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     @Override
     public String getUrl() {
-        return pageUrl;
+        return pageUrl + "?applicationId="+ this.applicationId + "&name=" + this.name;
     }
 
     @Override
     public String getBackUrl() {
-        return ApplicationDetailBean.pageUrl + MessageFormat.format("?applicationId={0}&tabId={1}", application.getId(), tabPropertiesId);
+        return ApplicationDetailBean.pageUrl + MessageFormat.format("?id={0}&tabId={1}", application.getId(), tabPropertiesId);
     }
 
     public void save() throws IOException {
         log.debug("Saving property details {}", this.entity.getName());
 
-        //
+        this.applicationsService.updateProperty(this.application, this.groupName, this.entity);
 
         this.redirect(getBackUrl());
+    }
+
+    public Map<String, Property.PropertyType> getTypes() {
+        return Arrays.stream(Property.PropertyType.values())
+                .collect(Collectors.toMap(Enum::toString, propertyType -> propertyType));
+    }
+
+    @Override
+    public boolean isChanged() {
+        return super.isChanged() || !this.groupName.equals(this.entity.getGroupName());
+    }
+
+    @Override
+    public void cancel() throws IOException {
+        this.entity = (Property) this.origEntity.clone();
+        this.groupName = this.origGroupName;
+
+        this.redirect(getUrl());
     }
 }
