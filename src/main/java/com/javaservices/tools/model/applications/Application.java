@@ -5,6 +5,7 @@ import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.web.beans.primefaces.EditableEntity;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,7 @@ public class Application implements EditableEntity {
         if (propertiesGroups != null) {
             propertiesGroups.forEach(propertyGroup -> propertyGroup.setApplication(this));
             propertiesGroups.forEach(PropertyGroup::initialize);
+            propertiesGroups.sort(Comparator.comparing(PropertyGroup::getName));
         }
     }
 
@@ -63,11 +65,62 @@ public class Application implements EditableEntity {
             .collect(Collectors.toList());
     }
 
+    public Property findPropertyByName(String name) {
+        if (this.propertiesGroups == null || name == null)
+            return null;
+
+        for(PropertyGroup group : this.propertiesGroups)
+            if (group.findPropertyByName(name) != null)
+                return group.findPropertyByName(name);
+
+        return null;
+    }
+
+    public void addProperty(String groupName, Property property) {
+        // Check whether property group exists
+        PropertyGroup existingGroup = this.findPropertyGroupByName(groupName);
+
+        if (existingGroup == null) {
+            if (this.propertiesGroups == null)
+                this.propertiesGroups = new ArrayList<>();
+
+            Long maxId = this.propertiesGroups.stream()
+                    .max(Comparator.comparingLong(PropertyGroup::getId))
+                    .map(PropertyGroup::getId)
+                    .orElse(1L);
+
+            // Create property group
+            existingGroup = PropertyGroup.builder().id(maxId + 1).name(groupName).build();
+
+            this.propertiesGroups.add(existingGroup);
+        }
+
+        existingGroup.addProperty(property);
+    }
+
     public void deletePropertyByName(String name) {
+        if (this.propertiesGroups == null)
+            return;
+
         this.propertiesGroups.forEach(propertyGroup -> propertyGroup.deletePropertyByName(name));
     }
 
     public PropertyGroup findPropertyGroupById(Long groupId) {
-        return this.propertiesGroups.stream().filter(propertyGroup -> propertyGroup.getId().equals(groupId)).findFirst().orElse(null);
+        if (this.propertiesGroups == null || groupId == null)
+            return null;
+
+        return this.propertiesGroups.stream()
+                .filter(propertyGroup -> propertyGroup.getId().equals(groupId))
+                .findFirst().orElse(null);
     }
+
+    public PropertyGroup findPropertyGroupByName(String name) {
+        if (this.propertiesGroups == null || name == null)
+            return null;
+
+        return this.propertiesGroups.stream()
+                .filter(propertyGroup -> propertyGroup.getName().equals(name))
+                .findFirst().orElse(null);
+    }
+
 }

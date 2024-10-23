@@ -1,7 +1,7 @@
 package com.javaservices.tools.web.beans;
 
-import com.javaservices.tools.service.ServersService;
 import com.javaservices.tools.model.servers.Server;
+import com.javaservices.tools.service.ServersService;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.annotation.ManagedProperty;
@@ -53,12 +53,12 @@ public class ServerDetailBean extends PrimefacesBean {
 
     public Map<String, Server.Protocol> getProtocols() {
         return Arrays.stream(Server.Protocol.values())
-                .collect(Collectors.toMap(protocol -> protocol.toString(), protocol -> protocol));
+                .collect(Collectors.toMap(Enum::toString, protocol -> protocol));
     }
 
     public Map<String, Server.ServerType> getTypes() {
         return Arrays.stream(Server.ServerType.values())
-                .collect(Collectors.toMap(serverType -> serverType.toString(), serverType -> serverType));
+                .collect(Collectors.toMap(Enum::toString, serverType -> serverType));
     }
 
     public void save() throws IOException {

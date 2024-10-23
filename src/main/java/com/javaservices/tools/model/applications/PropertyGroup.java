@@ -1,6 +1,7 @@
 package com.javaservices.tools.model.applications;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
@@ -19,10 +20,14 @@ public class PropertyGroup {
 
     protected Application application;
 
-    protected List<Property> properties = new ArrayList<>();
+    protected List<Property> properties;
 
     public void initialize() {
+        if (properties == null)
+            return;
+
         properties.forEach(property -> property.setGroup(this));
+        properties.sort(Comparator.comparing(Property::getName));
     }
 
     public void deletePropertyByName(String name) {
@@ -30,7 +35,21 @@ public class PropertyGroup {
     }
 
     public Property findPropertyByName(String name) {
-        return properties.stream().filter(property -> property.getName().equals(name)).findFirst().orElse(null);
+        if (properties == null || name == null)
+            return null;
+
+        return properties.stream()
+                .filter(property -> property.getName().equals(name))
+                .findFirst()
+                .orElse(null);
     }
 
+    public void addProperty(Property property) {
+        if (properties == null)
+            properties = new ArrayList<>();
+
+        properties.add(property);
+
+        properties.sort(Comparator.comparing(Property::getName));
+    }
 }
