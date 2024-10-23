@@ -1,9 +1,8 @@
 package com.javaservices.tools.exception;
 
-import jakarta.faces.context.ExceptionHandler;
-
 import jakarta.faces.FacesException;
 import jakarta.faces.application.NavigationHandler;
+import jakarta.faces.context.ExceptionHandler;
 import jakarta.faces.context.ExceptionHandlerWrapper;
 import jakarta.faces.context.FacesContext;
 import jakarta.faces.event.ExceptionQueuedEvent;
@@ -11,7 +10,9 @@ import jakarta.faces.event.ExceptionQueuedEventContext;
 import jakarta.servlet.http.HttpServletRequest;
 import java.util.Iterator;
 import java.util.Map;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 
     private final ExceptionHandler exceptionHandler;
@@ -35,7 +36,7 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
 
             try {
                 Throwable throwable = exceptionQueuedEventContext.getException();
-                System.err.println("Exception: " + throwable.getMessage());
+                log.error("Exception: " + throwable.getMessage(), throwable);
 
                 FacesContext context = FacesContext.getCurrentInstance();
                 Map<String, Object> requestMap = context.getExternalContext().getRequestMap();

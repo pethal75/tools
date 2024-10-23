@@ -6,41 +6,38 @@
 
     <div class="container-fluid">
 
-        <div class="row">
-            <div class="col-md-12">
-
-                <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationDetailBean.entity.instances}">
-                    <p:headerRow field="environment.name" expandable="true" expanded="true">
-                        <p:column colspan="4">
-                            <f:param name="name" value="#{applicationInstance.environment.name}"/>
-                            <h:outputText value="#{applicationInstance.environment.name}"/> Environment
-                        </p:column>
-                    </p:headerRow>
-
-                    <p:column headerText="Name" width="15%">
-                        <h:outputText value="#{applicationInstance.name}" />
+        <div class="card">
+            <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationDetailBean.entity.instances}">
+                <p:headerRow field="environment.name" expandable="true" expanded="true">
+                    <p:column colspan="4">
+                        <f:param name="name" value="#{applicationInstance.environment.name}"/>
+                        <h:outputText value="#{applicationInstance.environment.name}"/> Environment
                     </p:column>
+                </p:headerRow>
 
-                    <p:column headerText="Protocol" width="10%" style="text-align: center">
-                        <h:outputText value="#{applicationInstance.application.protocol.name()}" />
-                    </p:column>
+                <p:column headerText="Name" width="15%">
+                    <h:outputText value="#{applicationInstance.name}" />
+                </p:column>
 
-                    <p:column headerText="URL" width="40%">
-                        <h:outputLink value="#{applicationInstance.applicationUrl}" target="_blank">#{applicationInstance.applicationUrl}</h:outputLink>
-                    </p:column>
+                <p:column headerText="Protocol" width="10%" style="text-align: center">
+                    <h:outputText value="#{applicationInstance.application.protocol.name()}" />
+                </p:column>
 
-                    <p:column headerText="Status" width="10%" style="text-align: center">
-                        <f:facet name="header">
-                            <h:outputText value="Status" title="Status"/>
-                            <p:commandLink action="#{applicationsService.refreshApplications}">
-                                <p:graphicImage value="/images/icon-refresh-blue.png" style="width: 24px; height: 24px; margin-left: 5px"/>
-                            </p:commandLink>
-                        </f:facet>
-                        <p:graphicImage value="/images/#{applicationInstance.statusImage}" style="width: 16px; height: 16px"/>
-                    </p:column>
+                <p:column headerText="URL" width="40%">
+                    <h:outputLink value="#{applicationInstance.applicationUrl}" target="_blank">#{applicationInstance.applicationUrl}</h:outputLink>
+                </p:column>
 
-                </p:dataTable>
-            </div>
+                <p:column headerText="Status" width="10%" style="text-align: center">
+                    <f:facet name="header">
+                        <h:outputText value="Status" title="Status"/>
+                        <p:commandLink action="#{applicationsService.refreshApplications}">
+                            <p:graphicImage value="/images/icon-refresh-blue.png" style="width: 24px; height: 24px; margin-left: 5px"/>
+                        </p:commandLink>
+                    </f:facet>
+                    <p:graphicImage value="/images/#{applicationInstance.statusImage}" style="width: 16px; height: 16px"/>
+                </p:column>
+
+            </p:dataTable>
         </div>
     </div>
 </ui:composition>
