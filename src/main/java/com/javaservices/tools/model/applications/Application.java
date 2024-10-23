@@ -4,6 +4,7 @@ import com.javaservices.tools.model.environments.Group;
 import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.web.beans.primefaces.EditableEntity;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -54,6 +55,8 @@ public class Application implements EditableEntity {
     }
 
     public List<Property> getProperties() {
+        if (this.propertiesGroups == null)
+            return Collections.emptyList();
 
         return this.propertiesGroups.stream()
             .flatMap(propertyGroup -> propertyGroup.getProperties().stream())
