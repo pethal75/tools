@@ -33,3 +33,7 @@ h2 {
 .btn-width-icon-small {
     width: 36px !important;
 }
+
+.ui-panel-content {
+    border: none !important;
+}
