@@ -83,21 +83,35 @@ public class Application implements EditableEntity {
         PropertyGroup existingGroup = this.findPropertyGroupByName(groupName);
 
         if (existingGroup == null) {
-            if (this.propertiesGroups == null)
-                this.propertiesGroups = new ArrayList<>();
-
-            Long maxId = this.propertiesGroups.stream()
-                    .max(Comparator.comparingLong(PropertyGroup::getId))
-                    .map(PropertyGroup::getId)
-                    .orElse(1L);
-
-            // Create property group
-            existingGroup = PropertyGroup.builder().id(maxId + 1).name(groupName).build();
-
-            this.propertiesGroups.add(existingGroup);
+            existingGroup = this.createGroup(groupName);
         }
 
         existingGroup.addProperty(property);
+    }
+
+    /**
+     * Creates a new property group with the given group name and adds it to the list of property groups.
+     * If the property groups list is null, it initializes the list before adding the new group.
+     *
+     * @param groupName The name of the new property group to be created.
+     * @return The newly created PropertyGroup object.
+     */
+    public PropertyGroup createGroup(String groupName) {
+        if (this.propertiesGroups == null)
+            this.propertiesGroups = new ArrayList<>();
+
+        Long maxId = this.propertiesGroups.stream()
+                .max(Comparator.comparingLong(PropertyGroup::getId))
+                .map(PropertyGroup::getId)
+                .orElse(1L);
+
+        // Create property group
+        PropertyGroup group = PropertyGroup.builder().id(maxId + 1).name(groupName).application(this).build();
+        group.initialize();
+
+        this.propertiesGroups.add(group);
+
+        return group;
     }
 
     public void deletePropertyByName(String name) {

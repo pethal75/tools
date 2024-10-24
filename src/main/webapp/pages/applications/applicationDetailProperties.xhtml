@@ -36,9 +36,9 @@
 
                     <p:column headerText="Value" width="40%">
                         <h:outputLink value="#{property.value}" target="_blank" rendered="#{property.type == 'URL'}">
-                            <h:outputText value="#{property.value}" />
+                            <h:outputText value="#{property.printableValue}" />
                         </h:outputLink>
-                        <h:outputText value="#{property.value}" rendered="#{property.type != 'URL'}" />
+                        <h:outputText value="#{property.printableValue}" rendered="#{property.type != 'URL'}" />
                     </p:column>
 
                     <p:column headerText="Type" width="20%">

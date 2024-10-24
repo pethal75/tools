@@ -31,7 +31,7 @@
                             <p:selectOneMenu id="type" label="group" value="#{propertyDetailBean.entity.type}" class="form-control">
                                 <f:selectItem itemLabel="Select" itemValue="#{null}"/>
                                 <f:selectItems value="#{propertyDetailBean.types}"/>
-                                <p:ajax event="change" update="@form"/>
+                                <p:ajax event="change" process="@this" listener="#{propertyDetailBean.changePropertyType}" update="@form"/>
                             </p:selectOneMenu>
                         </div>
                     </div>
@@ -49,16 +49,47 @@
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="value">Value</label>
-                            <p:inputText id="value" label="value" value="#{propertyDetailBean.entity.value}" class="form-control">
-                                <p:ajax event="change" update="@form"/>
-                            </p:inputText>
+                <p:outputPanel  rendered="#{propertyDetailBean.entity.type ne 'DATABASE'}" style="padding: 0">
+                    <div class="row">
+                        <div class="col-md-12" >
+                            <div class="form-group">
+                                <label for="value">Value</label>
+                                <p:inputText id="value" label="value" value="#{propertyDetailBean.entity.value}" class="form-control">
+                                    <p:ajax event="change" update="@form"/>
+                                </p:inputText>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </p:outputPanel >
+
+                <p:outputPanel  rendered="#{propertyDetailBean.entity.type eq 'DATABASE'}">
+                    <div class="row">
+                        <div class="col-md-6" >
+                            <div class="form-group">
+                                <label for="connection">Connection</label>
+                                <p:inputText id="connection" value="#{propertyDetailBean.entityDatabase.connection}" class="form-control">
+                                    <p:ajax event="change" update="@form"/>
+                                </p:inputText>
+                            </div>
+                        </div>
+                        <div class="col-md-3" >
+                            <div class="form-group">
+                                <label for="user">User</label>
+                                <p:inputText id="user" value="#{propertyDetailBean.entityDatabase.username}" class="form-control">
+                                    <p:ajax event="change" update="@form"/>
+                                </p:inputText>
+                            </div>
+                        </div>
+                        <div class="col-md-3" >
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <p:inputText id="password" value="#{propertyDetailBean.entityDatabase.password}" class="form-control">
+                                    <p:ajax event="change" update="@form"/>
+                                </p:inputText>
+                            </div>
+                        </div>
+                    </div>
+                </p:outputPanel >
 
                 <br/>
 

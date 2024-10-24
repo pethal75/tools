@@ -4,6 +4,7 @@ import com.javaservices.network.clients.HttpClientUtil;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
 import com.javaservices.tools.model.applications.Property;
+import com.javaservices.tools.model.applications.PropertyGroup;
 import jakarta.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Collections;
@@ -173,11 +174,17 @@ public class ApplicationsService {
         Property existingProperty = application.findPropertyByName(property.getName());
 
         if (existingProperty != null) {
+            PropertyGroup group = application.findPropertyGroupByName(groupName);
+
             // Update property
             existingProperty.setName(property.getName());
             existingProperty.setValue(property.getValue());
             existingProperty.setType(property.getType());
-            existingProperty.setGroup(property.getGroup());
+            if (group == null) {
+                group = application.createGroup(groupName);
+            }
+            existingProperty.setGroup(group);
+
         } else {
             // Create property
             application.addProperty(groupName, property);

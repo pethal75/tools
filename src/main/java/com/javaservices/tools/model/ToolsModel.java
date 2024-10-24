@@ -3,6 +3,7 @@ package com.javaservices.tools.model;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
 import com.javaservices.tools.model.applications.Property;
+import com.javaservices.tools.model.applications.PropertyDatabase;
 import com.javaservices.tools.model.applications.PropertyGroup;
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.model.environments.Group;
@@ -175,6 +176,7 @@ public class ToolsModel {
         xstream.alias("MockRequest", HttpMockResponse.class);
         xstream.alias("PropertyGroup", PropertyGroup.class);
         xstream.alias("Property", Property.class);
+        xstream.alias("PropertyDatabase", PropertyDatabase.class);
         xstream.alias("Environment", Environment.class);
         xstream.alias("Group", Group.class);
 

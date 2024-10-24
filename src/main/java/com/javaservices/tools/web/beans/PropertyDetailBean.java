@@ -2,6 +2,7 @@ package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.Property;
+import com.javaservices.tools.model.applications.PropertyDatabase;
 import com.javaservices.tools.model.applications.PropertyGroup;
 import com.javaservices.tools.service.ApplicationsService;
 import static com.javaservices.tools.web.beans.ApplicationDetailBean.tabPropertiesId;
@@ -45,6 +46,8 @@ public class PropertyDetailBean extends PrimefacesFormBean<Property> {
 
     protected String groupName, origGroupName;
 
+    protected Property.PropertyType lastType;
+
     protected Application application;
 
     @Inject
@@ -67,9 +70,19 @@ public class PropertyDetailBean extends PrimefacesFormBean<Property> {
         this.groupName = property.getGroupName();
         this.origGroupName = property.getGroupName();
 
-        this.initialize(property);
+        initialize(property);
+
+        lastType = entity.getType();
     }
 
+    /**
+     * Completes the group name based on the provided query. Searches through the existing
+     * property groups and returns a list of group names that start with the query string,
+     * including the query itself if no matches are found.
+     *
+     * @param query the string to be used for searching and completing group names.
+     * @return a list of group names that match the query string, sorted alphabetically.
+     */
     public List<String> completeGroup(String query) {
         String queryLowerCase = query.toLowerCase();
 
@@ -95,6 +108,51 @@ public class PropertyDetailBean extends PrimefacesFormBean<Property> {
         return ApplicationDetailBean.pageUrl + MessageFormat.format("?id={0}&tabId={1}", application.getId(), tabPropertiesId);
     }
 
+    /**
+     * Retrieves a map of all available property types.
+     *
+     * @return a map where the key is the name of the property type and the value is the corresponding PropertyType enum.
+     */
+    public Map<String, Property.PropertyType> getTypes() {
+        return Arrays.stream(Property.PropertyType.values())
+                .collect(Collectors.toMap(Enum::toString, propertyType -> propertyType));
+    }
+
+    public void changePropertyType() {
+        if (this.entity.getType() != lastType) {
+            if (this.entity.getType() == Property.PropertyType.DATABASE) {
+                // Switch entity to database
+                PropertyDatabase db = PropertyDatabase.builder().build();
+                db.setName(entity.getName());
+                db.setGroup(entity.getGroup());
+                db.setType(Property.PropertyType.DATABASE);
+                this.entity = db;
+            } else {
+                // Switch entity to property
+                Property property = Property.builder().build();
+                property.setName(entity.getName());
+                property.setGroup(entity.getGroup());
+                property.setType(entity.getType());
+
+                this.entity = property;
+            }
+        }
+
+        lastType = entity.getType();
+    }
+
+    @Override
+    public boolean isChanged() {
+        return super.isChanged() || !this.groupName.equals(this.entity.getGroupName());
+    }
+
+    /**
+     * Saves the current property details by updating the corresponding application property
+     * and then redirects the user to the return URL.
+     *
+     * @throws IOException if an input or output exception occurs during the redirection process
+     */
+    @Override
     public void save() throws IOException {
         log.debug("Saving property details {}", this.entity.getName());
 
@@ -103,19 +161,9 @@ public class PropertyDetailBean extends PrimefacesFormBean<Property> {
         this.redirect(getBackUrl());
     }
 
-    public Map<String, Property.PropertyType> getTypes() {
-        return Arrays.stream(Property.PropertyType.values())
-                .collect(Collectors.toMap(Enum::toString, propertyType -> propertyType));
-    }
-
-    @Override
-    public boolean isChanged() {
-        return super.isChanged() || !this.groupName.equals(this.entity.getGroupName());
-    }
-
     @Override
     public void cancel() throws IOException {
-        this.entity = (Property) this.origEntity.clone();
+        this.entity = this.origEntity.clone();
         this.groupName = this.origGroupName;
 
         this.redirect(getUrl());

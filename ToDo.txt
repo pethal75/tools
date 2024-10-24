@@ -2,12 +2,7 @@ TODO:
 
 	- Application object
 		- Application detail
-			- add property type
-				- URL - display URLs as links
-				- DB connection - url/user/password
-				- config file - path
-			- add/edit/delete property
-			- add icon to application
+			- add icon field to application ?
 			- edit
 				- assign group
 			- add list of tasks for application
