@@ -15,10 +15,10 @@ public class AmfMonitoring {
                 Application.builder()
                         .id(5L)
                         .name("AMF Monitoring")
-                        .group(model.findGroup("AMF"))
+                        .group(model.findGroupByName("AMF"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().environment(model.findEnvironment("LOCAL")).applicationUrl("").build()
+                                ApplicationInstance.builder().environment(model.findEnvironmentByName("LOCAL")).applicationUrl("").build()
                         ))
                         .build());
 

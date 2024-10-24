@@ -15,10 +15,10 @@ public class OfflineRating {
                 Application.builder()
                         .id(10L)
                         .name("OfflineRating")
-                        .group(model.findGroup("OFR"))
+                        .group(model.findGroupByName("OFR"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().id(1L).environment(model.findEnvironment("LOCAL")).applicationUrl("http://localhost:1601/kyc-enc/actuator/health").build()
+                                ApplicationInstance.builder().id(1L).environment(model.findEnvironmentByName("LOCAL")).applicationUrl("http://localhost:1601/kyc-enc/actuator/health").build()
                         ))
                         .build());
 

@@ -82,7 +82,7 @@ public class ToolsModel {
                 .orElse(null);
     }
 
-    public Environment findEnvironment(String name) {
+    public Environment findEnvironmentByName(String name) {
 
         if (environments == null || name == null)
             return null;
@@ -93,13 +93,43 @@ public class ToolsModel {
                 .orElse(null);
     }
 
-    public Group findGroup(String name) {
+    public Group findGroupById(Long id) {
+        if (id == null || id == null)
+            return null;
+
+        return this.groups.stream()
+                .filter(group -> group.getId().equals(id))
+                .findAny()
+                .orElse(null);
+    }
+
+    public Group findGroupByName(String name) {
         if (groups == null || name == null)
             return null;
 
         return this.groups.stream()
                 .filter(group -> group.getName().equals(name))
                 .findAny()
+                .orElse(null);
+    }
+
+    public Server findServerById(Long id) {
+        if (servers == null || id == null) {
+            return null;
+        }
+        return servers.stream()
+                .filter(server -> id.equals(server.getId()))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public Server findServerByName(String name) {
+        if (name == null || name.isEmpty()) {
+            return null;
+        }
+        return servers.stream()
+                .filter(server -> name.equals(server.getName()))
+                .findFirst()
                 .orElse(null);
     }
 

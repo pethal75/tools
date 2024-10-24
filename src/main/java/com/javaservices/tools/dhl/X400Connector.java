@@ -15,10 +15,10 @@ public class X400Connector {
                 Application.builder()
                         .id(40L)
                         .name("X400 Connector")
-                        .group(model.findGroup("X400"))
+                        .group(model.findGroupByName("X400"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().environment(model.findEnvironment("LOCAL")).applicationUrl("").build()
+                                ApplicationInstance.builder().environment(model.findEnvironmentByName("LOCAL")).applicationUrl("").build()
                         ))
                         .build());
 
