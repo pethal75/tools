@@ -21,7 +21,7 @@ public class EnvironmentConverterBean implements Converter<Environment> {
     @Override
     public Environment getAsObject(FacesContext context, UIComponent component, String value) {
         if (value != null && !value.trim().isEmpty()) {
-            return toolsModelService.getModel().findEnvironment(value);
+            return toolsModelService.getModel().findEnvironmentByName(value);
         }
         else {
             return null;

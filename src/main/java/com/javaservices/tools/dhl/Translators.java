@@ -15,10 +15,10 @@ public class Translators {
                 Application.builder()
                         .id(21L)
                         .name("Translator KYC")
-                        .group(model.findGroup("Translators"))
+                        .group(model.findGroupByName("Translators"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().environment(model.findEnvironment("LOCAL")).applicationUrl("").build()
+                                ApplicationInstance.builder().environment(model.findEnvironmentByName("LOCAL")).applicationUrl("").build()
                         ))
                         .build());
 
@@ -26,10 +26,10 @@ public class Translators {
                 Application.builder()
                         .id(22L)
                         .name("Translator KYC Amazon")
-                        .group(model.findGroup("Translators"))
+                        .group(model.findGroupByName("Translators"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().environment(model.findEnvironment("LOCAL")).applicationUrl("").build()
+                                ApplicationInstance.builder().environment(model.findEnvironmentByName("LOCAL")).applicationUrl("").build()
                         ))
                         .build());
 
@@ -37,10 +37,10 @@ public class Translators {
                 Application.builder()
                         .id(23L)
                         .name("Translator PMF")
-                        .group(model.findGroup("Translators"))
+                        .group(model.findGroupByName("Translators"))
                         .protocol(Server.Protocol.HTTP)
                         .instances(Arrays.asList(
-                                ApplicationInstance.builder().environment(model.findEnvironment("LOCAL")).applicationUrl("").build()
+                                ApplicationInstance.builder().environment(model.findEnvironmentByName("LOCAL")).applicationUrl("").build()
                         ))
                         .build());
 
