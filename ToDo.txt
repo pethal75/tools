@@ -1,19 +1,13 @@
 TODO:
 
+    - Model
+	    - when loading model, assign Group/Environment/Server same objects based on IDs
 	- Application object
-		- Application detail
-			- add icon field to application ?
-			- edit
-				- assign group
-			- add list of tasks for application
-				- run local command (intellij project, build, run, maven)
-			- deploy to Tomcat command ?
 		- Instances table
 			- add instance-server relation
 		- Instance Detail
-			- add new instance, delete instance, go to instance detail
 			- edit instance
-				- assign group/environment/server/application
+				- assign server
 		- Mocks - http responses
 			- show detail
 			- processing with ProxyController
@@ -26,15 +20,6 @@ TODO:
 			- run http request and check response
 			- run automated testing
 			- test case related to specific application instance / environment
-		- Tasks list
-			- build application
-			- install local applications - java, maven, tomcat
-			- deploy application to tomcat, linux server
-			- read logs from local / remote machine
-			- run build / deployment ?
-
-	- Instances list
-		- edit instance detail
 
 	- Servers - add login data - username/password for telnet/ssh
 	- Add server relation to application instance
@@ -69,6 +54,12 @@ TODO:
 		-> custom scripting language jScript
 		-> PGP keys
 		-> Active MQ
+		-> Application tasks list
+			- build application
+			- install local applications - java, maven, tomcat
+			- deploy application to tomcat, linux server
+			- read logs from local / remote machine
+			- run build / deployment ?
 
 
 	- Servers list

@@ -63,6 +63,8 @@ public class ToolsModel {
 
     protected void initialize() {
 
+        // TODO replace referenced entities in Application.group, ApplicationInstance.environment, ApplicationInstance.server with referenced objects
+
         this.applications.forEach(Application::initialize);
 
         AtomicLong index = new AtomicLong(1);

@@ -83,7 +83,7 @@ public class Application implements EditableEntity {
         PropertyGroup existingGroup = this.findPropertyGroupByName(groupName);
 
         if (existingGroup == null) {
-            existingGroup = this.createGroup(groupName);
+            existingGroup = this.createPropertyGroup(groupName);
         }
 
         existingGroup.addProperty(property);
@@ -96,7 +96,7 @@ public class Application implements EditableEntity {
      * @param groupName The name of the new property group to be created.
      * @return The newly created PropertyGroup object.
      */
-    public PropertyGroup createGroup(String groupName) {
+    public PropertyGroup createPropertyGroup(String groupName) {
         if (this.propertiesGroups == null)
             this.propertiesGroups = new ArrayList<>();
 

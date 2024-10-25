@@ -138,6 +138,7 @@ public class ApplicationsService {
             existingApplication.setName(application.getName());
             existingApplication.setDescription(application.getDescription());
             existingApplication.setNotes(application.getNotes());
+            existingApplication.setGroup(application.getGroup());
         }
 
         this.toolsModelService.saveModel();
@@ -181,7 +182,7 @@ public class ApplicationsService {
             existingProperty.setValue(property.getValue());
             existingProperty.setType(property.getType());
             if (group == null) {
-                group = application.createGroup(groupName);
+                group = application.createPropertyGroup(groupName);
             }
             existingProperty.setGroup(group);
 
