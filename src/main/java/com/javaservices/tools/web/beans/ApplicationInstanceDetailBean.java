@@ -80,7 +80,7 @@ public class ApplicationInstanceDetailBean extends PrimefacesFormBean<Applicatio
     }
 
     public boolean isExistingInstance() {
-        return this.entity.getApplication() != null;
+        return this.origEntity.getApplication() != null;
     }
 
     public void save() throws IOException {

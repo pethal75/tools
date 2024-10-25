@@ -11,7 +11,13 @@
                 <div class="col-md-10 my-auto">
                     <h2>Applications Instances</h2>
                 </div>
+
+                <div class="col-md-2 text-center">
+                    <p:button styleClass="ui-button-success ui-button-outlined rounded-button" href="instanceDetail.xhtml" value="Add Instance"/>
+                </div>
             </div>
+
+            <br/>
 
             <div class="card">
 
@@ -55,12 +61,11 @@
                         <p:graphicImage value="/images/#{applicationInstance.statusImage}" style="width: 16px; height: 16px"/>
                     </p:column>
 
-                    <p:column headerText="Action" style="text-align: center" width="200px">
-                        <p:button href="applicationInstanceDetail.xhtml" value="Detail">
+                    <p:column headerText="Action" style="text-align: center" width="15%">
+                        <p:button href="applicationInstanceDetail.xhtml" value="Detail" styleClass="ui-button-outlined rounded-button">
                             <f:param name="id" value="#{applicationInstance.id}"/>
                         </p:button>
-                        <p:commandButton value="Delete" action="#{applicationsListBean.deleteApplicationInstance(applicationInstance.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
-                    </p:column>
+                        <p:commandButton value="Delete" action="#{applicationsListBean.deleteApplicationInstance(applicationInstance.id)}" update="@form" styleClass="ui-button-danger ui-button-outlined rounded-button ml-2"/>                    </p:column>
                 </p:dataTable>
             </div>
         </h:form>

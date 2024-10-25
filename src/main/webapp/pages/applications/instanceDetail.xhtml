@@ -20,6 +20,7 @@
                             <label for="name">Name</label>
                             <p:inputText id="name" required="true" value="#{applicationInstanceDetailBean.entity.name}" class="form-control" requiredMessage="Missing name">
                                 <p:ajax event="change" update="@form"/>
+                                <p:ajax event="keyup" update="@form"/>
                             </p:inputText>
                             <p:message for="name" styleClass="validationMessage"/>
                         </div>
@@ -53,6 +54,7 @@
                             <label for="url">Url</label>
                             <p:inputText id="url" value="#{applicationInstanceDetailBean.entity.applicationUrl}" class="form-control">
                                 <p:ajax event="change" update="@form"/>
+                                <p:ajax event="keyup" update="@form"/>
                             </p:inputText>
                         </div>
                     </div>

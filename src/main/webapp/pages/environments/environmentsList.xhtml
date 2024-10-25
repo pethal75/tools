@@ -13,8 +13,8 @@
                     <h2>Environments</h2>
                 </div>
 
-                <div class="col-md-2 text-right">
-                    <p:button styleClass="ui-button-success" href="environmentDetail.xhtml" value="Add Environment"/>
+                <div class="col-md-2 text-center">
+                    <p:button styleClass="ui-button-outlined rounded-button ui-button-success" href="environmentDetail.xhtml" value="Add Environment"/>
                 </div>
             </div>
 
@@ -35,11 +35,11 @@
                         <h:outputText value="#{environmentValue.description}"/>
                     </p:column>
 
-                    <p:column headerText="Action" style="text-align: center">
-                        <p:button href="environmentDetail.xhtml" value="Detail">
+                    <p:column headerText="Action" width="15%" style="text-align: center">
+                        <p:button styleClass="ui-button-outlined rounded-button" href="environmentDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{environmentValue.id}"/>
                         </p:button>
-                        <p:commandButton value="Delete" action="#{environmentsListBean.deleteEnvironment(environmentValue.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
+                        <p:commandButton styleClass="ui-button-outlined rounded-button ui-button-danger ml-2" value="Delete" action="#{environmentsListBean.deleteEnvironment(environmentValue.id)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
             </div>

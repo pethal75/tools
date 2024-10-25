@@ -4,6 +4,7 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:p="http://primefaces.org/ui">
+
     <ui:define name="content">
 
         <h:form>
@@ -12,8 +13,8 @@
                     <h2>Groups</h2>
                 </div>
 
-                <div class="col-md-2 text-right">
-                    <p:button styleClass="ui-button-success" href="groupDetail.xhtml" value="Add Group"/>
+                <div class="col-md-2 text-center">
+                    <p:button styleClass="ui-button-success ui-button-outlined rounded-button" href="groupDetail.xhtml" value="Add Group"/>
                 </div>
             </div>
 
@@ -34,11 +35,11 @@
                         <h:outputText value="#{groupValue.description}"/>
                     </p:column>
 
-                    <p:column headerText="Action" style="text-align: center">
-                        <p:button href="groupDetail.xhtml" value="Detail">
+                    <p:column headerText="Action" width="15%" style="text-align: center">
+                        <p:button styleClass="ui-button-outlined rounded-button" href="groupDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{groupValue.id}"/>
                         </p:button>
-                        <p:commandButton value="Delete" action="#{groupsListBean.deleteGroup(groupValue.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
+                        <p:commandButton styleClass="ui-button-danger ui-button-outlined rounded-button ml-2" value="Delete" action="#{groupsListBean.deleteGroup(groupValue.id)}" update="@form"/>
                     </p:column>
                 </p:dataTable>
             </div>
