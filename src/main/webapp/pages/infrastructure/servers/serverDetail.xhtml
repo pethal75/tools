@@ -69,10 +69,10 @@
 
                 <br/>
 
-                <div class="buttonsBlock">
+                <p:outputPanel id="buttonsBlock">
                     <p:commandButton id="saveButton" value="Save" action="#{serverDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2"/>
                     <p:commandButton id="cancelButton" value="Cancel" action="#{serverDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger"/>
-                </div>
+                </p:outputPanel>
 
                 <br/>
             </h:form>

@@ -12,6 +12,7 @@
                         <label for="name">Name</label>
                         <p:inputText id="name" required="true" label="name" value="#{applicationDetailBean.entity.name}" class="form-control" requiredMessage="Missing name">
                             <p:ajax event="change" update="@form"/>
+                            <p:ajax event="keyup" update="buttonsBlock"/>
                         </p:inputText>
                         <p:message for="name" styleClass="validationMessage"/>
                     </div>
@@ -21,6 +22,7 @@
                         <label for="description">Description</label>
                         <p:inputTextarea id="description" label="description" value="#{applicationDetailBean.entity.description}" rows="4" cols="40" class="form-control">
                             <p:ajax event="change" update="@form"/>
+                            <p:ajax event="keyup" update="buttonsBlock"/>
                         </p:inputTextarea>
                     </div>
                 </div>
@@ -34,6 +36,7 @@
                         <p:outputLabel for="notes">Notes</p:outputLabel>
                         <p:inputTextarea id="notes" label="description" value="#{applicationDetailBean.entity.notes}" rows="10" cols="80" class="form-control">
                             <p:ajax event="change" update="@form"/>
+                            <p:ajax event="keyup" update="buttonsBlock"/>
                         </p:inputTextarea>
                     </div>
                 </div>
@@ -41,11 +44,11 @@
 
             <br/>
 
-            <div class="buttonsBlock">
+            <p:outputPanel id="buttonsBlock">
                 <p:commandButton id="saveButton" value="Save" action="#{applicationDetailBean.save()}" update="@form" styleClass="ui-button-success mr-2" disabled="#{!applicationDetailBean.isChanged()}"/>
                 <p:commandButton id="cancelButton" value="Cancel" action="#{applicationDetailBean.cancel()}" immediate="true" styleClass="ui-button-danger mr-2" disabled="#{!applicationDetailBean.isChanged()}"/>
                 <p:commandButton id="backButton" value="Back" action="#{applicationDetailBean.back()}" immediate="true" styleClass="ui-button-secondary"/>
-            </div>
+            </p:outputPanel>
         </h:form>
     </div>
 </ui:composition>
