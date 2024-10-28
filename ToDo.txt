@@ -22,7 +22,6 @@ TODO:
 			- test case related to specific application instance / environment
 
 	- Servers - add login data - username/password for telnet/ssh
-	- Add server relation to application instance
 	- SSHServerTerminal comunication with server
 		- login
 		- enter password

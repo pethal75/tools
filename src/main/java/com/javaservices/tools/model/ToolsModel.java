@@ -18,7 +18,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
@@ -63,16 +62,16 @@ public class ToolsModel {
 
     protected void initialize() {
 
-        // TODO replace referenced entities in Application.group, ApplicationInstance.environment, ApplicationInstance.server with referenced objects
+        // Replace referenced entities of Application.group, ApplicationInstance.environment, ApplicationInstance.server with referenced objects
+        this.applications.forEach(application -> {
+            application.initialize();
+            application.setGroup(findGroupById(application.getGroup().getId()));
 
-        this.applications.forEach(Application::initialize);
-
-        AtomicLong index = new AtomicLong(1);
-
-        this.getApplications().stream()
-                .flatMap(application -> application.getInstances().stream())
-                .forEach(applicationInstance -> applicationInstance.setId(index.getAndIncrement()));
-
+            application.getInstances().forEach(applicationInstance -> {
+                applicationInstance.setEnvironment(findEnvironmentById(applicationInstance.getEnvironment().getId()));
+                applicationInstance.setServer(findServerById(applicationInstance.getServer().getId()));
+            });
+        });
     }
 
     public Application findApplicationByName(String name) {
@@ -81,6 +80,16 @@ public class ToolsModel {
 
         return this.applications.stream()
                 .filter(application -> application.getName().equals(name))
+                .findAny()
+                .orElse(null);
+    }
+
+    public Environment findEnvironmentById(Long id) {
+        if (environments == null || id == null)
+            return null;
+
+        return this.environments.stream()
+                .filter(group -> group.getId().equals(id))
                 .findAny()
                 .orElse(null);
     }
@@ -97,7 +106,7 @@ public class ToolsModel {
     }
 
     public Group findGroupById(Long id) {
-        if (id == null || id == null)
+        if (groups == null || id == null)
             return null;
 
         return this.groups.stream()
