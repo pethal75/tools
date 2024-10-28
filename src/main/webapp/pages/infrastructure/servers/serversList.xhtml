@@ -13,8 +13,8 @@
                     <h2>Servers</h2>
                 </div>
 
-                <div class="col-md-2 text-right">
-                    <p:button styleClass="ui-button-success" href="serverDetail.xhtml" value="Add Server"/>
+                <div class="col-md-2 text-center">
+                    <p:button styleClass="ui-button-success ui-button-outlined rounded-button" href="serverDetail.xhtml" value="Add Server"/>
                 </div>
             </div>
 
@@ -45,11 +45,11 @@
                         <h:outputText value="#{serverValue.serverType}"/>
                     </p:column>
 
-                    <p:column headerText="Action" style="text-align: center">
-                        <p:button href="serverDetail.xhtml" value="Detail">
+                    <p:column headerText="Action" style="text-align: center" width="15%">
+                        <p:button href="serverDetail.xhtml" value="Detail" styleClass="ui-button-outlined rounded-button">
                             <f:param name="id" value="#{serverValue.id}"/>
                         </p:button>
-                        <p:commandButton value="Delete" action="#{serversListBean.deleteServer(serverValue.id)}" update="@form" styleClass="ui-button-danger ml-2"/>
+                        <p:commandButton value="Delete" action="#{serversListBean.deleteServer(serverValue.id)}" update="@form" styleClass="ui-button-danger ui-button-outlined rounded-button ml-2"/>
                     </p:column>
                 </p:dataTable>
             </div>

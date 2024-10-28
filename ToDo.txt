@@ -1,5 +1,8 @@
 TODO:
 
+	- Servers
+	    - add login data - username/password for telnet/ssh
+
 	- Application object
 		- Mocks - http responses
 			- show detail
@@ -14,7 +17,6 @@ TODO:
 			- run automated testing
 			- test case related to specific application instance / environment
 
-	- Servers - add login data - username/password for telnet/ssh
 	- SSHServerTerminal comunication with server
 		- login
 		- enter password
