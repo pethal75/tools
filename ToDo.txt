@@ -1,13 +1,6 @@
 TODO:
 
-    - Model
-	    - when loading model, assign Group/Environment/Server same objects based on IDs
 	- Application object
-		- Instances table
-			- add instance-server relation
-		- Instance Detail
-			- edit instance
-				- assign server
 		- Mocks - http responses
 			- show detail
 			- processing with ProxyController

@@ -2,6 +2,7 @@ package com.javaservices.tools.model.applications;
 
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.model.servers.Server;
+import com.javaservices.tools.utils.StringUtils;
 import com.javaservices.tools.web.beans.primefaces.EditableEntity;
 import java.util.ArrayList;
 import lombok.AllArgsConstructor;
@@ -46,6 +47,10 @@ public class ApplicationInstance implements EditableEntity {
     protected Environment environment;
 
     protected Server server;
+
+    public String getServerName() {
+        return this.server != null ? StringUtils.getPrintableString(this.server.getName()) : "";
+    }
 
     @Override
     public EditableEntity clone() {

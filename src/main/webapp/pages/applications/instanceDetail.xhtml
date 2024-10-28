@@ -58,6 +58,17 @@
                             </p:inputText>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="server">Server</label>
+                            <p:selectOneMenu id="server" value="#{applicationInstanceDetailBean.entity.server}" class="form-control" converter="#{serverConverter}">
+                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+                                <f:selectItems value="#{applicationInstanceDetailBean.servers}" var="server" itemLabel="#{server.name}" itemValue="#{server}"/>
+                                <p:ajax event="change" update="@form"/>
+                            </p:selectOneMenu>
+                            <p:message for="server" styleClass="validationMessage"/>
+                        </div>
+                    </div>
                 </div>
 
                 <br/>

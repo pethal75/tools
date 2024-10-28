@@ -40,9 +40,6 @@ public class ToolsModelService {
         } else {
             this.createModel("New tools project");
         }
-
-        // TODO initialize all related services
-
     }
 
     public void createModel(String name) {

@@ -17,6 +17,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -65,13 +66,26 @@ public class ToolsModel {
         // Replace referenced entities of Application.group, ApplicationInstance.environment, ApplicationInstance.server with referenced objects
         this.applications.forEach(application -> {
             application.initialize();
-            application.setGroup(findGroupById(application.getGroup().getId()));
+
+            if (application.getGroup() != null)
+                application.setGroup(findGroupById(application.getGroup().getId()));
 
             application.getInstances().forEach(applicationInstance -> {
-                applicationInstance.setEnvironment(findEnvironmentById(applicationInstance.getEnvironment().getId()));
-                applicationInstance.setServer(findServerById(applicationInstance.getServer().getId()));
+                if (applicationInstance.getEnvironment() != null)
+                    applicationInstance.setEnvironment(findEnvironmentById(applicationInstance.getEnvironment().getId()));
+                if (applicationInstance.getServer() != null)
+                    applicationInstance.setServer(findServerById(applicationInstance.getServer().getId()));
             });
         });
+
+        if (environments != null)
+            this.environments.sort(Comparator.comparing(Environment::getName));
+
+        if (groups != null)
+            this.groups.sort(Comparator.comparing(Group::getName));
+
+        if (servers != null)
+            this.servers.sort(Comparator.comparing(Server::getName));
     }
 
     public Application findApplicationByName(String name) {

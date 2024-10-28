@@ -23,7 +23,7 @@
             <div class="card">
                 <p:dataTable id="applicationInstancesTable" var="applicationInstance" value="#{applicationDetailBean.entity.instances}">
                     <p:headerRow field="environment.name" expandable="true" expanded="true">
-                        <p:column colspan="5">
+                        <p:column colspan="6">
                             <f:param name="name" value="#{applicationInstance.environment.name}"/>
                             <h:outputText value="#{applicationInstance.environment.name}"/> Environment
                         </p:column>
@@ -37,8 +37,12 @@
                         <h:outputText value="#{applicationInstance.application.protocol.name()}" />
                     </p:column>
 
-                    <p:column headerText="URL" width="40%">
+                    <p:column headerText="URL" width="30%">
                         <h:outputLink value="#{applicationInstance.applicationUrl}" target="_blank">#{applicationInstance.applicationUrl}</h:outputLink>
+                    </p:column>
+
+                    <p:column headerText="Server">
+                        <h:outputText value="#{applicationInstance.serverName}"/>
                     </p:column>
 
                     <p:column headerText="Status" width="10%" style="text-align: center">
@@ -51,7 +55,7 @@
                         <p:graphicImage value="/images/#{applicationInstance.statusImage}" style="width: 16px; height: 16px"/>
                     </p:column>
 
-                    <p:column headerText="Action" style="text-align: center">
+                    <p:column headerText="Action" style="text-align: center" width="15%">
                         <p:button value="Detail" href="instanceDetail.xhtml" styleClass="ui-button-outlined rounded-button">
                             <f:param name="applicationId" value="#{applicationInstance.application.id}"/>
                             <f:param name="id" value="#{applicationInstance.id}"/>

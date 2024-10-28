@@ -5,6 +5,10 @@ package com.javaservices.tools.utils;
  */
 public class StringUtils {
 
+    public static String getPrintableString(String str) {
+        return getPrintableString(str, -1);
+    }
+
     /**
      * Trims the input string to a specified maximum length and appends "..." if the string exceeds that length.
      *

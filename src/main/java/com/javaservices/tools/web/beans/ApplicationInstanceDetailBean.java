@@ -3,6 +3,7 @@ package com.javaservices.tools.web.beans;
 import com.javaservices.tools.model.applications.Application;
 import com.javaservices.tools.model.applications.ApplicationInstance;
 import com.javaservices.tools.model.environments.Environment;
+import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.service.ApplicationsService;
 import com.javaservices.tools.service.ToolsModelService;
 import static com.javaservices.tools.web.beans.ApplicationDetailBean.tabInstancesId;
@@ -89,5 +90,9 @@ public class ApplicationInstanceDetailBean extends PrimefacesFormBean<Applicatio
         this.applicationsService.updateApplicationInstance(this.entity);
 
         this.redirect(getBackUrl());
+    }
+
+    public List<Server> getServers() {
+        return this.toolsModelService.getModel().getServers();
     }
 }
