@@ -50,9 +50,12 @@ public class ApplicationInstanceDetailBean extends PrimefacesFormBean<Applicatio
     public void init() {
         log.debug("initialize application instance id : {} for application id {}", id, applicationId);
 
-        this.application = applicationsService.findApplicationById(applicationId);
-
         ApplicationInstance existingInstance = applicationsService.findApplicationInstanceById(id);
+
+        if (existingInstance.getApplication() != null && existingInstance.getApplication().getId() != null)
+            this.application = applicationsService.findApplicationById(existingInstance.getApplication().getId());
+        else if (applicationId != null)
+            this.application = applicationsService.findApplicationById(applicationId);
 
         if (existingInstance == null)
             existingInstance = new ApplicationInstance();
@@ -77,7 +80,10 @@ public class ApplicationInstanceDetailBean extends PrimefacesFormBean<Applicatio
 
     @Override
     public String getBackUrl() {
-        return ApplicationDetailBean.pageUrl + MessageFormat.format("?id={0}&tabId={1}", application.getId(), tabInstancesId);
+        if (applicationId != null)
+            return ApplicationDetailBean.pageUrl + MessageFormat.format("?id={0}&tabId={1}", application.getId(), tabInstancesId);
+        else
+            return ApplicationsListBean.pageUrlInstances;
     }
 
     public boolean isExistingInstance() {
