@@ -1,5 +1,6 @@
 package com.javaservices.tools.web.beans;
 
+import com.javaservices.tools.model.servers.Login;
 import com.javaservices.tools.model.servers.Server;
 import com.javaservices.tools.service.ServersService;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesBean;
@@ -11,16 +12,16 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@EqualsAndHashCode
 @Component
 @ViewScoped
-@Data
+@Getter
+@Setter
 @Slf4j
 public class ServerDetailBean extends PrimefacesBean {
 
@@ -49,6 +50,9 @@ public class ServerDetailBean extends PrimefacesBean {
             log.debug("Found server named : {}", server.getName());
         else
             this.server = new Server();
+
+        if (server.getLogin() == null)
+            server.setLogin(new Login());
     }
 
     public Map<String, Server.Protocol> getProtocols() {

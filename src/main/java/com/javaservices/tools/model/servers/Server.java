@@ -27,4 +27,6 @@ public class Server {
     public enum ServerType {
         WEB, LINUX, WINDOWS
     }
+
+    protected Login login = new Login();
 }

@@ -19,16 +19,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toCollection;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@EqualsAndHashCode
 @Component
 @ViewScoped
-@Data
+@Getter
+@Setter
 @Slf4j
 public class PropertyDetailBean extends PrimefacesFormBean<Property> {
 

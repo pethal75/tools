@@ -1,29 +1,21 @@
 package com.javaservices.tools.web.beans;
 
 import com.javaservices.tools.model.ToolsModel;
-import com.javaservices.tools.model.environments.Group;
-import com.javaservices.tools.service.GroupsService;
 import com.javaservices.tools.service.ToolsModelService;
 import com.javaservices.tools.web.beans.primefaces.PrimefacesBean;
 import jakarta.annotation.PostConstruct;
-import jakarta.faces.annotation.ManagedProperty;
-import jakarta.faces.application.FacesMessage;
-import jakarta.faces.context.FacesContext;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
-import java.io.IOException;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.file.UploadedFile;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-@EqualsAndHashCode
 @Component
 @ViewScoped
-@Data
+@Getter
+@Setter
 @Slf4j
 public class ProjectDetailBean extends PrimefacesBean {
 

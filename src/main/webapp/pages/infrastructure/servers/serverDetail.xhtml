@@ -67,6 +67,23 @@
                     </div>
                 </div>
 
+                <!-- New Login Fields -->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <p:inputText id="username" label="username" value="#{serverDetailBean.server.login.username}" class="form-control"/>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <p:inputText id="password" label="password" value="#{serverDetailBean.server.login.password}" class="form-control"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- End of New Login Fields -->
+
                 <br/>
 
                 <p:outputPanel id="buttonsBlock">

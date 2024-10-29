@@ -12,15 +12,15 @@ import jakarta.inject.Inject;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.List;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-@EqualsAndHashCode(callSuper = true)
 @Component
 @ViewScoped
-@Data
+@Getter
+@Setter
 @Slf4j
 public class ApplicationDetailBean extends PrimefacesFormBean<Application> {
 

@@ -7,15 +7,15 @@ import com.javaservices.tools.web.beans.primefaces.PrimefacesFormBean;
 import jakarta.annotation.PostConstruct;
 import jakarta.faces.view.ViewScoped;
 import jakarta.inject.Inject;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-@EqualsAndHashCode(callSuper = false)
 @Component
 @ViewScoped
-@Data
+@Getter
+@Setter
 @Slf4j
 public class ActiveMQDetailBean extends PrimefacesFormBean<ActiveMQ> {
 
