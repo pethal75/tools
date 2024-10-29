@@ -46,18 +46,6 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="protocol">Protocol</label>
-                            <p:selectOneMenu id="protocol" label="protocol" value="#{serverDetailBean.server.protocol}" class="form-control">
-                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
-                                <f:selectItems value="#{serverDetailBean.protocols}"/>
-                            </p:selectOneMenu>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
                             <label for="type">Type</label>
                             <p:selectOneMenu id="type" label="type" value="#{serverDetailBean.server.serverType}" class="form-control">
                                 <f:selectItem itemLabel="Select" itemValue="#{null}"/>
@@ -67,8 +55,17 @@
                     </div>
                 </div>
 
-                <!-- New Login Fields -->
+                <!-- Protocol and Login Fields -->
                 <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="protocol">Protocol</label>
+                            <p:selectOneMenu id="protocol" label="protocol" value="#{serverDetailBean.server.protocol}" class="form-control">
+                                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+                                <f:selectItems value="#{serverDetailBean.protocols}"/>
+                            </p:selectOneMenu>
+                        </div>
+                    </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="username">Username</label>

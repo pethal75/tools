@@ -1,8 +1,5 @@
 TODO:
 
-	- Servers
-	    - add login data - username/password for telnet/ssh
-
 	- Application object
 		- Mocks - http responses
 			- show detail
@@ -17,7 +14,7 @@ TODO:
 			- run automated testing
 			- test case related to specific application instance / environment
 
-	- SSHServerTerminal comunication with server
+	- SSHServerTerminal communication with server
 		- login
 		- enter password
 		- execute command
@@ -27,7 +24,7 @@ TODO:
 	- Jenkins pipeline
 		- HTML scanner to run/read status
 		- add pipeline URLs to application properties
-	- Custom jScript
+	- Custom jScript for various tasks
 	- Saving/Loading configuration from/to Json file
 		- on project page
 		- after each change
@@ -47,7 +44,6 @@ TODO:
 		-> ssh/telnet perform commands, read log files
 		-> custom scripting language jScript
 		-> PGP keys
-		-> Active MQ
 		-> Application tasks list
 			- build application
 			- install local applications - java, maven, tomcat
