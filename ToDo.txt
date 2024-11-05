@@ -1,5 +1,15 @@
 TODO:
 
+	- Servers list
+	    - show instances running on the server in the servers table
+		- connect terminal to server
+			- connect through other server
+
+	- Databases list
+		- show databases
+		- db connection check
+		- db mocking
+
 	- Application object
 		- Mocks - http responses
 			- show detail
@@ -25,9 +35,11 @@ TODO:
 		- HTML scanner to run/read status
 		- add pipeline URLs to application properties
 	- Custom jScript for various tasks
+
 	- Saving/Loading configuration from/to Json file
 		- on project page
 		- after each change
+    - Deleting objects checking
 
 	- Current work tasks
 		- remote commands, checking logs, upload files, restart tomcat / run remote scripts
@@ -50,17 +62,8 @@ TODO:
 			- deploy application to tomcat, linux server
 			- read logs from local / remote machine
 			- run build / deployment ?
-
-
-	- Servers list
 		- KPI monitoring - disk, healthchecks, applications, others
-		- connect terminal to server
-			- connect through other server
 
-	- Databases list
-		- show databases
-		- db connection check
-		- db mocking
 
 	- Build
 		- Maven build

@@ -26,7 +26,7 @@
                         <p:column colspan="7">
                             <h:outputLink styleClass="ml-2" value="applicationDetail.xhtml" target="_blank">
                                 <f:param name="name" value="#{applicationInstance.application.name}"/>
-                                <h:outputText value="#{applicationInstance.application.name}"/> Application #{applicationInstance.application.id}
+                                <h:outputText value="#{applicationInstance.application.name}"/> Application
                             </h:outputLink>
                         </p:column>
                     </p:headerRow>
@@ -47,8 +47,10 @@
                         <h:outputText value="#{applicationInstance.application.protocol.name()}" />
                     </p:column>
 
-                    <p:column headerText="Healthcheck" width="30%">
+                    <p:column headerText="Healthcheck / Server" width="30%">
                         <h:outputLink value="#{applicationInstance.applicationUrl}" target="_blank">#{applicationInstance.applicationUrl}</h:outputLink>
+                        <br/>
+                        <h:outputText value="#{applicationInstance.serverName}" /> <h:outputText style="color: darkgray; padding-left: 20px" value="#{applicationInstance.serverHost}" />
                     </p:column>
 
                     <p:column headerText="Status" width="10%" style="text-align: center">

@@ -25,7 +25,7 @@
                 <p:dataTable id="serversTable" var="serverValue" value="#{serversListBean.servers}">
 
                     <p:column headerText="Name" sortBy="#{serverValue.name}" sortOrder="ASC" width="25%">
-                        <h:outputLink styleClass="ml-2" value="serverDetail.xhtml">
+                        <h:outputLink value="serverDetail.xhtml">
                             <f:param name="id" value="#{serverValue.id}"/>
                             <h:outputText value="#{serverValue.name}"/>
                         </h:outputLink>

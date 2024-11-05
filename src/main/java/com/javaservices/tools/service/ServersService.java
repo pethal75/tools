@@ -26,7 +26,6 @@ public class ServersService {
     }
 
     public void updateServer(Server server) {
-        // TODO save server according saving method - file / database
 
         if (server.getId() == null) {
             Long maxId = this.toolsModelService.getModel().getServers().stream()
@@ -37,8 +36,18 @@ public class ServersService {
 
             this.toolsModelService.getModel().getServers().add(server);
         } else {
-            // TODO update ?
+            Server existingServer = findServerById(server.getId());
+
+            existingServer.setName(server.getName());
+            existingServer.setDescription(server.getDescription());
+            existingServer.setLogin(server.getLogin());
+            existingServer.setHost(server.getHost());
+            existingServer.setPort(server.getPort());
+            existingServer.setServerType(server.getServerType());
+            existingServer.setProtocol(server.getProtocol());
         }
+
+        this.toolsModelService.saveModel();
     }
 
     public void delete(Long id) {

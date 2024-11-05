@@ -19,8 +19,7 @@
                         <div class="form-group">
                             <label for="name">Name</label>
                             <p:inputText id="name" required="true" value="#{applicationInstanceDetailBean.entity.name}" class="form-control" requiredMessage="Missing name">
-                                <p:ajax event="change" update="@form"/>
-                                <p:ajax event="keyup" update="@form"/>
+                                <p:ajax event="keyup" update="buttonsBlock"/>
                             </p:inputText>
                             <p:message for="name" styleClass="validationMessage"/>
                         </div>
@@ -31,7 +30,7 @@
                             <p:selectOneMenu id="application" value="#{applicationInstanceDetailBean.entity.application}" class="form-control" disabled="#{applicationInstanceDetailBean.isExistingInstance()}" converter="#{applicationConverterBean}">
                                 <f:selectItem itemLabel="Select" itemValue="#{null}"/>
                                 <f:selectItems value="#{applicationInstanceDetailBean.applications}" var="app" itemLabel="#{app.name}" itemValue="#{app}"/>
-                                <p:ajax event="change" update="@form"/>
+                                <p:ajax event="change" update="buttonsBlock"/>
                             </p:selectOneMenu>
                             <p:message for="application" styleClass="validationMessage"/>
                         </div>
@@ -42,7 +41,7 @@
                             <p:selectOneMenu id="environment" value="#{applicationInstanceDetailBean.entity.environment}" class="form-control" converter="#{environmentConverterBean}">
                                 <f:selectItem itemLabel="Select" itemValue="#{null}"/>
                                 <f:selectItems value="#{applicationInstanceDetailBean.environments}" var="env" itemLabel="#{env.name}" itemValue="#{env}"/>
-                                <p:ajax event="change" update="@form"/>
+                                <p:ajax event="change" update="buttonsBlock"/>
                             </p:selectOneMenu>
                             <p:message for="environment" styleClass="validationMessage"/>
                         </div>
@@ -53,8 +52,7 @@
                         <div class="form-group">
                             <label for="url">Url</label>
                             <p:inputText id="url" value="#{applicationInstanceDetailBean.entity.applicationUrl}" class="form-control">
-                                <p:ajax event="change" update="@form"/>
-                                <p:ajax event="keyup" update="@form"/>
+                                <p:ajax event="keyup" update="buttonsBlock"/>
                             </p:inputText>
                         </div>
                     </div>
@@ -64,7 +62,7 @@
                             <p:selectOneMenu id="server" value="#{applicationInstanceDetailBean.entity.server}" class="form-control" converter="#{serverConverter}">
                                 <f:selectItem itemLabel="Select" itemValue="#{null}"/>
                                 <f:selectItems value="#{applicationInstanceDetailBean.servers}" var="server" itemLabel="#{server.name}" itemValue="#{server}"/>
-                                <p:ajax event="change" update="@form"/>
+                                <p:ajax event="change" update="buttonsBlock"/>
                             </p:selectOneMenu>
                             <p:message for="server" styleClass="validationMessage"/>
                         </div>

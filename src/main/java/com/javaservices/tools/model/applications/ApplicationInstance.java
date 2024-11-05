@@ -52,6 +52,10 @@ public class ApplicationInstance implements EditableEntity {
         return this.server != null ? StringUtils.getPrintableString(this.server.getName()) : "";
     }
 
+    public String getServerHost() {
+        return this.server != null ? StringUtils.getPrintableString(this.server.getHost()) : "";
+    }
+
     @Override
     public EditableEntity clone() {
         return this.toBuilder().build();
