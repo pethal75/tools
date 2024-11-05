@@ -19,3 +19,13 @@ Or build jar archive:
 and run final WAR archive
 
 ```java -jar target\servers-1.0-SNAPSHOT.war```
+
+## Properties
+
+To run application, tools.properties file should be present in working directory:
+
+```
+tools.last-project=project_name
+tools.storage.directory=./directory
+tools.storage.type=FILE
+```
