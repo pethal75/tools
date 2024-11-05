@@ -66,7 +66,7 @@ public class ToolsModelService {
     public void loadCustomProperties() {
         try {
             Properties props = new Properties();
-            File f = new File("./data/tools.properties");
+            File f = new File("./tools.properties");
             FileReader in = new FileReader( f );
             // write into it
             DefaultPropertiesPersister p = new DefaultPropertiesPersister();
@@ -89,7 +89,7 @@ public class ToolsModelService {
             props.setProperty("tools.storage.directory", customProperties.storageDirectory);
             props.setProperty("tools.last-project", customProperties.lastProject);
             // get or create the file
-            File f = new File("./data/tools.properties");
+            File f = new File("./tools.properties");
             FileWriter writer = new FileWriter( f );
             // write into it
             DefaultPropertiesPersister p = new DefaultPropertiesPersister();
