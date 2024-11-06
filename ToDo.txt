@@ -1,5 +1,10 @@
 TODO:
 
+    - Projects
+        - list of projects in combo box
+        - switch projects
+        - new project page
+
 	- Servers list
 	    - show instances running on the server in the servers table
 		- connect terminal to server

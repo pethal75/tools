@@ -64,19 +64,21 @@ public class ToolsModel {
     protected void initialize() {
 
         // Replace referenced entities of Application.group, ApplicationInstance.environment, ApplicationInstance.server with referenced objects
-        this.applications.forEach(application -> {
-            application.initialize();
+        if (this.applications != null) {
+            this.applications.forEach(application -> {
+                application.initialize();
 
-            if (application.getGroup() != null)
-                application.setGroup(findGroupById(application.getGroup().getId()));
+                if (application.getGroup() != null)
+                    application.setGroup(findGroupById(application.getGroup().getId()));
 
-            application.getInstances().forEach(applicationInstance -> {
-                if (applicationInstance.getEnvironment() != null)
-                    applicationInstance.setEnvironment(findEnvironmentById(applicationInstance.getEnvironment().getId()));
-                if (applicationInstance.getServer() != null)
-                    applicationInstance.setServer(findServerById(applicationInstance.getServer().getId()));
+                application.getInstances().forEach(applicationInstance -> {
+                    if (applicationInstance.getEnvironment() != null)
+                        applicationInstance.setEnvironment(findEnvironmentById(applicationInstance.getEnvironment().getId()));
+                    if (applicationInstance.getServer() != null)
+                        applicationInstance.setServer(findServerById(applicationInstance.getServer().getId()));
+                });
             });
-        });
+        }
 
         if (environments != null)
             this.environments.sort(Comparator.comparing(Environment::getName));

@@ -51,7 +51,7 @@ public class ActiveMQService {
 
     @PostConstruct
     public void initialize() throws Exception {
-        if (getEmbeddedActiveMQ().isEnabled()) {
+        if (getEmbeddedActiveMQ() != null && getEmbeddedActiveMQ().isEnabled()) {
             registerBroker(getEmbeddedActiveMQ());
         }
     }
