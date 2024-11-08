@@ -3,6 +3,7 @@
       xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core"
 >
 
+<form>
     <div class="row">
         <div class="col-md-3">
             <h1 style="padding-top: 5px">DevTools Application</h1>
@@ -16,11 +17,9 @@
         </div>
         <div class="col-md-3">
             <label for="project">Project</label>
-            <p:selectOneMenu id="project" label="project" class="ml-2 mb-1" style="width: 180px; background: #e0f0ff">
-                <f:selectItem itemLabel="Select0" itemValue="#{null}"/>
-                <f:selectItem itemLabel="Select1" itemValue="project1"/>
-                <f:selectItem itemLabel="Select2" itemValue="project2"/>
-                <f:selectItem itemLabel="Select3" itemValue="project3"/>
+            <p:selectOneMenu id="project" label="project" value="#{projectDetailBean.projectModel.name}" class="ml-2 mb-1" style="width: 180px; background: #e0f0ff">
+                <f:selectItem itemLabel="Select" itemValue="#{null}"/>
+                <f:selectItems value="#{projectDetailBean.availableProjects}"/>
             </p:selectOneMenu>
             <p:button href="#{request.contextPath}/pages/project/projectDetail.xhtml" value="&nbsp;" type="button" icon="pi pi-arrow-circle-right" styleClass="ml-2 btn-width-icon-small"/>
         </div>
@@ -38,5 +37,5 @@
             </p:menu>
         </div>
     </div>
-
+</form>
 </html>
