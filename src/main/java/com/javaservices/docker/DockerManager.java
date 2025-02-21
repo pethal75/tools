@@ -18,18 +18,23 @@ import java.util.List;
 @Slf4j
 public class DockerManager {
 
+    private static DockerClient dockerClient;
+
     public static DockerClient dockerClient() {
-        DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                .build();
 
-        DockerHttpClient httpClient = new OkDockerHttpClient.Builder()
-                .dockerHost(config.getDockerHost())
-                .sslConfig(config.getSSLConfig())
-                .build();
+        if (dockerClient != null) {
+            DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
+                    .build();
 
-        DockerClient dockerClient = DockerClientBuilder.getInstance(config)
-                .withDockerHttpClient(httpClient)
-                .build();
+            DockerHttpClient httpClient = new OkDockerHttpClient.Builder()
+                    .dockerHost(config.getDockerHost())
+                    .sslConfig(config.getSSLConfig())
+                    .build();
+
+            dockerClient = DockerClientBuilder.getInstance(config)
+                    .withDockerHttpClient(httpClient)
+                    .build();
+        }
 
         return dockerClient;
     }
