@@ -1,5 +1,6 @@
 package com.javaservices.tools.web.beans;
 
+import com.javaservices.tools.model.docker.DockerContainer;
 import com.javaservices.tools.model.docker.DockerImage;
 import com.javaservices.tools.model.environments.Environment;
 import com.javaservices.tools.service.DockerService;
@@ -24,5 +25,9 @@ public class DockerListBean {
 
     public List<DockerImage> getImages() {
         return dockerService.listImages();
+    }
+
+    public List<DockerContainer> getContainers() {
+        return dockerService.listContainers();
     }
 }

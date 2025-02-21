@@ -1,6 +1,8 @@
 package com.javaservices.docker;
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.ListContainersCmd;
+import com.github.dockerjava.api.model.Container;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.core.DefaultDockerClientConfig;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -18,25 +20,19 @@ import java.util.List;
 @Slf4j
 public class DockerManager {
 
-    private static DockerClient dockerClient;
-
     public static DockerClient dockerClient() {
 
-        if (dockerClient == null) {
-            DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
-                    .build();
+        DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
+                .build();
 
-            DockerHttpClient httpClient = new OkDockerHttpClient.Builder()
-                    .dockerHost(config.getDockerHost())
-                    .sslConfig(config.getSSLConfig())
-                    .build();
+        DockerHttpClient httpClient = new OkDockerHttpClient.Builder()
+                .dockerHost(config.getDockerHost())
+                .sslConfig(config.getSSLConfig())
+                .build();
 
-            dockerClient = DockerClientBuilder.getInstance(config)
-                    .withDockerHttpClient(httpClient)
-                    .build();
-        }
-
-        return dockerClient;
+        return DockerClientBuilder.getInstance(config)
+                .withDockerHttpClient(httpClient)
+                .build();
     }
 
     public static List<Image> listImages() {
@@ -69,5 +65,23 @@ public class DockerManager {
         }
 
         return images;
+    }
+
+    /**
+     * List all Docker containers on the host.
+     *
+     * @param showAll - If true, includes stopped containers in the list.
+     * @return List of containers.
+     */
+    public static List<Container> listContainers(boolean showAll) {
+        try {
+            DockerClient client = dockerClient(); // Get the Docker client instance
+            ListContainersCmd cmd = client.listContainersCmd().withShowAll(showAll);
+            List<Container> containers = cmd.exec(); // Execute the command
+            return containers;
+        } catch (Exception e) {
+            log.error("Error listing Docker containers", e);
+            throw new RuntimeException("Failed to list Docker containers", e);
+        }
     }
 }
