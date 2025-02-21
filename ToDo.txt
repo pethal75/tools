@@ -1,9 +1,13 @@
 TODO:
 
-    - Projects
+    - Projects list
         - list of projects in combo box
         - switch projects
         - new project page
+
+    - Docker containers list
+        - Show docker images / containers
+        - Create sample docker configuration NEW/EDIT/RUN/STOP - posgtres, etc...
 
 	- Servers list
 	    - show instances running on the server in the servers table
@@ -15,7 +19,7 @@ TODO:
 		- db connection check
 		- db mocking
 
-	- Application object
+	- Application detail page
 		- Mocks - http responses
 			- show detail
 			- processing with ProxyController
