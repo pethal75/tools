@@ -10,11 +10,11 @@
         <h:form>
             <div class="row">
                 <div class="col-md-10 my-auto">
-                    <h2>Environments</h2>
+                    <h2>Docker Images</h2>
                 </div>
 
                 <div class="col-md-2 text-center">
-                    <p:button styleClass="ui-button-outlined rounded-button ui-button-success" href="environmentDetail.xhtml" value="Add Environment"/>
+                    <p:button styleClass="ui-button-outlined rounded-button ui-button-success" href="dockerDetail.xhtml" value="Create Image"/>
                 </div>
             </div>
 
@@ -22,24 +22,33 @@
 
             <div class="card">
 
-                <p:dataTable id="environmentsTable" var="environmentValue" value="#{environmentsListBean.environments}">
+                <p:dataTable id="dockerTable" var="image" value="#{dockerListBean.images}">
 
-                    <p:column headerText="Name" sortBy="#{environmentValue.name}" sortOrder="ASC">
-                        <h:outputLink styleClass="ml-2" value="environmentDetail.xhtml">
-                            <f:param name="id" value="#{environmentValue.id}"/>
-                            <h:outputText value="#{environmentValue.name}"/>
-                        </h:outputLink>
+                    <p:column headerText="Name" sortBy="#{image.name}" sortOrder="ASC">
+                        <h:outputText value="#{image.name}"/>
                     </p:column>
 
-                    <p:column headerText="Description" sortBy="#{environmentValue.description}">
-                        <h:outputText value="#{environmentValue.description}"/>
+                    <p:column headerText="Tag" sortBy="#{image.tag}">
+                        <h:outputText value="#{image.tag}"/>
+                    </p:column>
+
+                    <p:column headerText="Image ID" sortBy="#{image.imageId}">
+                        <h:outputText value="#{image.imageId}"/>
+                    </p:column>
+
+                    <p:column headerText="Created" sortBy="#{image.created}">
+                        <h:outputText value="#{image.created}"/>
+                    </p:column>
+
+                    <p:column headerText="Size" sortBy="#{image.size}">
+                        <h:outputText value="#{image.size}"/>
                     </p:column>
 
                     <p:column headerText="Action" width="15%" style="text-align: center">
-                        <p:button styleClass="ui-button-outlined rounded-button" href="environmentDetail.xhtml" value="Detail">
+                        <!--p:button styleClass="ui-button-outlined rounded-button" href="environmentDetail.xhtml" value="Detail">
                             <f:param name="id" value="#{environmentValue.id}"/>
                         </p:button>
-                        <p:commandButton styleClass="ui-button-outlined rounded-button ui-button-danger ml-2" value="Delete" action="#{environmentsListBean.deleteEnvironment(environmentValue.id)}" update="@form"/>
+                        <p:commandButton styleClass="ui-button-outlined rounded-button ui-button-danger ml-2" value="Delete" action="#{environmentsListBean.deleteEnvironment(environmentValue.id)}" update="@form"/-->
                     </p:column>
                 </p:dataTable>
             </div>
