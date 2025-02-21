@@ -22,7 +22,7 @@ public class DockerManager {
 
     public static DockerClient dockerClient() {
 
-        if (dockerClient != null) {
+        if (dockerClient == null) {
             DefaultDockerClientConfig config = DefaultDockerClientConfig.createDefaultConfigBuilder()
                     .build();
 
